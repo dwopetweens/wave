@@ -5,7 +5,7 @@
 1. **Header**: NDC wordmark, About / Services / Process links, and a Contact Us pill.
 2. **Why NDC?**: the copy from *Why NDC Consulting Group – Homepage.docx*, with the key phrase highlighted in sky blue.
 3. **About us**: "We make the business work better." with a "Let’s talk about your business →" link.
-4. **What we do**: Human Resources, Talent Acquisition, Internal Communications.
+4. **What we do**: Human Resources, Internal Communications, Customer Retention & Recovery, Marketing Operations.
 5. **Our process**: Discover → Design → Implement, on a dotted timeline.
 6. **Start the conversation**: a call to action, plus the footer strip.
 

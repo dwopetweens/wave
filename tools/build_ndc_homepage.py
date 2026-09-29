@@ -367,12 +367,15 @@ SERVICES = [
     ("01", "Human Resources",
      "Employee lifecycle systems, onboarding, policy development, compliance workflows, "
      "and performance processes designed for a growing team."),
-    ("02", "Talent Acquisition",
-     "Recruiting strategy, candidate experience, interview systems, role clarity, "
-     "and hiring workflows that support better decisions."),
-    ("03", "Internal Communications",
-     "Communication structures, leadership messaging, change communications, "
-     "and practical systems that keep teams aligned."),
+    ("02", "Internal Communications",
+     "Communication structures, leadership messaging, and change communications "
+     "that keep teams informed and aligned."),
+    ("03", "Customer Retention & Recovery",
+     "Escalation protocols, service recovery systems, and response standards "
+     "that help resolve issues and rebuild trust."),
+    ("04", "Marketing Operations",
+     "Campaign workflows, content processes, and clear team responsibilities "
+     "that help turn plans into consistent execution."),
 ]
 
 

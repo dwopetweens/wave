@@ -792,7 +792,7 @@
       "isInner": false
     },
     {
-      "id": "1d0c032",
+      "id": "1d0c039",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -1036,7 +1036,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c031",
+          "id": "1d0c038",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -1484,7 +1484,7 @@
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
-                        "title": "Talent Acquisition",
+                        "title": "Internal Communications",
                         "header_size": "h3",
                         "title_color": "#1A1A1A",
                         "typography_typography": "custom",
@@ -1554,7 +1554,7 @@
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "settings": {
-                        "editor": "Recruiting strategy, candidate experience, interview systems, role clarity, and hiring workflows that support better decisions.",
+                        "editor": "Communication structures, leadership messaging, and change communications that keep teams informed and aligned.",
                         "text_color": "#6B6B66",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
@@ -1608,7 +1608,7 @@
                   "unit": "px",
                   "top": "1",
                   "right": "0",
-                  "bottom": "1",
+                  "bottom": "0",
                   "left": "0",
                   "isLinked": false
                 },
@@ -1744,7 +1744,7 @@
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
-                        "title": "Internal Communications",
+                        "title": "Customer Retention & Recovery",
                         "header_size": "h3",
                         "title_color": "#1A1A1A",
                         "typography_typography": "custom",
@@ -1814,7 +1814,267 @@
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "settings": {
-                        "editor": "Communication structures, leadership messaging, change communications, and practical systems that keep teams aligned.",
+                        "editor": "Escalation protocols, service recovery systems, and response standards that help resolve issues and rebuild trust.",
+                        "text_color": "#6B6B66",
+                        "typography_typography": "custom",
+                        "typography_font_family": "DM Sans",
+                        "typography_font_weight": "400",
+                        "typography_font_size": {
+                          "unit": "custom",
+                          "size": "clamp(17px, 1.2vw, 24px)",
+                          "sizes": []
+                        },
+                        "typography_line_height": {
+                          "unit": "em",
+                          "size": 1.6,
+                          "sizes": []
+                        }
+                      },
+                      "elements": []
+                    }
+                  ],
+                  "isInner": true
+                }
+              ],
+              "isInner": true
+            },
+            {
+              "id": "1d0c037",
+              "elType": "container",
+              "settings": {
+                "content_width": "full",
+                "flex_direction": "row",
+                "flex_gap": {
+                  "unit": "px",
+                  "row": "16",
+                  "column": "16",
+                  "isLinked": true,
+                  "size": 16
+                },
+                "padding": {
+                  "unit": "px",
+                  "top": "56",
+                  "right": "0",
+                  "bottom": "56",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "flex_direction_mobile": "column",
+                "flex_align_items_mobile": "flex-start",
+                "flex_justify_content": "space-between",
+                "flex_align_items": "flex-start",
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "0",
+                  "bottom": "1",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "border_color": "#D9D6CC",
+                "padding_mobile": {
+                  "unit": "px",
+                  "top": "36",
+                  "right": "0",
+                  "bottom": "36",
+                  "left": "0",
+                  "isLinked": false
+                }
+              },
+              "elements": [
+                {
+                  "id": "1d0c032",
+                  "elType": "container",
+                  "settings": {
+                    "content_width": "full",
+                    "flex_direction": "column",
+                    "flex_gap": {
+                      "unit": "px",
+                      "row": "0",
+                      "column": "0",
+                      "isLinked": true,
+                      "size": 0
+                    },
+                    "padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 9,
+                      "sizes": []
+                    },
+                    "width_tablet": {
+                      "unit": "%",
+                      "size": 10,
+                      "sizes": []
+                    },
+                    "width_mobile": {
+                      "unit": "%",
+                      "size": 100,
+                      "sizes": []
+                    }
+                  },
+                  "elements": [
+                    {
+                      "id": "1d0c031",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "04",
+                        "header_size": "p",
+                        "title_color": "#2A87B4",
+                        "typography_typography": "custom",
+                        "typography_font_family": "DM Sans",
+                        "typography_font_weight": "700",
+                        "typography_font_size": {
+                          "unit": "px",
+                          "size": 20,
+                          "sizes": []
+                        },
+                        "typography_font_size_mobile": {
+                          "unit": "px",
+                          "size": 16,
+                          "sizes": []
+                        },
+                        "typography_line_height": {
+                          "unit": "em",
+                          "size": 1.2,
+                          "sizes": []
+                        }
+                      },
+                      "elements": []
+                    }
+                  ],
+                  "isInner": true
+                },
+                {
+                  "id": "1d0c034",
+                  "elType": "container",
+                  "settings": {
+                    "content_width": "full",
+                    "flex_direction": "column",
+                    "flex_gap": {
+                      "unit": "px",
+                      "row": "0",
+                      "column": "0",
+                      "isLinked": true,
+                      "size": 0
+                    },
+                    "padding": {
+                      "unit": "px",
+                      "top": "18",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 44,
+                      "sizes": []
+                    },
+                    "width_tablet": {
+                      "unit": "%",
+                      "size": 38,
+                      "sizes": []
+                    },
+                    "width_mobile": {
+                      "unit": "%",
+                      "size": 100,
+                      "sizes": []
+                    },
+                    "padding_mobile": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    }
+                  },
+                  "elements": [
+                    {
+                      "id": "1d0c033",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "Marketing Operations",
+                        "header_size": "h3",
+                        "title_color": "#1A1A1A",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Inter Tight",
+                        "typography_font_weight": "600",
+                        "typography_font_size": {
+                          "unit": "custom",
+                          "size": "clamp(30px, 2.7vw, 54px)",
+                          "sizes": []
+                        },
+                        "typography_line_height": {
+                          "unit": "em",
+                          "size": 1.05,
+                          "sizes": []
+                        },
+                        "typography_letter_spacing": {
+                          "unit": "em",
+                          "size": -0.04,
+                          "sizes": []
+                        }
+                      },
+                      "elements": []
+                    }
+                  ],
+                  "isInner": true
+                },
+                {
+                  "id": "1d0c036",
+                  "elType": "container",
+                  "settings": {
+                    "content_width": "full",
+                    "flex_direction": "column",
+                    "flex_gap": {
+                      "unit": "px",
+                      "row": "0",
+                      "column": "0",
+                      "isLinked": true,
+                      "size": 0
+                    },
+                    "padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 43,
+                      "sizes": []
+                    },
+                    "width_tablet": {
+                      "unit": "%",
+                      "size": 48,
+                      "sizes": []
+                    },
+                    "width_mobile": {
+                      "unit": "%",
+                      "size": 100,
+                      "sizes": []
+                    }
+                  },
+                  "elements": [
+                    {
+                      "id": "1d0c035",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "settings": {
+                        "editor": "Campaign workflows, content processes, and clear team responsibilities that help turn plans into consistent execution.",
                         "text_color": "#6B6B66",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
@@ -1845,7 +2105,7 @@
       "isInner": false
     },
     {
-      "id": "1d0c049",
+      "id": "1d0c050",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -1888,7 +2148,7 @@
       },
       "elements": [
         {
-          "id": "1d0c038",
+          "id": "1d0c03f",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -1917,7 +2177,7 @@
           },
           "elements": [
             {
-              "id": "1d0c035",
+              "id": "1d0c03c",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -1950,7 +2210,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c033",
+                  "id": "1d0c03a",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -1990,7 +2250,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c034",
+                  "id": "1d0c03b",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2022,7 +2282,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c037",
+              "id": "1d0c03e",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2060,7 +2320,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c036",
+                  "id": "1d0c03d",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
@@ -2089,7 +2349,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c048",
+          "id": "1d0c04f",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -2121,7 +2381,7 @@
           },
           "elements": [
             {
-              "id": "1d0c03d",
+              "id": "1d0c044",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2185,7 +2445,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c039",
+                  "id": "1d0c040",
                   "elType": "widget",
                   "widgetType": "icon",
                   "settings": {
@@ -2218,7 +2478,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c03a",
+                  "id": "1d0c041",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2253,7 +2513,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c03b",
+                  "id": "1d0c042",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2282,7 +2542,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c03c",
+                  "id": "1d0c043",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
@@ -2308,7 +2568,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c042",
+              "id": "1d0c049",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2372,7 +2632,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c03e",
+                  "id": "1d0c045",
                   "elType": "widget",
                   "widgetType": "icon",
                   "settings": {
@@ -2405,7 +2665,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c03f",
+                  "id": "1d0c046",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2440,7 +2700,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c040",
+                  "id": "1d0c047",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2469,7 +2729,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c041",
+                  "id": "1d0c048",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
@@ -2495,7 +2755,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c047",
+              "id": "1d0c04e",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2559,7 +2819,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c043",
+                  "id": "1d0c04a",
                   "elType": "widget",
                   "widgetType": "icon",
                   "settings": {
@@ -2592,7 +2852,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c044",
+                  "id": "1d0c04b",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2627,7 +2887,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c045",
+                  "id": "1d0c04c",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2656,7 +2916,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c046",
+                  "id": "1d0c04d",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
@@ -2688,7 +2948,7 @@
       "isInner": false
     },
     {
-      "id": "1d0c054",
+      "id": "1d0c05b",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -2713,7 +2973,7 @@
       },
       "elements": [
         {
-          "id": "1d0c050",
+          "id": "1d0c057",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -2759,7 +3019,7 @@
           },
           "elements": [
             {
-              "id": "1d0c04e",
+              "id": "1d0c055",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2792,7 +3052,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c04c",
+                  "id": "1d0c053",
                   "elType": "container",
                   "settings": {
                     "content_width": "full",
@@ -2819,7 +3079,7 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c04a",
+                      "id": "1d0c051",
                       "elType": "widget",
                       "widgetType": "divider",
                       "settings": {
@@ -2850,7 +3110,7 @@
                       "elements": []
                     },
                     {
-                      "id": "1d0c04b",
+                      "id": "1d0c052",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
@@ -2893,7 +3153,7 @@
                   "isInner": true
                 },
                 {
-                  "id": "1d0c04d",
+                  "id": "1d0c054",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -2925,7 +3185,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c04f",
+              "id": "1d0c056",
               "elType": "widget",
               "widgetType": "button",
               "settings": {
@@ -3017,7 +3277,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c053",
+          "id": "1d0c05a",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -3071,7 +3331,7 @@
           },
           "elements": [
             {
-              "id": "1d0c051",
+              "id": "1d0c058",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
@@ -3105,7 +3365,7 @@
               "elements": []
             },
             {
-              "id": "1d0c052",
+              "id": "1d0c059",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
