@@ -1,0 +1,121 @@
+/* NDC Contact Form — styled to match the NDC homepage. */
+.ndc-form {
+	--ndc-ink: #1a1a1a;
+	--ndc-cream: #f6f4e6;
+	--ndc-border: #6b7280;
+	--ndc-focus: #2a87b4;
+	--ndc-error: #b42318;
+	--ndc-placeholder: #6b7280;
+
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 40px 32px;
+	font-family: "DM Sans", system-ui, sans-serif;
+	color: var(--ndc-ink);
+	width: 100%;
+}
+
+.ndc-form--sent { display: block; }
+.ndc-form__row { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.ndc-form__row--full { grid-column: 1 / -1; }
+.ndc-form fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.ndc-form fieldset legend { padding: 0; margin-bottom: 14px; }
+.ndc-form__pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.ndc-form__pair > div { display: flex; flex-direction: column; gap: 8px; }
+
+.ndc-form__label {
+	font-size: clamp(17px, 1.3vw, 21px);
+	font-weight: 500;
+	line-height: 1.35;
+	color: var(--ndc-ink);
+}
+.ndc-form__req { color: var(--ndc-error); margin-left: 4px; }
+
+.ndc-form input[type="text"],
+.ndc-form input[type="email"],
+.ndc-form textarea {
+	box-sizing: border-box;
+	width: 100%;
+	font: inherit;
+	font-size: clamp(17px, 1.3vw, 20px);
+	color: var(--ndc-ink);
+	background: #fff;
+	border: 1.5px solid var(--ndc-border);
+	border-radius: 4px;
+	padding: 18px 22px;
+	line-height: 1.4;
+	transition: border-color .15s, box-shadow .15s;
+}
+.ndc-form textarea { min-height: 180px; resize: vertical; }
+.ndc-form ::placeholder { color: var(--ndc-placeholder); opacity: 1; }
+.ndc-form input:focus,
+.ndc-form textarea:focus {
+	outline: none;
+	border-color: var(--ndc-focus);
+	box-shadow: 0 0 0 3px rgba(42, 135, 180, .2);
+}
+.ndc-form [aria-invalid="true"] { border-color: var(--ndc-error); }
+
+.ndc-form__error { margin: 0; color: var(--ndc-error); font-size: 15px; }
+.ndc-form__alert {
+	grid-column: 1 / -1;
+	margin: 0;
+	padding: 14px 18px;
+	border-left: 3px solid var(--ndc-error);
+	background: #fdf1f0;
+	color: var(--ndc-error);
+	font-size: 16px;
+}
+
+.ndc-form__submit {
+	justify-self: start;
+	align-self: flex-start;
+	font: inherit;
+	font-size: clamp(18px, 1.4vw, 22px);
+	font-weight: 700;
+	line-height: 1;
+	color: var(--ndc-cream);
+	background: var(--ndc-ink);
+	border: 2px solid var(--ndc-ink);
+	border-radius: 999px;
+	padding: 22px 40px;
+	cursor: pointer;
+	transition: background-color .25s, color .25s;
+}
+.ndc-form__submit:hover,
+.ndc-form__submit:focus-visible { background: transparent; color: var(--ndc-ink); }
+.ndc-form__submit:disabled { opacity: .6; cursor: progress; }
+
+.ndc-form__success {
+	margin: 0;
+	padding: 28px 32px;
+	background: #fff;
+	border-left: 4px solid #6ec6ee;
+	font-family: "DM Sans", system-ui, sans-serif;
+	font-size: clamp(18px, 1.5vw, 24px);
+	color: #1a1a1a;
+}
+
+/* Honeypot: off-screen rather than display:none, which some bots detect. */
+.ndc-form__hp {
+	position: absolute !important;
+	left: -10000px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.ndc-form .screen-reader-text {
+	position: absolute !important;
+	width: 1px; height: 1px;
+	margin: -1px; padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+@media (max-width: 767px) {
+	.ndc-form { grid-template-columns: 1fr; gap: 28px; }
+	.ndc-form__pair { gap: 16px; }
+}

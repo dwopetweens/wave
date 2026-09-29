@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Generate the NDC Consulting Group homepage as an Elementor template.
+"""Generate the NDC Consulting Group pages as Elementor templates.
 
 Run:  python3 tools/build_ndc_homepage.py
-Out:  elementor/ndc-homepage.json  (import via Elementor > Templates > Import)
+Out:  elementor/ndc-homepage.json and elementor/ndc-contact.json
+      (import via Elementor > Templates > Import)
 
 Only free Elementor widgets are used (container, heading, text-editor,
-button, divider, icon), so the page stays fully editable in the visual
-editor and needs no custom CSS or Elementor Pro.
+button, divider, icon, shortcode), so the pages stay fully editable in the
+visual editor and need no custom CSS or Elementor Pro. The contact form
+itself comes from the NDC Contact Form plugin in wordpress/.
 """
 
 import itertools
@@ -27,6 +29,8 @@ RULE_DARK = "#3A3A3A"    # hairlines on dark sections
 BG_ABOUT = "#F4F3EF"
 BG_SERVICES = "#F8F6EB"
 BG_PROCESS = "#DFF0FA"
+
+CONTACT_URL = "/contact/"
 
 FONT_DISPLAY = "Inter Tight"
 FONT_LEAD = "Manrope"
@@ -280,7 +284,8 @@ def sky(text_):
 # --------------------------------------------------------------------------
 # Sections
 # --------------------------------------------------------------------------
-def site_header():
+def site_header(on_home=True):
+    prefix = "" if on_home else "/"
     nav_link = lambda label, href: heading(  # noqa: E731
         f'<a href="{href}">{label}</a>', tag="p", color=CREAM,
         typography=typo(FONT_BODY, 17, "500", 1.2),
@@ -288,13 +293,13 @@ def site_header():
     )
     return container(
         [
-            heading("NDC Consulting Group", tag="p", color=CREAM,
+            heading('<a href="/">NDC Consulting Group</a>', tag="p", color=CREAM,
                     typography=typo(FONT_DISPLAY, 22, "600", 1, -0.02, mobile=18),
                     extra={"_flex_size": "grow"}),
-            nav_link("About", "#about"),
-            nav_link("Services", "#services"),
-            nav_link("Process", "#process"),
-            pill_button("Contact Us", "#contact",
+            nav_link("About", f"{prefix}#about"),
+            nav_link("Services", f"{prefix}#services"),
+            nav_link("Process", f"{prefix}#process"),
+            pill_button("Contact Us", CONTACT_URL,
                         extra={**typo(FONT_BODY, 16, "700", 1),
                                "text_padding": box(12, 24, 12, 24),
                                "text_padding_mobile": box(10, 18, 10, 18),
@@ -303,6 +308,44 @@ def site_header():
         direction="row", align="center", bg=INK, stack_on=None, row_gap=36,
         padding=section_padding(top=(28, 24, 20), bottom=(28, 24, 20)),
         html_tag="header", is_inner=False,
+    )
+
+
+def hero():
+    """Full-width photo hero. Set the photo in Elementor: select this container,
+    then Style > Background > Image. The dark gradient keeps text legible."""
+    return container(
+        [
+            container(
+                [
+                    eyebrow("Business operations consulting", color=CREAM),
+                    display("Better systems make better work possible.", color=CREAM, tag="h1",
+                            css="clamp(48px, 6.6vw, 136px)"),
+                    lead_copy("For leaders ready to move from reactive problem-solving to intentional growth.",
+                              css="clamp(19px, 1.6vw, 30px)"),
+                    pill_button("Start the conversation", CONTACT_URL),
+                ],
+                width=62, width_tablet=90, width_mobile=100, row_gap=32, align="flex-start",
+            ),
+        ],
+        justify="flex-end", bg=INK, anchor="top", html_tag="section", is_inner=False,
+        padding=section_padding(top=(200, 160, 120), bottom=(120, 96, 72)),
+        extra={
+            "min_height": size(88, "vh"),
+            "min_height_mobile": size(80, "vh"),
+            "background_image": {"url": "", "id": "", "size": "", "alt": "", "source": "library"},
+            "background_position": "center center",
+            "background_repeat": "no-repeat",
+            "background_size": "cover",
+            "background_overlay_background": "gradient",
+            "background_overlay_color": "rgba(26,26,26,0.88)",
+            "background_overlay_color_stop": size(0, "%"),
+            "background_overlay_color_b": "rgba(26,26,26,0.35)",
+            "background_overlay_color_b_stop": size(100, "%"),
+            "background_overlay_gradient_type": "linear",
+            "background_overlay_gradient_angle": size(20, "deg"),
+            "background_overlay_opacity": size(1, ""),
+        },
     )
 
 
@@ -351,7 +394,7 @@ def about():
                               "connects strategy to execution across human resources, talent acquisition, "
                               "internal communications, customer retention, and marketing operations.",
                               css="clamp(16px, 1.45vw, 25px)", line_height=1.4),
-                    arrow_link("Let’s talk about your business", "#contact",
+                    arrow_link("Let’s talk about your business", CONTACT_URL,
                                css="clamp(16px, 1.5vw, 26px)", underline_gap=8),
                 ],
                 width=56, width_tablet=100, row_gap=30, align="flex-start",
@@ -476,6 +519,20 @@ def process():
     )
 
 
+def site_footer():
+    small = typo(FONT_BODY, 18, "400", 1.4, tablet=16, mobile=14)
+    return container(
+        [
+            heading("© 2026 NDC Consulting Group. All rights reserved.", tag="p", color="#BDBBAF", typography=small),
+            heading("Built for better business.", tag="p", color="#BDBBAF", typography=small),
+        ],
+        direction="row", justify="space-between", align="center", row_gap=8,
+        padding=section_padding(top=(28, 24, 24), bottom=(28, 24, 24)),
+        html_tag="footer",
+        extra={"border_border": "solid", "border_width": box(1, 0, 0, 0), "border_color": RULE_DARK},
+    )
+
+
 def contact_and_footer():
     cta = container(
         [
@@ -487,29 +544,42 @@ def contact_and_footer():
                 ],
                 row_gap=24, width=62, width_tablet=100,
             ),
-            pill_button("Contact Us", "mailto:hello@example.com"),
+            pill_button("Contact Us", CONTACT_URL),
         ],
         direction="row", justify="space-between", align="center", stack_on="tablet", row_gap=40,
         padding=section_padding(top=(140, 100, 72), bottom=(140, 100, 72)),
         anchor="contact",
     )
-    small = typo(FONT_BODY, 18, "400", 1.4, tablet=16, mobile=14)
-    footer = container(
+    return container([cta, site_footer()], bg=INK, is_inner=False)
+
+
+def contact_form_section():
+    return container(
         [
-            heading("© 2026 NDC Consulting Group. All rights reserved.", tag="p", color="#BDBBAF", typography=small),
-            heading("Built for better business.", tag="p", color="#BDBBAF", typography=small),
+            container(
+                [
+                    eyebrow("Contact", css="clamp(12px, 1.05vw, 17px)"),
+                    display("Let’s talk about your business.", css="clamp(44px, 5vw, 104px)"),
+                    body_copy("Tell us about your company and what you are looking for. "
+                              "All fields are required, and we will be in touch soon.",
+                              css="clamp(16px, 1.3vw, 22px)"),
+                ],
+                width=36, width_tablet=100, row_gap=24,
+            ),
+            container(
+                [widget("shortcode", {"shortcode": "[ndc_contact_form]"})],
+                width=58, width_tablet=100,
+            ),
         ],
-        direction="row", justify="space-between", align="center", row_gap=8,
-        padding=section_padding(top=(28, 24, 24), bottom=(28, 24, 24)),
-        html_tag="footer",
-        extra={"border_border": "solid", "border_width": box(1, 0, 0, 0), "border_color": RULE_DARK},
+        direction="row", justify="space-between", align="flex-start", bg=BG_ABOUT, stack_on="tablet",
+        row_gap=56, padding=section_padding(top=(120, 96, 64), bottom=(140, 104, 80)),
+        anchor="contact-form", html_tag="section", is_inner=False,
+        extra={"min_height": custom("calc(100vh - 180px)")},
     )
-    return container([cta, footer], bg=INK, is_inner=False)
 
 
 # --------------------------------------------------------------------------
-def build():
-    content = [site_header(), why_ndc(), about(), services(), process(), contact_and_footer()]
+def page(title, content):
     return {
         "content": content,
         "page_settings": {
@@ -519,13 +589,26 @@ def build():
             "background_color": INK,
         },
         "version": "0.4",
-        "title": "NDC Consulting Group – Homepage",
+        "title": title,
         "type": "page",
     }
 
 
+def build():
+    return page("NDC Consulting Group – Homepage",
+                [site_header(), hero(), why_ndc(), about(), services(), process(), contact_and_footer()])
+
+
+def build_contact():
+    return page("NDC Consulting Group – Contact",
+                [site_header(on_home=False), contact_form_section(),
+                 container([site_footer()], bg=INK, is_inner=False)])
+
+
 if __name__ == "__main__":
-    out = pathlib.Path(__file__).resolve().parent.parent / "elementor" / "ndc-homepage.json"
-    out.parent.mkdir(exist_ok=True)
-    out.write_text(json.dumps(build(), indent=2, ensure_ascii=False) + "\n")
-    print(f"wrote {out}")
+    out_dir = pathlib.Path(__file__).resolve().parent.parent / "elementor"
+    out_dir.mkdir(exist_ok=True)
+    for name, builder in (("ndc-homepage.json", build), ("ndc-contact.json", build_contact)):
+        out = out_dir / name
+        out.write_text(json.dumps(builder(), indent=2, ensure_ascii=False) + "\n")
+        print(f"wrote {out}")
