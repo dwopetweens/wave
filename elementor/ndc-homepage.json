@@ -500,9 +500,9 @@
         },
         "padding": {
           "unit": "px",
-          "top": "140",
+          "top": "88",
           "right": "36",
-          "bottom": "140",
+          "bottom": "104",
           "left": "36",
           "isLinked": false
         },
@@ -516,15 +516,15 @@
         "background_color": "#F4F3EF",
         "padding_tablet": {
           "unit": "px",
-          "top": "100",
+          "top": "80",
           "right": "28",
-          "bottom": "100",
+          "bottom": "88",
           "left": "28",
           "isLinked": false
         },
         "padding_mobile": {
           "unit": "px",
-          "top": "72",
+          "top": "64",
           "right": "20",
           "bottom": "72",
           "left": "20",
@@ -542,10 +542,10 @@
             "flex_direction": "column",
             "flex_gap": {
               "unit": "px",
-              "row": "32",
-              "column": "32",
+              "row": "20",
+              "column": "20",
               "isLinked": true,
-              "size": 32
+              "size": 20
             },
             "padding": {
               "unit": "px",
@@ -579,18 +579,8 @@
                 "typography_font_family": "DM Sans",
                 "typography_font_weight": "700",
                 "typography_font_size": {
-                  "unit": "px",
-                  "size": 17,
-                  "sizes": []
-                },
-                "typography_font_size_tablet": {
-                  "unit": "px",
-                  "size": 15,
-                  "sizes": []
-                },
-                "typography_font_size_mobile": {
-                  "unit": "px",
-                  "size": 13,
+                  "unit": "custom",
+                  "size": "clamp(12px, 1.05vw, 17px)",
                   "sizes": []
                 },
                 "typography_line_height": {
@@ -620,17 +610,17 @@
                 "typography_font_weight": "600",
                 "typography_font_size": {
                   "unit": "custom",
-                  "size": "clamp(48px, 6.3vw, 128px)",
+                  "size": "clamp(48px, 6.4vw, 132px)",
                   "sizes": []
                 },
                 "typography_line_height": {
                   "unit": "em",
-                  "size": 0.93,
+                  "size": 0.92,
                   "sizes": []
                 },
                 "typography_letter_spacing": {
                   "unit": "em",
-                  "size": -0.045,
+                  "size": -0.05,
                   "sizes": []
                 }
               },
@@ -647,10 +637,10 @@
             "flex_direction": "column",
             "flex_gap": {
               "unit": "px",
-              "row": "36",
-              "column": "36",
+              "row": "30",
+              "column": "30",
               "isLinked": true,
-              "size": 36
+              "size": 30
             },
             "padding": {
               "unit": "px",
@@ -663,7 +653,7 @@
             "flex_align_items": "flex-start",
             "width": {
               "unit": "%",
-              "size": 54,
+              "size": 56,
               "sizes": []
             },
             "width_tablet": {
@@ -681,16 +671,16 @@
                 "editor": "NDC Consulting Group is a business operations firm for leaders who are ready to move from reactive problem-solving to intentional growth.",
                 "text_color": "#1A1A1A",
                 "typography_typography": "custom",
-                "typography_font_family": "Manrope",
+                "typography_font_family": "Inter Tight",
                 "typography_font_weight": "500",
                 "typography_font_size": {
                   "unit": "custom",
-                  "size": "clamp(24px, 2.2vw, 46px)",
+                  "size": "clamp(22px, 2.45vw, 48px)",
                   "sizes": []
                 },
                 "typography_line_height": {
                   "unit": "em",
-                  "size": 1.28,
+                  "size": 1.27,
                   "sizes": []
                 },
                 "typography_letter_spacing": {
@@ -713,12 +703,12 @@
                 "typography_font_weight": "400",
                 "typography_font_size": {
                   "unit": "custom",
-                  "size": "clamp(17px, 1.2vw, 24px)",
+                  "size": "clamp(16px, 1.45vw, 25px)",
                   "sizes": []
                 },
                 "typography_line_height": {
                   "unit": "em",
-                  "size": 1.6,
+                  "size": 1.4,
                   "sizes": []
                 }
               },
@@ -729,12 +719,22 @@
               "elType": "widget",
               "widgetType": "button",
               "settings": {
-                "text": "Let’s talk about your business →",
+                "text": "Let’s talk about your business",
                 "link": {
                   "url": "#contact",
                   "is_external": "",
                   "nofollow": "",
                   "custom_attributes": ""
+                },
+                "selected_icon": {
+                  "value": "fas fa-arrow-right",
+                  "library": "fa-solid"
+                },
+                "icon_align": "row-reverse",
+                "icon_indent": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
                 },
                 "button_text_color": "#1A1A1A",
                 "hover_color": "#2A87B4",
@@ -765,7 +765,7 @@
                   "unit": "px",
                   "top": "0",
                   "right": "0",
-                  "bottom": "12",
+                  "bottom": "8",
                   "left": "0",
                   "isLinked": false
                 },
@@ -774,7 +774,7 @@
                 "typography_font_weight": "700",
                 "typography_font_size": {
                   "unit": "custom",
-                  "size": "clamp(18px, 1.35vw, 26px)",
+                  "size": "clamp(16px, 1.5vw, 26px)",
                   "sizes": []
                 },
                 "typography_line_height": {

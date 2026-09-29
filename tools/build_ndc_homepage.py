@@ -172,9 +172,12 @@ def text(html, *, color=INK, typography, extra=None):
     return widget("text-editor", s)
 
 
-def eyebrow(label, color=EYEBROW):
-    return heading(label, tag="p", color=color,
-                   typography=typo(FONT_BODY, 17, "700", 1.2, 0.2, "uppercase", tablet=15, mobile=13))
+def eyebrow(label, color=EYEBROW, css=None):
+    if css:
+        t = typo(FONT_BODY, css, "700", 1.2, 0.2, "uppercase")
+    else:
+        t = typo(FONT_BODY, 17, "700", 1.2, 0.2, "uppercase", tablet=15, mobile=13)
+    return heading(label, tag="p", color=color, typography=t)
 
 
 def display(text_, color=INK, tag="h2", css="clamp(48px, 6.5vw, 136px)", tablet=None, mobile=None):
@@ -182,8 +185,8 @@ def display(text_, color=INK, tag="h2", css="clamp(48px, 6.5vw, 136px)", tablet=
                    typography=typo(FONT_DISPLAY, css, "600", 0.93, -0.045, tablet=tablet, mobile=mobile))
 
 
-def body_copy(html, color=INK, css="clamp(17px, 1.2vw, 24px)"):
-    return text(html, color=color, typography=typo(FONT_BODY, css, "400", 1.6))
+def body_copy(html, color=INK, css="clamp(17px, 1.2vw, 24px)", line_height=1.6):
+    return text(html, color=color, typography=typo(FONT_BODY, css, "400", line_height))
 
 
 def lead_copy(html, color=CREAM, css="clamp(22px, 2vw, 40px)"):
@@ -216,11 +219,14 @@ def pill_button(label, url, *, on_dark=True, extra=None):
     return widget("button", s)
 
 
-def arrow_link(label, url):
+def arrow_link(label, url, css="clamp(18px, 1.35vw, 26px)", underline_gap=12):
     """Underlined text link with a trailing arrow, built from the button widget."""
     return widget("button", {
-        "text": f"{label}\u2003\u2192",
+        "text": label,
         "link": {"url": url, "is_external": "", "nofollow": "", "custom_attributes": ""},
+        "selected_icon": {"value": "fas fa-arrow-right", "library": "fa-solid"},
+        "icon_align": "row-reverse",
+        "icon_indent": size(14),
         "button_text_color": INK,
         "hover_color": EYEBROW,
         "button_hover_border_color": EYEBROW,
@@ -232,8 +238,8 @@ def arrow_link(label, url):
         "border_width": box(0, 0, 2, 0),
         "border_color": INK,
         "border_radius": box(0, 0, 0, 0),
-        "text_padding": box(0, 0, 12, 0),
-        **typo(FONT_BODY, "clamp(18px, 1.35vw, 26px)", "700", 1.2),
+        "text_padding": box(0, 0, underline_gap, 0),
+        **typo(FONT_BODY, css, "700", 1.2),
     })
 
 
@@ -329,27 +335,31 @@ def about():
         [
             container(
                 [
-                    eyebrow("About us"),
-                    display("We make the business work better.", css="clamp(48px, 6.3vw, 128px)"),
+                    eyebrow("About us", css="clamp(12px, 1.05vw, 17px)"),
+                    heading("We make the business work better.", tag="h2", color=INK,
+                            typography=typo(FONT_DISPLAY, "clamp(48px, 6.4vw, 132px)", "600", 0.92, -0.05)),
                 ],
-                width=38, width_tablet=100, row_gap=32,
+                width=38, width_tablet=100, row_gap=20,
             ),
             container(
                 [
                     text("NDC Consulting Group is a business operations firm for leaders who are ready "
                          "to move from reactive problem-solving to intentional growth.",
-                         color=INK, typography=typo(FONT_LEAD, "clamp(24px, 2.2vw, 46px)", "500", 1.28, -0.015)),
+                         color=INK, typography=typo(FONT_DISPLAY, "clamp(22px, 2.45vw, 48px)", "500", 1.27, -0.015)),
                     body_copy("We evaluate how work gets done, identify the gaps costing your company time "
                               "and trust, and build practical systems your team can actually use. Our work "
                               "connects strategy to execution across human resources, talent acquisition, "
-                              "internal communications, customer retention, and marketing operations."),
-                    arrow_link("Let’s talk about your business", "#contact"),
+                              "internal communications, customer retention, and marketing operations.",
+                              css="clamp(16px, 1.45vw, 25px)", line_height=1.4),
+                    arrow_link("Let’s talk about your business", "#contact",
+                               css="clamp(16px, 1.5vw, 26px)", underline_gap=8),
                 ],
-                width=54, width_tablet=100, row_gap=36, align="flex-start",
+                width=56, width_tablet=100, row_gap=30, align="flex-start",
             ),
         ],
         direction="row", justify="space-between", align="flex-start", bg=BG_ABOUT, stack_on="tablet",
-        row_gap=48, padding=section_padding(), anchor="about", html_tag="section", is_inner=False,
+        row_gap=48, padding=section_padding(top=(88, 80, 64), bottom=(104, 88, 72)),
+        anchor="about", html_tag="section", is_inner=False,
     )
 
 
