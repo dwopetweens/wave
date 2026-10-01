@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NDC_CHILD_VERSION', '1.3.0' );
+define( 'NDC_CHILD_VERSION', '1.4.0' );
 
 /** Template titles looked up when nothing is chosen in the Customizer. */
 const NDC_PART_TITLES = array(
@@ -551,5 +551,170 @@ add_action(
 				esc_html__( 'Fix it on the NDC Site Status page →', 'ndc-hello-child' )
 			);
 		}
+	}
+);
+
+/* -------------------------------------------------------------------------
+ * Homepage photo: download the Higgsfield team photo into the Media Library
+ * and set it as the hero background. Done from a button rather than during
+ * template import, because importing a very large image can time out.
+ * ---------------------------------------------------------------------- */
+const NDC_HERO_PHOTO_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_3K2VyhBi5YY9ZE0uS8kzZI19UlC/hf_20261001_190615_008c59d6-7671-4d96-96d9-35ed4fbd3615.png';
+const NDC_HERO_PHOTO_ALT = 'A diverse team collaborating around a conference table';
+
+/** Find the hero container (anchor "top") in Elementor data, by reference. */
+function &ndc_find_hero( array &$elements ) {
+	$none = null;
+	foreach ( $elements as &$el ) {
+		if ( 'top' === ( $el['settings']['_element_id'] ?? '' ) ) {
+			return $el;
+		}
+	}
+	return $none;
+}
+
+/** @return array{0:bool,1:string} Whether the homepage hero has a photo, and its URL. */
+function ndc_hero_photo_status() {
+	$front = (int) get_option( 'page_on_front' );
+	$data  = $front ? json_decode( (string) get_post_meta( $front, '_elementor_data', true ), true ) : null;
+	if ( ! is_array( $data ) ) {
+		return array( false, '' );
+	}
+	$hero = &ndc_find_hero( $data );
+	$url  = is_array( $hero ) ? ( $hero['settings']['background_image']['url'] ?? '' ) : '';
+	return array( $url && false === strpos( $url, 'placeholder' ), $url );
+}
+
+/** Download the photo (or reuse it) and set it on the homepage hero. */
+function ndc_add_hero_photo() {
+	$front = (int) get_option( 'page_on_front' );
+	if ( ! $front ) {
+		return new WP_Error( 'ndc_no_front', __( 'Set a homepage first (Settings → Reading).', 'ndc-hello-child' ) );
+	}
+	$data = json_decode( (string) get_post_meta( $front, '_elementor_data', true ), true );
+	if ( ! is_array( $data ) ) {
+		return new WP_Error( 'ndc_no_data', __( 'The homepage was not built with Elementor.', 'ndc-hello-child' ) );
+	}
+	$hero = &ndc_find_hero( $data );
+	if ( null === $hero ) {
+		return new WP_Error( 'ndc_no_hero', __( 'Could not find the hero section. Insert the latest NDC homepage template first.', 'ndc-hello-child' ) );
+	}
+
+	$existing = get_posts(
+		array(
+			'post_type'      => 'attachment',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'meta_key'       => '_ndc_hero_photo', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_value'     => '1', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+		)
+	);
+	$id = $existing ? (int) $existing[0] : 0;
+
+	if ( ! $id ) {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/media.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 300 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		}
+		wp_raise_memory_limit( 'image' );
+
+		$tmp = download_url( apply_filters( 'ndc_hero_photo_url', NDC_HERO_PHOTO_URL ), 120 );
+		if ( is_wp_error( $tmp ) ) {
+			return $tmp;
+		}
+		// Skip the resized copies and the "-scaled" version: they are what
+		// makes very large images time out, and a background only needs one.
+		$no_sizes = static fn() => array();
+		add_filter( 'intermediate_image_sizes_advanced', $no_sizes );
+		add_filter( 'big_image_size_threshold', '__return_false' );
+		$id = media_handle_sideload(
+			array(
+				'name'     => 'ndc-homepage-team.png',
+				'tmp_name' => $tmp,
+			),
+			$front,
+			NDC_HERO_PHOTO_ALT
+		);
+		remove_filter( 'intermediate_image_sizes_advanced', $no_sizes );
+		remove_filter( 'big_image_size_threshold', '__return_false' );
+		if ( is_wp_error( $id ) ) {
+			@unlink( $tmp ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.unlink_unlink
+			return $id;
+		}
+		update_post_meta( $id, '_ndc_hero_photo', '1' );
+		update_post_meta( $id, '_wp_attachment_image_alt', NDC_HERO_PHOTO_ALT );
+	}
+
+	$hero['settings']['background_image'] = array(
+		'url'    => wp_get_attachment_url( $id ),
+		'id'     => $id,
+		'size'   => '',
+		'alt'    => NDC_HERO_PHOTO_ALT,
+		'source' => 'library',
+	);
+	unset( $hero );
+	update_post_meta( $front, '_elementor_data', wp_slash( wp_json_encode( $data ) ) );
+	delete_post_meta( $front, '_elementor_css' );
+	delete_post_meta( $front, '_elementor_element_cache' );
+	if ( class_exists( '\Elementor\Plugin' ) ) {
+		\Elementor\Plugin::$instance->files_manager->clear_cache();
+	}
+	return $id;
+}
+
+add_action(
+	'ndc_status_page_after',
+	static function () {
+		$notice = '';
+		$error  = '';
+		if ( isset( $_POST['ndc_hero_photo'] ) && check_admin_referer( 'ndc_hero_photo' ) ) {
+			$result = ndc_add_hero_photo();
+			if ( is_wp_error( $result ) ) {
+				$error = $result->get_error_message();
+			} else {
+				$notice = __( 'Homepage photo added.', 'ndc-hello-child' );
+			}
+		}
+		list( $has_photo ) = ndc_hero_photo_status();
+		?>
+		<h2 style="margin-top:32px"><?php esc_html_e( 'Homepage photo', 'ndc-hello-child' ); ?></h2>
+		<?php if ( $notice ) : ?><div class="notice notice-success"><p><?php echo esc_html( $notice ); ?></p></div><?php endif; ?>
+		<?php if ( $error ) : ?>
+			<div class="notice notice-error"><p><?php echo esc_html( sprintf( __( 'The photo could not be added: %s', 'ndc-hello-child' ), $error ) ); ?></p>
+			<p><?php esc_html_e( 'You can add it by hand instead: download it from Higgsfield, upload it to Media, then in Elementor select the top section of Home and set Style → Background → Image.', 'ndc-hello-child' ); ?></p></div>
+		<?php endif; ?>
+		<form method="post">
+			<?php wp_nonce_field( 'ndc_hero_photo' ); ?>
+			<p><?php echo $has_photo ? '&#9989; ' . esc_html__( 'The homepage hero has a photo.', 'ndc-hello-child' ) : '&#10060; ' . esc_html__( 'The homepage hero has no photo yet.', 'ndc-hello-child' ); ?></p>
+			<?php submit_button( $has_photo ? __( 'Re-apply the team photo', 'ndc-hello-child' ) : __( 'Add homepage photo', 'ndc-hello-child' ), $has_photo ? 'secondary' : 'primary', 'ndc_hero_photo', false ); ?>
+		</form>
+		<?php
+	},
+	5
+);
+
+/** Nudge admins to add the homepage photo while the hero has none. */
+add_action(
+	'admin_notices',
+	static function () {
+		if ( ! current_user_can( 'manage_options' ) || ( isset( $_GET['page'] ) && 'ndc-site-status' === $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return;
+		}
+		$front = (int) get_option( 'page_on_front' );
+		if ( ! $front || ndc_page_issues( $front ) ) {
+			return; // The "fix pages" notice comes first.
+		}
+		$data = json_decode( (string) get_post_meta( $front, '_elementor_data', true ), true );
+		if ( ! is_array( $data ) || null === ndc_find_hero( $data ) || ndc_hero_photo_status()[0] ) {
+			return;
+		}
+		printf(
+			'<div class="notice notice-info"><p>%s <a href="%s">%s</a></p></div>',
+			esc_html__( 'Your homepage has no hero photo yet.', 'ndc-hello-child' ),
+			esc_url( admin_url( 'themes.php?page=ndc-site-status' ) ),
+			esc_html__( 'Add the team photo on the NDC Site Status page →', 'ndc-hello-child' )
+		);
 	}
 );

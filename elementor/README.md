@@ -99,10 +99,12 @@ The pages use only **free Elementor** widgets, and the form comes from the inclu
 
 The hero uses a photo generated with Higgsfield: a diverse team around a conference table, led by a Black woman. A dark gradient over the left side keeps the white headline readable.
 
-**How it gets onto your site:** the homepage template points to the photo's online address. When you import the template, Elementor downloads the photo into your **Media Library** automatically.
+**Adding it:** after you insert the homepage template, go to **Appearance → NDC Site Status → Homepage photo** and click **Add homepage photo**. The theme downloads the photo into your Media Library and places it in the hero. Until then, the hero shows plain black behind the text.
 
-**If the hero shows a grey placeholder instead:** the download didn't work (some hosts block outside downloads). To fix it:
-1. Download the photo from your Higgsfield account and upload it to the Media Library.
+**Why it isn't in the template:** the photo is very large. Importing it as part of the template made Elementor's import fail with "An error occurred". The button downloads it without making the extra resized copies that caused the failure.
+
+**If the button reports an error:** add the photo by hand.
+1. Download it from your Higgsfield account and upload it to the Media Library.
 2. Edit **Home** with Elementor and click the hero section to select it.
 3. Go to **Style → Background → Image** → choose the photo → **Update**.
 

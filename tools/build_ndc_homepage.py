@@ -37,13 +37,10 @@ FOOTER_PHONE = "(000) 000-0000"
 FOOTER_PHONE_LINK = "tel:+10000000000"
 FOOTER_EMAIL = "nadiaworsley@gmail.com"
 
-# Hero photo (generated with Higgsfield, option 1: team around a conference
-# table). Elementor downloads it into the Media Library on import.
-HERO_IMAGE = {
-    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3K2VyhBi5YY9ZE0uS8kzZI19UlC/"
-           "hf_20261001_190615_008c59d6-7671-4d96-96d9-35ed4fbd3615.png",
-    "id": "", "size": "", "alt": "Diverse team collaborating around a conference table", "source": "library",
-}
+# Hero photo: left empty so the template imports quickly. The NDC Hello Child
+# theme's "Add homepage photo" button (Appearance > NDC Site Status)
+# downloads the Higgsfield team photo and sets it here.
+HERO_IMAGE = {"url": "", "id": "", "size": "", "alt": "", "source": "library"}
 
 FONT_DISPLAY = "Inter Tight"
 FONT_LEAD = "Manrope"
