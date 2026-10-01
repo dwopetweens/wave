@@ -7,10 +7,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// Elementor Pro Theme Builder first, then the NDC template, then Hello's default.
+// Elementor Pro Theme Builder first, then the NDC template, then the built-in fallback.
 if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'footer' ) ) {
 	if ( ! ndc_render_part( 'footer' ) ) {
-		ndc_hello_default_part( 'footer' );
+		ndc_builtin_part( 'footer' );
 	}
 }
 ?>

@@ -28,9 +28,9 @@ $skip_link_url    = apply_filters( 'hello_elementor_skip_link_url', '#content' )
 <?php } ?>
 
 <?php
-// Elementor Pro Theme Builder first, then the NDC template, then Hello's default.
+// Elementor Pro Theme Builder first, then the NDC template, then the built-in fallback.
 if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'header' ) ) {
 	if ( ! ndc_render_part( 'header' ) ) {
-		ndc_hello_default_part( 'header' );
+		ndc_builtin_part( 'header' );
 	}
 }

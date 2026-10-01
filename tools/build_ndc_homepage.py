@@ -12,6 +12,7 @@ visual editor and need no custom CSS or Elementor Pro. The contact form
 itself comes from the NDC Contact Form plugin in wordpress/.
 """
 
+import base64
 import itertools
 import json
 import pathlib
@@ -293,12 +294,23 @@ def nav_link(label, href, size_px=17, hide_mobile=True):
     )
 
 
-def logo(variant="light", height=64, height_mobile=46):
-    """NDC logo from the child theme's [ndc_logo] shortcode."""
-    return widget("shortcode", {
-        "shortcode": f'[ndc_logo variant="{variant}" height="{height}" height_mobile="{height_mobile}"]',
-        "_flex_size": "grow",
-    })
+LOGO_FILE = pathlib.Path(__file__).resolve().parent.parent / "wordpress/ndc-hello-child/assets/img/ndc-logo-light-200.png"
+LOGO_RATIO = 894 / 371
+
+
+def logo(height=64, height_mobile=46):
+    """Cream NDC logo embedded in an HTML widget, so it shows up with or
+    without the child theme and needs no media upload on import."""
+    data = base64.b64encode(LOGO_FILE.read_bytes()).decode()
+    cls = f"ndc-logo--{height}"
+    html = (
+        f'<a class="ndc-logo-link" href="/" rel="home" aria-label="NDC Consulting Group home">'
+        f'<img class="ndc-logo {cls}" src="data:image/png;base64,{data}" '
+        f'width="{round(height * LOGO_RATIO)}" height="{height}" alt="NDC Consulting Group" '
+        f'style="display:block;height:{height}px;width:auto;max-width:100%"></a>'
+        f'<style>@media (max-width:767px){{img.ndc-logo.{cls}{{height:{height_mobile}px!important}}}}</style>'
+    )
+    return widget("html", {"html": html, "_flex_size": "grow"})
 
 
 NAV = [("About", "/#about"), ("Services", "/#services"), ("Process", "/#process")]
@@ -645,3 +657,9 @@ if __name__ == "__main__":
         out = out_dir / name
         out.write_text(json.dumps(builder(), indent=2, ensure_ascii=False) + "\n")
         print(f"wrote {out}")
+    # The child theme bundles the header/footer and imports them if missing.
+    theme_tpl = out_dir.parent / "wordpress" / "ndc-hello-child" / "templates"
+    theme_tpl.mkdir(exist_ok=True)
+    for name in ("ndc-header.json", "ndc-footer.json"):
+        (theme_tpl / name).write_text((out_dir / name).read_text())
+        print(f"wrote {theme_tpl / name}")

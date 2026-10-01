@@ -15,7 +15,20 @@ This folder has the Elementor templates for the site. The theme and plugin they 
 
 The header and footer are **separate templates**. You edit each one once in Elementor (*Templates → Saved Templates → NDC Site Header / NDC Site Footer → Edit with Elementor*), and the change appears on every page. The pages themselves contain only their own content.
 
-Free Elementor can't do this by itself; that feature is the Pro "Theme Builder". The NDC Hello Child theme does it instead:
+**Setup is automatic.** The theme includes both templates. The first time you open the WordPress admin with the theme active, it imports any that are missing and selects them.
+
+**If something isn't showing:** go to **Appearance → NDC Site Status**. It shows a ✅ or ❌ for each piece:
+- the active theme
+- Hello Elementor
+- Elementor
+- the header and footer templates
+- the logo files
+
+Click **Repair header & footer** to re-import both templates and clear Elementor's cache.
+
+**The logo always appears.** It's embedded directly in the header and footer templates. If the Elementor templates can't be found at all, the theme shows its own built-in header and footer, which also include the logo and links.
+
+Free Elementor can't share a header and footer across pages by itself; that feature is the Pro "Theme Builder". The NDC Hello Child theme does it instead:
 - **Automatic:** it finds the templates named exactly **NDC Site Header** and **NDC Site Footer**.
 - **Choosing others:** to use templates with different names, pick them in *Appearance → Customize → NDC Header & Footer*.
 - **Fallback:** if neither template exists, Hello's normal header and footer appear.
