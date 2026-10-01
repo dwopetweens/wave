@@ -32,9 +32,9 @@ CONTACT_URL = "/contact/"
 BLACK = "#000000"
 WHITE = "#FFFFFF"
 
-# Footer contact details: placeholders until the client confirms them.
-FOOTER_PHONE = "(000) 000-0000"
-FOOTER_PHONE_LINK = "tel:+10000000000"
+# Footer contact details.
+FOOTER_PHONE = "(818)213-6313"
+FOOTER_PHONE_LINK = "tel:+18182136313"
 FOOTER_EMAIL = "nadiaworsley@gmail.com"
 
 # Hero photo: left empty so the template imports quickly. The NDC Hello Child

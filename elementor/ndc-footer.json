@@ -88,13 +88,13 @@
                 "icon_list": [
                   {
                     "_id": "1d0c063",
-                    "text": "(000) 000-0000",
+                    "text": "(818)213-6313",
                     "selected_icon": {
                       "value": "fas fa-phone",
                       "library": "fa-solid"
                     },
                     "link": {
-                      "url": "tel:+10000000000",
+                      "url": "tel:+18182136313",
                       "is_external": "",
                       "nofollow": "",
                       "custom_attributes": ""

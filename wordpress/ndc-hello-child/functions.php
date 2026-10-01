@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NDC_CHILD_VERSION', '1.4.0' );
+define( 'NDC_CHILD_VERSION', '1.5.0' );
 
 /** Template titles looked up when nothing is chosen in the Customizer. */
 const NDC_PART_TITLES = array(
@@ -25,6 +25,14 @@ add_action(
 	'wp_enqueue_scripts',
 	static function () {
 		wp_enqueue_style( 'ndc-hello-child', get_stylesheet_uri(), array(), NDC_CHILD_VERSION );
+		// The header/footer are rendered after <head>, so Elementor would only
+		// load these widget styles late in the page, where caching plugins can
+		// drop them (the footer icons then render huge). Load them up front.
+		foreach ( array( 'widget-icon-list', 'widget-heading' ) as $handle ) {
+			if ( wp_style_is( $handle, 'registered' ) ) {
+				wp_enqueue_style( $handle );
+			}
+		}
 	},
 	20
 );

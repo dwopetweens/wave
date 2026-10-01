@@ -7,7 +7,7 @@ This folder has the Elementor templates for the site. The theme and plugin they 
 | `../wordpress/ndc-hello-child.zip` | **NDC Hello Child** theme. It puts the site header and footer on every page and includes the NDC logo. |
 | `../wordpress/ndc-contact-form.zip` | The contact form plugin, with spam protection. It emails each enquiry to **nadiaworsley@gmail.com**. |
 | `ndc-header.json` | **NDC Site Header**: the logo, About / Services / Process links, and a Contact Us button. |
-| `ndc-footer.json` | **NDC Site Footer**: one black bar with the phone number and email on the left and the copyright on the right. |
+| `ndc-footer.json` | **NDC Site Footer**: one black bar with the phone number and email on the left and the copyright on the right. The theme sizes its icons as well, so caching plugins can't make them display huge. |
 | `ndc-homepage.json` | The homepage content. |
 | `ndc-contact.json` | The contact page content. |
 
@@ -150,7 +150,7 @@ Turnstile adds Cloudflare's own check on top of the checks above. It's free, and
 
 | Where | What |
 | --- | --- |
-| **Footer phone number** | **Placeholder:** `(000) 000-0000`. Replace it in *Templates → Saved Templates → NDC Site Footer → Edit with Elementor* by clicking the phone line and editing both the **Text** and the **Link** (`tel:+1XXXXXXXXXX`). Or send me the number and I'll update the template. |
+| **Footer phone number** | **(818)213-6313**, which links to `tel:+18182136313` so tapping it on a phone starts a call. To change it, edit the phone line in *NDC Site Footer* (both **Text** and **Link**). |
 | Footer | The copyright year is plain text (`2026`). |
 
 ## Design tokens

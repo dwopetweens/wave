@@ -3,7 +3,7 @@ Theme Name:   NDC Hello Child
 Description:  Child theme of Hello Elementor for NDC Consulting Group. Shows the "NDC Site Header" and "NDC Site Footer" Elementor templates on every page, and provides the [ndc_logo] shortcode.
 Author:       NDC Consulting Group
 Template:     hello-elementor
-Version:      1.4.0
+Version:      1.5.0
 Requires at least: 6.0
 Requires PHP: 7.4
 License:      GNU General Public License v3 or later
@@ -31,6 +31,19 @@ img.ndc-logo,
 .ndc-site-footer { display: block; width: 100%; }
 .ndc-site-header .elementor,
 .ndc-site-footer .elementor { margin: 0; }
+
+/* Footer phone/email list: sized here too, so the icons stay small even if a
+   caching plugin drops Elementor's icon-list stylesheet. */
+.ndc-site-footer .elementor-icon-list-items { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 36px; list-style: none; margin: 0; padding: 0; }
+.ndc-site-footer .elementor-icon-list-item,
+.ndc-site-footer .elementor-icon-list-item > a { display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; }
+.ndc-site-footer .elementor-icon-list-item::after { display: none; }
+.ndc-site-footer .elementor-icon-list-icon { display: inline-flex; flex: none; }
+.ndc-site-footer .elementor-icon-list-icon svg { width: 18px; height: 18px; fill: currentColor; }
+.ndc-site-footer .elementor-icon-list-icon i { font-size: 18px; }
+@media (max-width: 767px) {
+	.ndc-site-footer .elementor-icon-list-items { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
 
 /* Smooth scroll for the in-page About / Services / Process links. */
 html { scroll-behavior: smooth; }
