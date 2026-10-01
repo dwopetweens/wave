@@ -1,23 +1,52 @@
 # NDC Consulting Group: website (Elementor + Hello)
 
-This folder has two Elementor page templates and the contact-form plugin they rely on.
+This folder has the Elementor templates for the site. The theme and plugin they rely on are in `../wordpress/`.
 
 | File | What it is |
 | --- | --- |
-| `ndc-homepage.json` | The homepage template. |
-| `ndc-contact.json` | The contact page template. |
+| `../wordpress/ndc-hello-child.zip` | **NDC Hello Child** theme. It puts the site header and footer on every page and includes the NDC logo. |
 | `../wordpress/ndc-contact-form.zip` | The contact form plugin, with spam protection. It emails each enquiry to **nadiaworsley@gmail.com**. |
+| `ndc-header.json` | **NDC Site Header**: the logo, About / Services / Process links, and a Contact Us button. |
+| `ndc-footer.json` | **NDC Site Footer**: the logo, the page links, the copyright and the tagline. |
+| `ndc-homepage.json` | The homepage content. |
+| `ndc-contact.json` | The contact page content. |
 
-**Homepage sections:**
-1. **Header**: NDC wordmark, About / Services / Process links, and a Contact Us button.
-2. **Hero**: a full-width photo with the headline "Better systems make better work possible." and a "Start the conversation" button. *You add the photo; see below.*
-3. **Why NDC?**: the copy from *Why NDC Consulting Group – Homepage.docx*.
-4. **About us**.
-5. **What we do**: Human Resources, Internal Communications, Customer Retention & Recovery, Marketing Operations.
-6. **Our process**: Discover → Design → Implement.
-7. **Start the conversation**: a call to action, plus the footer.
+### How the header and footer work
 
-**Contact page:** the same header and footer, with a form for Full Name (first and last), Company / Organization, Email and Message. Every field is required.
+The header and footer are **separate templates**. You edit each one once in Elementor (*Templates → Saved Templates → NDC Site Header / NDC Site Footer → Edit with Elementor*), and the change appears on every page. The pages themselves contain only their own content.
+
+Free Elementor can't do this by itself; that feature is the Pro "Theme Builder". The NDC Hello Child theme does it instead:
+- **Automatic:** it finds the templates named exactly **NDC Site Header** and **NDC Site Footer**.
+- **Choosing others:** to use templates with different names, pick them in *Appearance → Customize → NDC Header & Footer*.
+- **Fallback:** if neither template exists, Hello's normal header and footer appear.
+- **Elementor Pro:** if you add Pro later, its Theme Builder header and footer take over automatically.
+
+### Logo
+
+The theme includes the logo in two colours. Both are cropped, transparent PNGs:
+- `assets/img/ndc-logo-light.png`: cream, for the dark header and footer.
+- `assets/img/ndc-logo-dark.png`: black, for light backgrounds.
+
+**Placing the logo:** add a **Shortcode** widget containing:
+
+```
+[ndc_logo variant="light" height="64" height_mobile="46"]
+```
+
+- `variant="dark"` gives the black version.
+- `link="no"` stops the logo linking to the homepage.
+
+**Replacing the logo:** to update it later, swap those two files for new ones with the same names.
+
+**Homepage sections** (between the site header and footer):
+1. **Hero**: a full-width photo with the headline "Better systems make better work possible." and a "Start the conversation" button. *You add the photo; see below.*
+2. **Why NDC?**: the copy from *Why NDC Consulting Group – Homepage.docx*.
+3. **About us**.
+4. **What we do**: Human Resources, Internal Communications, Customer Retention & Recovery, Marketing Operations.
+5. **Our process**: Discover → Design → Implement.
+6. **Start the conversation**: a call to action.
+
+**Contact page:** a form for Full Name (first and last), Company / Organization, Email and Message. Every field is required.
 
 **Links:** every Contact button on the site goes to `/contact/`. Your email address never appears on the site itself, so spam bots can't harvest it.
 
@@ -27,16 +56,22 @@ The pages use only **free Elementor** widgets, and the form comes from the inclu
 
 ## Install
 
-1. **Theme:** activate **Hello Elementor** (*Appearance → Themes*).
+1. **Themes:** install **Hello Elementor** (*Appearance → Themes → Add New*), but don't activate it. It must be installed for the child theme to work.
+   Then go to *Appearance → Themes → Add New → Upload Theme* → choose `wordpress/ndc-hello-child.zip` → **Install** → **Activate**.
 2. **Elementor:** install and activate **Elementor**.
    On Elementor 3.x, check that *Elementor → Settings → Features → Flexbox Container* is **Active**.
 3. **Contact form plugin:** *Plugins → Add New → Upload Plugin* → choose `wordpress/ndc-contact-form.zip` → **Install Now** → **Activate**.
-4. **Import both templates:** *Templates → Saved Templates → Import Templates*. Import `ndc-homepage.json`, then `ndc-contact.json`.
+4. **Import all four templates:** *Templates → Saved Templates → Import Templates*. Import `ndc-header.json`, `ndc-footer.json`, `ndc-homepage.json` and `ndc-contact.json`.
+   The header and footer appear on every page as soon as they're imported; there's nothing else to set up.
 5. **Create the pages:**
    - **Home:** *Pages → Add New* → title **Home** → **Edit with Elementor**. Click the folder icon → **My Templates** → **Insert** next to *NDC Consulting Group – Homepage*.
    - **Contact:** *Pages → Add New* → title **Contact**. The web address must be `/contact/`, which WordPress sets automatically from that title. → **Edit with Elementor** → insert *NDC Consulting Group – Contact*.
-   - **For both pages:** open the page settings (gear icon) → **Page Layout → Elementor Canvas** → **Publish**.
+   - **For both pages:** open the page settings (gear icon) → **Page Layout → Elementor Full Width** → **Publish**.
+     Use *Full Width*, not *Canvas*. Canvas hides the site header and footer.
 6. **Set the homepage:** *Settings → Reading → A static page → Homepage: Home*.
+7. **Browser-tab icon:** go to *Appearance → Customize → Site Identity → Site Icon* and upload `wordpress/ndc-hello-child/assets/img/ndc-site-icon.png`. It's a cream "N" from the logo on the dark brand colour.
+
+**Updating from an earlier version:** if you imported earlier versions of these templates, delete them first under *Templates → Saved Templates*. The earlier page templates had the header and footer built in, and keeping them would show the header and footer twice.
 
 ## Adding the hero photo
 

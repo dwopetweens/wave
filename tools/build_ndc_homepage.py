@@ -2,7 +2,8 @@
 """Generate the NDC Consulting Group pages as Elementor templates.
 
 Run:  python3 tools/build_ndc_homepage.py
-Out:  elementor/ndc-homepage.json and elementor/ndc-contact.json
+Out:  elementor/ndc-homepage.json, ndc-contact.json  (pages)
+      elementor/ndc-header.json, ndc-footer.json     (site header/footer)
       (import via Elementor > Templates > Import)
 
 Only free Elementor widgets are used (container, heading, text-editor,
@@ -284,21 +285,30 @@ def sky(text_):
 # --------------------------------------------------------------------------
 # Sections
 # --------------------------------------------------------------------------
-def site_header(on_home=True):
-    prefix = "" if on_home else "/"
-    nav_link = lambda label, href: heading(  # noqa: E731
+def nav_link(label, href, size_px=17, hide_mobile=True):
+    return heading(
         f'<a href="{href}">{label}</a>', tag="p", color=CREAM,
-        typography=typo(FONT_BODY, 17, "500", 1.2),
-        extra={"hide_mobile": "hidden-mobile"},
+        typography=typo(FONT_BODY, size_px, "500", 1.2),
+        extra={"hide_mobile": "hidden-mobile"} if hide_mobile else None,
     )
+
+
+def logo(variant="light", height=64, height_mobile=46):
+    """NDC logo from the child theme's [ndc_logo] shortcode."""
+    return widget("shortcode", {
+        "shortcode": f'[ndc_logo variant="{variant}" height="{height}" height_mobile="{height_mobile}"]',
+        "_flex_size": "grow",
+    })
+
+
+NAV = [("About", "/#about"), ("Services", "/#services"), ("Process", "/#process")]
+
+
+def site_header():
     return container(
         [
-            heading('<a href="/">NDC Consulting Group</a>', tag="p", color=CREAM,
-                    typography=typo(FONT_DISPLAY, 22, "600", 1, -0.02, mobile=18),
-                    extra={"_flex_size": "grow"}),
-            nav_link("About", f"{prefix}#about"),
-            nav_link("Services", f"{prefix}#services"),
-            nav_link("Process", f"{prefix}#process"),
+            logo(),
+            *[nav_link(label, href) for label, href in NAV],
             pill_button("Contact Us", CONTACT_URL,
                         extra={**typo(FONT_BODY, 16, "700", 1),
                                "text_padding": box(12, 24, 12, 24),
@@ -306,8 +316,9 @@ def site_header(on_home=True):
                                "border_width": box(1.5, 1.5, 1.5, 1.5)}),
         ],
         direction="row", align="center", bg=INK, stack_on=None, row_gap=36,
-        padding=section_padding(top=(28, 24, 20), bottom=(28, 24, 20)),
-        html_tag="header", is_inner=False,
+        padding=section_padding(top=(18, 16, 14), bottom=(18, 16, 14)),
+        is_inner=False,
+        extra={"border_border": "solid", "border_width": box(0, 0, 1, 0), "border_color": RULE_DARK},
     )
 
 
@@ -520,21 +531,37 @@ def process():
 
 
 def site_footer():
-    small = typo(FONT_BODY, 18, "400", 1.4, tablet=16, mobile=14)
-    return container(
+    small = typo(FONT_BODY, 16, "400", 1.4, mobile=14)
+    links = [*NAV, ("Contact", CONTACT_URL)]
+    top = container(
+        [
+            container([logo(height=96, height_mobile=72)], width=40, width_mobile=100,
+                      extra={"_flex_size": "none"}),
+            container([nav_link(label, href, size_px=18, hide_mobile=False) for label, href in links],
+                      direction="row", stack_on=None, row_gap=36, col_gap=36, wrap=True,
+                      justify="flex-end", align="center",
+                      extra={"flex_justify_content_mobile": "flex-start", "_flex_size": "none",
+                             "width": size(55, "%"), "width_mobile": size(100, "%"),
+                             "flex_gap_mobile": gap(16, 28)}),
+        ],
+        direction="row", justify="space-between", align="center", row_gap=32,
+        padding=section_padding(top=(72, 64, 56), bottom=(56, 48, 40)),
+    )
+    bottom = container(
         [
             heading("© 2026 NDC Consulting Group. All rights reserved.", tag="p", color="#BDBBAF", typography=small),
             heading("Built for better business.", tag="p", color="#BDBBAF", typography=small),
         ],
         direction="row", justify="space-between", align="center", row_gap=8,
-        padding=section_padding(top=(28, 24, 24), bottom=(28, 24, 24)),
-        html_tag="footer",
+        padding=section_padding(top=(24, 24, 20), bottom=(28, 24, 24)),
         extra={"border_border": "solid", "border_width": box(1, 0, 0, 0), "border_color": RULE_DARK},
     )
+    return container([top, bottom], bg=INK, is_inner=False,
+                     extra={"border_border": "solid", "border_width": box(1, 0, 0, 0), "border_color": RULE_DARK})
 
 
-def contact_and_footer():
-    cta = container(
+def contact_cta():
+    return container(
         [
             container(
                 [
@@ -548,9 +575,8 @@ def contact_and_footer():
         ],
         direction="row", justify="space-between", align="center", stack_on="tablet", row_gap=40,
         padding=section_padding(top=(140, 100, 72), bottom=(140, 100, 72)),
-        anchor="contact",
+        anchor="contact", bg=INK, is_inner=False,
     )
-    return container([cta, site_footer()], bg=INK, is_inner=False)
 
 
 def contact_form_section():
@@ -574,41 +600,48 @@ def contact_form_section():
         direction="row", justify="space-between", align="flex-start", bg=BG_ABOUT, stack_on="tablet",
         row_gap=56, padding=section_padding(top=(120, 96, 64), bottom=(140, 104, 80)),
         anchor="contact-form", html_tag="section", is_inner=False,
-        extra={"min_height": custom("calc(100vh - 180px)")},
     )
 
 
 # --------------------------------------------------------------------------
 def page(title, content):
+    # "Elementor Full Width" keeps the theme header/footer (the NDC Site
+    # Header/Footer templates, via the NDC Hello Child theme).
     return {
         "content": content,
-        "page_settings": {
-            "template": "elementor_canvas",
-            "hide_title": "yes",
-            "background_background": "classic",
-            "background_color": INK,
-        },
+        "page_settings": {"template": "elementor_header_footer", "hide_title": "yes"},
         "version": "0.4",
         "title": title,
         "type": "page",
     }
 
 
+def part(title, content):
+    return {"content": content, "page_settings": [], "version": "0.4", "title": title, "type": "section"}
+
+
 def build():
     return page("NDC Consulting Group – Homepage",
-                [site_header(), hero(), why_ndc(), about(), services(), process(), contact_and_footer()])
+                [hero(), why_ndc(), about(), services(), process(), contact_cta()])
 
 
 def build_contact():
-    return page("NDC Consulting Group – Contact",
-                [site_header(on_home=False), contact_form_section(),
-                 container([site_footer()], bg=INK, is_inner=False)])
+    return page("NDC Consulting Group – Contact", [contact_form_section()])
+
+
+def build_header():
+    return part("NDC Site Header", [site_header()])
+
+
+def build_footer():
+    return part("NDC Site Footer", [site_footer()])
 
 
 if __name__ == "__main__":
     out_dir = pathlib.Path(__file__).resolve().parent.parent / "elementor"
     out_dir.mkdir(exist_ok=True)
-    for name, builder in (("ndc-homepage.json", build), ("ndc-contact.json", build_contact)):
+    for name, builder in (("ndc-homepage.json", build), ("ndc-contact.json", build_contact),
+                          ("ndc-header.json", build_header), ("ndc-footer.json", build_footer)):
         out = out_dir / name
         out.write_text(json.dumps(builder(), indent=2, ensure_ascii=False) + "\n")
         print(f"wrote {out}")
