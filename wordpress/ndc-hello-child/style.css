@@ -3,7 +3,7 @@ Theme Name:   NDC Hello Child
 Description:  Child theme of Hello Elementor for NDC Consulting Group. Shows the "NDC Site Header" and "NDC Site Footer" Elementor templates on every page, and provides the [ndc_logo] shortcode.
 Author:       NDC Consulting Group
 Template:     hello-elementor
-Version:      1.2.0
+Version:      1.3.0
 Requires at least: 6.0
 Requires PHP: 7.4
 License:      GNU General Public License v3 or later
@@ -37,21 +37,19 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* Built-in header/footer (shown only if the Elementor templates are unavailable). */
-.ndc-builtin { background: #1a1a1a; color: #f6f4e6; font-family: "DM Sans", system-ui, sans-serif; }
+.ndc-builtin { background: #000; color: #f6f4e6; font-family: "DM Sans", system-ui, sans-serif; }
 .ndc-builtin a { color: #f6f4e6; text-decoration: none; }
 .ndc-builtin a:hover { color: #6ec6ee; }
-.ndc-builtin__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px 36px; padding: 18px 36px; }
+.ndc-builtin__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px 36px; padding: 18px 36px; }
 .ndc-builtin__nav { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 36px; font-size: 17px; font-weight: 500; }
-.ndc-builtin__cta { border: 1.5px solid #f6f4e6; border-radius: 999px; padding: 12px 24px; font-weight: 700; font-size: 16px; }
-.ndc-builtin__cta:hover { background: #f6f4e6; color: #1a1a1a !important; }
-.ndc-builtin--header { border-bottom: 1px solid #3a3a3a; }
-.ndc-builtin--footer { border-top: 1px solid #3a3a3a; }
-.ndc-builtin--footer .ndc-builtin__inner { padding: 72px 36px 56px; }
-.ndc-builtin--footer .ndc-builtin__nav { font-size: 18px; }
-.ndc-builtin__legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding: 24px 36px 28px; border-top: 1px solid #3a3a3a; color: #bdbbaf; font-size: 16px; }
+.ndc-builtin--footer { color: #fff; }
+.ndc-builtin--footer a { color: #fff; font-size: 19px; }
+.ndc-builtin--footer .ndc-builtin__inner { padding: 28px 36px; flex-wrap: wrap; }
+.ndc-builtin__legal { font-size: 15px; }
 @media (max-width: 767px) {
 	.ndc-builtin__inner { padding: 14px 20px; }
-	.ndc-builtin--header .ndc-builtin__nav a:not(.ndc-builtin__cta) { display: none; }
-	.ndc-builtin--footer .ndc-builtin__inner { flex-direction: column; align-items: flex-start; padding: 56px 20px 40px; }
-	.ndc-builtin__legal { flex-direction: column; padding: 20px 20px 24px; font-size: 14px; }
+	.ndc-builtin__hide-mobile { display: none; }
+	.ndc-builtin--footer .ndc-builtin__inner { flex-direction: column; align-items: flex-start; padding: 24px 20px 28px; }
+	.ndc-builtin--footer a { font-size: 16px; }
+	.ndc-builtin__legal { font-size: 13px; }
 }

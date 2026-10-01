@@ -7,7 +7,7 @@ This folder has the Elementor templates for the site. The theme and plugin they 
 | `../wordpress/ndc-hello-child.zip` | **NDC Hello Child** theme. It puts the site header and footer on every page and includes the NDC logo. |
 | `../wordpress/ndc-contact-form.zip` | The contact form plugin, with spam protection. It emails each enquiry to **nadiaworsley@gmail.com**. |
 | `ndc-header.json` | **NDC Site Header**: the logo, About / Services / Process links, and a Contact Us button. |
-| `ndc-footer.json` | **NDC Site Footer**: the logo, the page links, the copyright and the tagline. |
+| `ndc-footer.json` | **NDC Site Footer**: one black bar with the phone number and email on the left and the copyright on the right. |
 | `ndc-homepage.json` | The homepage content. |
 | `ndc-contact.json` | The contact page content. |
 
@@ -36,7 +36,7 @@ Click **Repair header & footer** to re-import both templates and clear Elementor
 Free Elementor can't share a header and footer across pages by itself; that feature is the Pro "Theme Builder". The NDC Hello Child theme does it instead:
 - **Automatic:** it finds the templates named exactly **NDC Site Header** and **NDC Site Footer**.
 - **Choosing others:** to use templates with different names, pick them in *Appearance → Customize → NDC Header & Footer*.
-- **Fallback:** if neither template exists, Hello's normal header and footer appear.
+- **Fallback:** if neither template exists, the theme's own built-in header and footer appear.
 - **Elementor Pro:** if you add Pro later, its Theme Builder header and footer take over automatically.
 
 ### Logo
@@ -57,11 +57,11 @@ The theme includes the logo in two colours. Both are cropped, transparent PNGs:
 **Replacing the logo:** to update it later, swap those two files for new ones with the same names.
 
 **Homepage sections** (between the site header and footer):
-1. **Hero**: a full-width photo with the headline "Better systems make better work possible." and a "Start the conversation" button. *You add the photo; see below.*
-2. **Why NDC?**: the copy from *Why NDC Consulting Group – Homepage.docx*.
+1. **Hero**: the team photo with "Your business can’t grow on broken systems.", a supporting line, and a small **Contact Us** button that goes to the contact page.
+2. **Why NDC?**: black background, white text; the copy from *Why NDC Consulting Group – Homepage.docx*.
 3. **About us**.
-4. **What we do**: Human Resources, Internal Communications, Customer Retention & Recovery, Marketing Operations.
-5. **Our process**: Discover → Design → Implement.
+4. **What we do**: white background, black text, no dividing lines. Human Resources, Internal Communications, Customer Retention & Recovery, Marketing Operations.
+5. **Our process**: black background, white text. Discover → Design → Implement, with copy from *Our Process – Biz Ops Website.docx*.
 6. **Start the conversation**: a call to action.
 
 **Contact page:** a form for Full Name (first and last), Company / Organization, Email and Message. Every field is required.
@@ -71,6 +71,8 @@ The theme includes the logo in two colours. Both are cropped, transparent PNGs:
 The pages use only **free Elementor** widgets, and the form comes from the included plugin, so you don't need Elementor Pro. Everything was tested on WordPress 6.9.4, Hello Elementor 3.4.7 and Elementor 4.0.0.
 
 ![Desktop preview](preview/homepage-desktop.png)
+
+*The preview uses a stand-in graphic for the hero photo; your site shows the Higgsfield team photo.*
 
 ## Install
 
@@ -89,28 +91,22 @@ The pages use only **free Elementor** widgets, and the form comes from the inclu
 6. **Set the homepage:** *Settings → Reading → A static page → Homepage: Home*.
 7. **Browser-tab icon:** go to *Appearance → Customize → Site Identity → Site Icon* and upload `wordpress/ndc-hello-child/assets/img/ndc-site-icon.png`. It's a cream "N" from the logo on the dark brand colour.
 
-**Updating from an earlier version:** if you imported earlier versions of these templates, delete them first under *Templates → Saved Templates*. The earlier page templates had the header and footer built in, and keeping them would show the header and footer twice.
+**Updating from an earlier version:**
+- **Theme:** upload the new `ndc-hello-child.zip` and choose **Replace current with uploaded**. The next time you open the WordPress admin, the theme updates the **NDC Site Header** and **NDC Site Footer** templates to the new design by itself. It keeps their names and settings and saves a backup of the previous version.
+- **Pages:** delete the old *NDC Consulting Group – Homepage* and *– Contact* templates under *Templates → Saved Templates*. Import the new ones, then re-insert them into Home and Contact (open the page in Elementor, delete its old content, then **Insert** the template).
 
-## Adding the hero photo
+## Hero photo
 
-The hero has a photo slot with a dark gradient over it, so the white text stays readable.
+The hero uses a photo generated with Higgsfield: a diverse team around a conference table, led by a Black woman. A dark gradient over the left side keeps the white headline readable.
 
-**To set the photo:**
-1. Edit **Home** with Elementor.
-2. Click the hero section (the one with "Better systems make better work possible.") to select it.
-3. Go to **Style → Background → Image** → choose your photo → **Update**.
+**How it gets onto your site:** the homepage template points to the photo's online address. When you import the template, Elementor downloads the photo into your **Media Library** automatically.
 
-**What to look for in the photo:**
-- A **landscape** photo, at least **2400 px wide**.
-- The people are best placed **centre-right**. The headline sits on the left, so faces there would be covered.
-- A real working moment (people around a table, a whiteboard, a laptop) reads better than a posed line-up.
+**If the hero shows a grey placeholder instead:** the download didn't work (some hosts block outside downloads). To fix it:
+1. Download the photo from your Higgsfield account and upload it to the Media Library.
+2. Edit **Home** with Elementor and click the hero section to select it.
+3. Go to **Style → Background → Image** → choose the photo → **Update**.
 
-**Free sources with strong, genuinely diverse business photos** (all free for commercial use):
-- **nappy.co**: photos centred on Black and Brown people. Search "meeting" or "office".
-- **Pexels**: search "diverse team meeting" or "black woman business meeting". The *#WOCinTech Chat* photos by Christina Morillo are a good fit.
-- **Unsplash**: search "diverse team collaboration".
-
-Before you publish, check the photo's licence page. Unsplash, Pexels and nappy.co photos need no attribution.
+**Page speed:** the photo is a large PNG. An image-optimisation plugin (for example **Smush** or **ShortPixel**) will compress it so the page loads faster.
 
 ## Spam protection
 
@@ -127,7 +123,19 @@ The form stops bots without a CAPTCHA puzzle for real visitors. Each submission 
 
 **Bots are shown a fake "sent" message**, so they get no signal to adapt to. Nothing reaches your inbox.
 
-**Optional extra layer: Cloudflare Turnstile.** It's free and usually invisible to visitors. If spam still gets through, create a Turnstile widget at dash.cloudflare.com and paste its **Site key** and **Secret key** into *Settings → NDC Contact Form*.
+### Cloudflare Turnstile
+
+Turnstile adds Cloudflare's own check on top of the checks above. It's free, and most real visitors pass without clicking anything. The check appears just above **Send Message**.
+
+**To switch it on:**
+1. Log in at **dash.cloudflare.com** and open **Turnstile**.
+2. Click **Add widget**. Name it "NDC Contact Form" and add the site's domain.
+3. **Widget mode:** choose **Managed**.
+4. Copy the **Site Key** and **Secret Key** into *Settings → NDC Contact Form → Cloudflare Turnstile* → **Save Changes**.
+
+**Checking it's on:** *Appearance → NDC Site Status* shows **Cloudflare Turnstile: on**. Send yourself one test message to confirm the whole thing works end to end.
+
+**Keep the Secret Key private:** enter it only in WordPress.
 
 ## Where enquiries go
 
@@ -140,20 +148,19 @@ The form stops bots without a CAPTCHA puzzle for real visitors. Each submission 
 
 | Where | What |
 | --- | --- |
-| Hero | The eyebrow, headline and subline are placeholder copy drawn from your existing wording. Edit them in Elementor if you want different text. |
-| Footer | The copyright year is plain text (`© 2026`). |
+| **Footer phone number** | **Placeholder:** `(000) 000-0000`. Replace it in *Templates → Saved Templates → NDC Site Footer → Edit with Elementor* by clicking the phone line and editing both the **Text** and the **Link** (`tel:+1XXXXXXXXXX`). Or send me the number and I'll update the template. |
+| Footer | The copyright year is plain text (`2026`). |
 
 ## Design tokens
 
 | Token | Value | Used for |
 | --- | --- | --- |
-| Ink | `#1A1A1A` | Dark sections, text on light sections |
-| Cream | `#F6F4E6` | Text on dark sections |
-| Sky | `#6EC6EE` | Accent line, highlighted phrase |
-| Eyebrow blue | `#2A87B4` | Small uppercase labels |
+| Black | `#000000` | Header, hero, "Why NDC?", "Our Process", call to action, footer |
+| White | `#FFFFFF` | Text on black sections; "What We Do" background |
+| Ink | `#1A1A1A` | Text on light sections |
+| Cream | `#F6F4E6` | Logo and header links |
+| Sky | `#6EC6EE` | Accent line above "Start the conversation" |
 | About / Contact background | `#F4F3EF` | |
-| Services background | `#F8F6EB` | |
-| Process background | `#DFF0FA` | |
 
 **Fonts (loaded automatically from Google Fonts by Elementor):**
 - **Inter Tight** for headlines.

@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NDC_CHILD_VERSION', '1.2.0' );
+define( 'NDC_CHILD_VERSION', '1.3.0' );
 
 /** Template titles looked up when nothing is chosen in the Customizer. */
 const NDC_PART_TITLES = array(
@@ -200,26 +200,26 @@ add_action(
  * found or rendered, so the logo and navigation always appear.
  * ---------------------------------------------------------------------- */
 function ndc_builtin_part( $part ) {
-	$logo = do_shortcode( 'header' === $part ? '[ndc_logo height="64" height_mobile="46"]' : '[ndc_logo height="96" height_mobile="72"]' );
-	$links = array(
-		__( 'About', 'ndc-hello-child' )    => home_url( '/#about' ),
-		__( 'Services', 'ndc-hello-child' ) => home_url( '/#services' ),
-		__( 'Process', 'ndc-hello-child' )  => home_url( '/#process' ),
-	);
-	$nav = '';
-	foreach ( $links as $label => $url ) {
-		$nav .= '<a href="' . esc_url( $url ) . '">' . esc_html( $label ) . '</a>';
-	}
 	if ( 'header' === $part ) {
-		echo '<header id="site-header" class="ndc-builtin ndc-builtin--header"><div class="ndc-builtin__inner">' . $logo // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			. '<nav class="ndc-builtin__nav" aria-label="' . esc_attr__( 'Main', 'ndc-hello-child' ) . '">' . $nav // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			. '<a class="ndc-builtin__cta" href="' . esc_url( home_url( '/contact/' ) ) . '">' . esc_html__( 'Contact Us', 'ndc-hello-child' ) . '</a></nav></div></header>';
+		$links = array(
+			__( 'About', 'ndc-hello-child' )      => array( home_url( '/#about' ), true ),
+			__( 'Services', 'ndc-hello-child' )   => array( home_url( '/#services' ), true ),
+			__( 'Process', 'ndc-hello-child' )    => array( home_url( '/#process' ), true ),
+			__( 'Contact Us', 'ndc-hello-child' ) => array( home_url( '/contact/' ), false ),
+		);
+		$nav = '';
+		foreach ( $links as $label => $link ) {
+			$nav .= '<a href="' . esc_url( $link[0] ) . '"' . ( $link[1] ? ' class="ndc-builtin__hide-mobile"' : '' ) . '>' . esc_html( $label ) . '</a>';
+		}
+		echo '<header id="site-header" class="ndc-builtin ndc-builtin--header"><div class="ndc-builtin__inner">' . do_shortcode( '[ndc_logo height="64" height_mobile="46"]' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			. '<nav class="ndc-builtin__nav" aria-label="' . esc_attr__( 'Main', 'ndc-hello-child' ) . '">' . $nav . '</nav></div></header>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		return;
 	}
-	$nav .= '<a href="' . esc_url( home_url( '/contact/' ) ) . '">' . esc_html__( 'Contact', 'ndc-hello-child' ) . '</a>';
-	echo '<footer id="site-footer" class="ndc-builtin ndc-builtin--footer"><div class="ndc-builtin__inner">' . $logo // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		. '<nav class="ndc-builtin__nav" aria-label="' . esc_attr__( 'Footer', 'ndc-hello-child' ) . '">' . $nav . '</nav></div>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		. '<div class="ndc-builtin__legal"><span>&copy; ' . esc_html( wp_date( 'Y' ) ) . ' NDC Consulting Group. All rights reserved.</span><span>Built for better business.</span></div></footer>';
+	$email = 'nadiaworsley@gmail.com';
+	echo '<footer id="site-footer" class="ndc-builtin ndc-builtin--footer"><div class="ndc-builtin__inner">'
+		. '<a href="' . esc_url( 'mailto:' . $email ) . '">' . esc_html( $email ) . '</a>'
+		. '<span class="ndc-builtin__legal">' . esc_html( sprintf( 'Copyright %s © NDC Consulting Group', wp_date( 'Y' ) ) ) . '</span>'
+		. '</div></footer>';
 }
 
 /* -------------------------------------------------------------------------
@@ -251,14 +251,54 @@ function ndc_import_missing_parts( $force = false ) {
 	return $done;
 }
 
+/**
+ * Replace the content of the existing header/footer templates with the
+ * versions bundled in this theme. Keeps the template IDs (so nothing else
+ * needs re-selecting) and stores a backup of the previous content.
+ *
+ * @return string[] Parts that were updated.
+ */
+function ndc_update_parts_from_theme() {
+	if ( ! did_action( 'elementor/loaded' ) || ! class_exists( '\Elementor\Plugin' ) ) {
+		return array();
+	}
+	$updated = array();
+	foreach ( array( 'header', 'footer' ) as $part ) {
+		$id   = ndc_part_template_id( $part );
+		$file = get_stylesheet_directory() . "/templates/ndc-{$part}.json";
+		$json = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : null; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		if ( ! $id || empty( $json['content'] ) ) {
+			continue;
+		}
+		$old = (string) get_post_meta( $id, '_elementor_data', true );
+		if ( $old ) {
+			update_post_meta( $id, '_ndc_previous_elementor_data', wp_slash( $old ) );
+		}
+		$document = \Elementor\Plugin::$instance->documents->get( $id, false );
+		if ( $document ) {
+			$document->save( array( 'elements' => $json['content'] ) );
+			$updated[] = $part;
+		}
+	}
+	if ( $updated ) {
+		\Elementor\Plugin::$instance->files_manager->clear_cache();
+	}
+	return $updated;
+}
+
 add_action(
 	'admin_init',
 	static function () {
-		if ( wp_doing_ajax() || get_option( 'ndc_parts_imported' ) === NDC_CHILD_VERSION ) {
+		$installed = (string) get_option( 'ndc_parts_imported' );
+		if ( wp_doing_ajax() || $installed === NDC_CHILD_VERSION ) {
 			return;
 		}
 		if ( did_action( 'elementor/loaded' ) && current_user_can( 'manage_options' ) ) {
 			ndc_import_missing_parts();
+			// After a theme update, bring the header/footer up to the new design.
+			if ( $installed && version_compare( $installed, NDC_CHILD_VERSION, '<' ) ) {
+				ndc_update_parts_from_theme();
+			}
 			update_option( 'ndc_parts_imported', NDC_CHILD_VERSION, false );
 		}
 	}
@@ -293,6 +333,14 @@ function ndc_status_page() {
 	foreach ( array( 'header', 'footer' ) as $part ) {
 		$id = ndc_part_template_id( $part );
 		$rows[ 'header' === $part ? __( 'Header template', 'ndc-hello-child' ) : __( 'Footer template', 'ndc-hello-child' ) ] = array( (bool) $id, $id ? get_the_title( $id ) . " (#{$id})" : __( 'not found — the built-in header/footer is shown instead', 'ndc-hello-child' ) );
+	}
+	if ( class_exists( 'NDC_Contact_Form' ) ) {
+		$form      = NDC_Contact_Form::settings();
+		$turnstile = $form['turnstile_site_key'] && $form['turnstile_secret_key'];
+		$rows[ __( 'Contact form', 'ndc-hello-child' ) ] = array( true, sprintf( __( 'active — enquiries go to %s', 'ndc-hello-child' ), $form['recipient'] ) );
+		$rows[ __( 'Cloudflare Turnstile', 'ndc-hello-child' ) ] = array( $turnstile, $turnstile ? __( 'on', 'ndc-hello-child' ) : __( 'off — add the Site key and Secret key under Settings → NDC Contact Form', 'ndc-hello-child' ) );
+	} else {
+		$rows[ __( 'Contact form', 'ndc-hello-child' ) ] = array( false, __( 'NDC Contact Form plugin not active', 'ndc-hello-child' ) );
 	}
 	$logo = get_stylesheet_directory() . '/assets/img/ndc-logo-light.png';
 	$rows[ __( 'Logo files', 'ndc-hello-child' ) ] = array( is_readable( $logo ), is_readable( $logo ) ? __( 'present', 'ndc-hello-child' ) : __( 'missing', 'ndc-hello-child' ) );

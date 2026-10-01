@@ -1,7 +1,7 @@
 {
   "content": [
     {
-      "id": "1d0c006",
+      "id": "1d0c005",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -23,7 +23,7 @@
         },
         "flex_justify_content": "flex-end",
         "background_background": "classic",
-        "background_color": "#1A1A1A",
+        "background_color": "#000000",
         "padding_tablet": {
           "unit": "px",
           "top": "160",
@@ -53,23 +53,24 @@
           "sizes": []
         },
         "background_image": {
-          "url": "",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3K2VyhBi5YY9ZE0uS8kzZI19UlC/hf_20261001_190615_008c59d6-7671-4d96-96d9-35ed4fbd3615.png",
           "id": "",
           "size": "",
-          "alt": "",
+          "alt": "Diverse team collaborating around a conference table",
           "source": "library"
         },
         "background_position": "center center",
+        "background_position_mobile": "center right",
         "background_repeat": "no-repeat",
         "background_size": "cover",
         "background_overlay_background": "gradient",
-        "background_overlay_color": "rgba(26,26,26,0.88)",
+        "background_overlay_color": "rgba(0,0,0,0.86)",
         "background_overlay_color_stop": {
           "unit": "%",
           "size": 0,
           "sizes": []
         },
-        "background_overlay_color_b": "rgba(26,26,26,0.35)",
+        "background_overlay_color_b": "rgba(0,0,0,0.15)",
         "background_overlay_color_b_stop": {
           "unit": "%",
           "size": 100,
@@ -78,7 +79,7 @@
         "background_overlay_gradient_type": "linear",
         "background_overlay_gradient_angle": {
           "unit": "deg",
-          "size": 20,
+          "size": 70,
           "sizes": []
         },
         "background_overlay_opacity": {
@@ -89,17 +90,17 @@
       },
       "elements": [
         {
-          "id": "1d0c005",
+          "id": "1d0c004",
           "elType": "container",
           "settings": {
             "content_width": "full",
             "flex_direction": "column",
             "flex_gap": {
               "unit": "px",
-              "row": "32",
-              "column": "32",
+              "row": "28",
+              "column": "28",
               "isLinked": true,
-              "size": 32
+              "size": 28
             },
             "padding": {
               "unit": "px",
@@ -112,7 +113,7 @@
             "flex_align_items": "flex-start",
             "width": {
               "unit": "%",
-              "size": 62,
+              "size": 60,
               "sizes": []
             },
             "width_tablet": {
@@ -132,55 +133,15 @@
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
-                "title": "Business operations consulting",
-                "header_size": "p",
-                "title_color": "#F6F4E6",
-                "typography_typography": "custom",
-                "typography_font_family": "DM Sans",
-                "typography_font_weight": "700",
-                "typography_font_size": {
-                  "unit": "px",
-                  "size": 17,
-                  "sizes": []
-                },
-                "typography_font_size_tablet": {
-                  "unit": "px",
-                  "size": 15,
-                  "sizes": []
-                },
-                "typography_font_size_mobile": {
-                  "unit": "px",
-                  "size": 13,
-                  "sizes": []
-                },
-                "typography_line_height": {
-                  "unit": "em",
-                  "size": 1.2,
-                  "sizes": []
-                },
-                "typography_letter_spacing": {
-                  "unit": "em",
-                  "size": 0.2,
-                  "sizes": []
-                },
-                "typography_text_transform": "uppercase"
-              },
-              "elements": []
-            },
-            {
-              "id": "1d0c002",
-              "elType": "widget",
-              "widgetType": "heading",
-              "settings": {
-                "title": "Better systems make better work possible.",
+                "title": "Your business can’t grow on broken systems.",
                 "header_size": "h1",
-                "title_color": "#F6F4E6",
+                "title_color": "#FFFFFF",
                 "typography_typography": "custom",
                 "typography_font_family": "Inter Tight",
                 "typography_font_weight": "600",
                 "typography_font_size": {
                   "unit": "custom",
-                  "size": "clamp(48px, 6.6vw, 136px)",
+                  "size": "clamp(44px, 5.6vw, 116px)",
                   "sizes": []
                 },
                 "typography_line_height": {
@@ -197,18 +158,18 @@
               "elements": []
             },
             {
-              "id": "1d0c003",
+              "id": "1d0c002",
               "elType": "widget",
               "widgetType": "text-editor",
               "settings": {
-                "editor": "For leaders ready to move from reactive problem-solving to intentional growth.",
-                "text_color": "#F6F4E6",
+                "editor": "NDC Consulting Group strengthens the systems, processes, and teams your business depends on to operate efficiently and deliver a better customer experience.",
+                "text_color": "#FFFFFF",
                 "typography_typography": "custom",
                 "typography_font_family": "Manrope",
                 "typography_font_weight": "500",
                 "typography_font_size": {
                   "unit": "custom",
-                  "size": "clamp(19px, 1.6vw, 30px)",
+                  "size": "clamp(18px, 1.5vw, 28px)",
                   "sizes": []
                 },
                 "typography_line_height": {
@@ -225,34 +186,34 @@
               "elements": []
             },
             {
-              "id": "1d0c004",
+              "id": "1d0c003",
               "elType": "widget",
               "widgetType": "button",
               "settings": {
-                "text": "Start the conversation",
+                "text": "Contact Us",
                 "link": {
                   "url": "/contact/",
                   "is_external": "",
                   "nofollow": "",
                   "custom_attributes": ""
                 },
-                "button_text_color": "#F6F4E6",
+                "button_text_color": "#FFFFFF",
                 "background_background": "classic",
                 "background_color": "rgba(0,0,0,0)",
-                "hover_color": "#1A1A1A",
+                "hover_color": "#000000",
                 "button_background_hover_background": "classic",
-                "button_background_hover_color": "#F6F4E6",
-                "button_hover_border_color": "#F6F4E6",
+                "button_background_hover_color": "#FFFFFF",
+                "button_hover_border_color": "#FFFFFF",
                 "border_border": "solid",
                 "border_width": {
                   "unit": "px",
-                  "top": "2",
-                  "right": "2",
-                  "bottom": "2",
-                  "left": "2",
+                  "top": "1.5",
+                  "right": "1.5",
+                  "bottom": "1.5",
+                  "left": "1.5",
                   "isLinked": false
                 },
-                "border_color": "#F6F4E6",
+                "border_color": "#FFFFFF",
                 "border_radius": {
                   "unit": "px",
                   "top": "999",
@@ -263,18 +224,18 @@
                 },
                 "text_padding": {
                   "unit": "px",
-                  "top": "26",
-                  "right": "38",
-                  "bottom": "26",
-                  "left": "38",
+                  "top": "14",
+                  "right": "28",
+                  "bottom": "14",
+                  "left": "28",
                   "isLinked": false
                 },
                 "text_padding_mobile": {
                   "unit": "px",
-                  "top": "18",
-                  "right": "28",
-                  "bottom": "18",
-                  "left": "28",
+                  "top": "12",
+                  "right": "24",
+                  "bottom": "12",
+                  "left": "24",
                   "isLinked": false
                 },
                 "button_hover_transition_duration": {
@@ -287,7 +248,7 @@
                 "typography_font_weight": "700",
                 "typography_font_size": {
                   "unit": "px",
-                  "size": 26,
+                  "size": 17,
                   "sizes": []
                 },
                 "typography_font_size_tablet": {
@@ -297,7 +258,7 @@
                 },
                 "typography_font_size_mobile": {
                   "unit": "px",
-                  "size": 18,
+                  "size": 16,
                   "sizes": []
                 },
                 "typography_line_height": {
@@ -320,7 +281,7 @@
       "isInner": false
     },
     {
-      "id": "1d0c00d",
+      "id": "1d0c00c",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -347,7 +308,7 @@
         "flex_justify_content": "space-between",
         "flex_align_items": "flex-start",
         "background_background": "classic",
-        "background_color": "#1A1A1A",
+        "background_color": "#000000",
         "padding_tablet": {
           "unit": "px",
           "top": "100",
@@ -369,7 +330,7 @@
       },
       "elements": [
         {
-          "id": "1d0c008",
+          "id": "1d0c007",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -402,13 +363,13 @@
           },
           "elements": [
             {
-              "id": "1d0c007",
+              "id": "1d0c006",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
                 "title": "Why<br>NDC?",
                 "header_size": "h2",
-                "title_color": "#F6F4E6",
+                "title_color": "#FFFFFF",
                 "typography_typography": "custom",
                 "typography_font_family": "Inter Tight",
                 "typography_font_weight": "600",
@@ -434,7 +395,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c00c",
+          "id": "1d0c00b",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -467,12 +428,40 @@
           },
           "elements": [
             {
-              "id": "1d0c009",
+              "id": "1d0c008",
               "elType": "widget",
               "widgetType": "text-editor",
               "settings": {
                 "editor": "As businesses grow, the systems that once worked often become the very things holding them back.",
-                "text_color": "#F6F4E6",
+                "text_color": "#FFFFFF",
+                "typography_typography": "custom",
+                "typography_font_family": "Manrope",
+                "typography_font_weight": "500",
+                "typography_font_size": {
+                  "unit": "custom",
+                  "size": "clamp(22px, 2vw, 40px)",
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.35,
+                  "sizes": []
+                },
+                "typography_letter_spacing": {
+                  "unit": "em",
+                  "size": -0.01,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "1d0c009",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "NDC Consulting Group identifies the gaps, inefficiencies, and operational challenges affecting your company’s performance. We provide clear direction, practical solutions, and disciplined execution to help your business operate more effectively.",
+                "text_color": "#FFFFFF",
                 "typography_typography": "custom",
                 "typography_font_family": "Manrope",
                 "typography_font_weight": "500",
@@ -499,36 +488,8 @@
               "elType": "widget",
               "widgetType": "text-editor",
               "settings": {
-                "editor": "NDC Consulting Group identifies the gaps, inefficiencies, and operational challenges affecting your company’s performance. We provide <span style=\"color:#6EC6EE;\">clear direction, practical solutions, and disciplined execution</span> to help your business operate more effectively.",
-                "text_color": "#F6F4E6",
-                "typography_typography": "custom",
-                "typography_font_family": "Manrope",
-                "typography_font_weight": "500",
-                "typography_font_size": {
-                  "unit": "custom",
-                  "size": "clamp(22px, 2vw, 40px)",
-                  "sizes": []
-                },
-                "typography_line_height": {
-                  "unit": "em",
-                  "size": 1.35,
-                  "sizes": []
-                },
-                "typography_letter_spacing": {
-                  "unit": "em",
-                  "size": -0.01,
-                  "sizes": []
-                }
-              },
-              "elements": []
-            },
-            {
-              "id": "1d0c00b",
-              "elType": "widget",
-              "widgetType": "text-editor",
-              "settings": {
                 "editor": "Sustainable growth depends on more than ambition. It requires the right systems, structure, and support to move your business forward.",
-                "text_color": "#F6F4E6",
+                "text_color": "#FFFFFF",
                 "typography_typography": "custom",
                 "typography_font_family": "Manrope",
                 "typography_font_weight": "500",
@@ -557,7 +518,7 @@
       "isInner": false
     },
     {
-      "id": "1d0c015",
+      "id": "1d0c013",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -606,7 +567,7 @@
       },
       "elements": [
         {
-          "id": "1d0c010",
+          "id": "1d0c00f",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -639,13 +600,13 @@
           },
           "elements": [
             {
-              "id": "1d0c00e",
+              "id": "1d0c00d",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
                 "title": "About us",
                 "header_size": "p",
-                "title_color": "#2A87B4",
+                "title_color": "#000000",
                 "typography_typography": "custom",
                 "typography_font_family": "DM Sans",
                 "typography_font_weight": "700",
@@ -669,7 +630,7 @@
               "elements": []
             },
             {
-              "id": "1d0c00f",
+              "id": "1d0c00e",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
@@ -701,7 +662,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c014",
+          "id": "1d0c012",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -735,7 +696,7 @@
           },
           "elements": [
             {
-              "id": "1d0c011",
+              "id": "1d0c010",
               "elType": "widget",
               "widgetType": "text-editor",
               "settings": {
@@ -763,11 +724,11 @@
               "elements": []
             },
             {
-              "id": "1d0c012",
+              "id": "1d0c011",
               "elType": "widget",
               "widgetType": "text-editor",
               "settings": {
-                "editor": "We evaluate how work gets done, identify the gaps costing your company time and trust, and build practical systems your team can actually use. Our work connects strategy to execution across human resources, talent acquisition, internal communications, customer retention, and marketing operations.",
+                "editor": "We evaluate how work gets done, identify the gaps costing your company time and trust, and build practical systems your team can actually use. Our work connects strategy to execution across human resources, internal communications, customer retention, and marketing operations.",
                 "text_color": "#1A1A1A",
                 "typography_typography": "custom",
                 "typography_font_family": "DM Sans",
@@ -784,77 +745,6 @@
                 }
               },
               "elements": []
-            },
-            {
-              "id": "1d0c013",
-              "elType": "widget",
-              "widgetType": "button",
-              "settings": {
-                "text": "Let’s talk about your business",
-                "link": {
-                  "url": "/contact/",
-                  "is_external": "",
-                  "nofollow": "",
-                  "custom_attributes": ""
-                },
-                "selected_icon": {
-                  "value": "fas fa-arrow-right",
-                  "library": "fa-solid"
-                },
-                "icon_align": "row-reverse",
-                "icon_indent": {
-                  "unit": "px",
-                  "size": 14,
-                  "sizes": []
-                },
-                "button_text_color": "#1A1A1A",
-                "hover_color": "#2A87B4",
-                "button_hover_border_color": "#2A87B4",
-                "background_background": "classic",
-                "background_color": "rgba(0,0,0,0)",
-                "button_background_hover_background": "classic",
-                "button_background_hover_color": "rgba(0,0,0,0)",
-                "border_border": "solid",
-                "border_width": {
-                  "unit": "px",
-                  "top": "0",
-                  "right": "0",
-                  "bottom": "2",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "border_color": "#1A1A1A",
-                "border_radius": {
-                  "unit": "px",
-                  "top": "0",
-                  "right": "0",
-                  "bottom": "0",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "text_padding": {
-                  "unit": "px",
-                  "top": "0",
-                  "right": "0",
-                  "bottom": "8",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "typography_typography": "custom",
-                "typography_font_family": "DM Sans",
-                "typography_font_weight": "700",
-                "typography_font_size": {
-                  "unit": "custom",
-                  "size": "clamp(16px, 1.5vw, 26px)",
-                  "sizes": []
-                },
-                "typography_line_height": {
-                  "unit": "em",
-                  "size": 1.2,
-                  "sizes": []
-                }
-              },
-              "elements": []
             }
           ],
           "isInner": true
@@ -863,17 +753,17 @@
       "isInner": false
     },
     {
-      "id": "1d0c039",
+      "id": "1d0c037",
       "elType": "container",
       "settings": {
         "content_width": "full",
         "flex_direction": "column",
         "flex_gap": {
           "unit": "px",
-          "row": "88",
-          "column": "88",
+          "row": "56",
+          "column": "56",
           "isLinked": true,
-          "size": 88
+          "size": 56
         },
         "padding": {
           "unit": "px",
@@ -884,7 +774,7 @@
           "isLinked": false
         },
         "background_background": "classic",
-        "background_color": "#F8F6EB",
+        "background_color": "#FFFFFF",
         "padding_tablet": {
           "unit": "px",
           "top": "100",
@@ -906,7 +796,7 @@
       },
       "elements": [
         {
-          "id": "1d0c01b",
+          "id": "1d0c019",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -935,7 +825,7 @@
           },
           "elements": [
             {
-              "id": "1d0c018",
+              "id": "1d0c016",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -968,13 +858,13 @@
               },
               "elements": [
                 {
-                  "id": "1d0c016",
+                  "id": "1d0c014",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
                     "title": "What we do",
                     "header_size": "p",
-                    "title_color": "#2A87B4",
+                    "title_color": "#000000",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "700",
@@ -1008,13 +898,13 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c017",
+                  "id": "1d0c015",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
                     "title": "Operational clarity, where it counts.",
                     "header_size": "h2",
-                    "title_color": "#1A1A1A",
+                    "title_color": "#000000",
                     "typography_typography": "custom",
                     "typography_font_family": "Inter Tight",
                     "typography_font_weight": "600",
@@ -1040,7 +930,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c01a",
+              "id": "1d0c018",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -1078,12 +968,12 @@
               },
               "elements": [
                 {
-                  "id": "1d0c019",
+                  "id": "1d0c017",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
                     "editor": "Focused consulting support for the parts of your business that shape performance, culture, and customer trust.",
-                    "text_color": "#1A1A1A",
+                    "text_color": "#000000",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "400",
@@ -1107,7 +997,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c038",
+          "id": "1d0c036",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -1130,7 +1020,7 @@
           },
           "elements": [
             {
-              "id": "1d0c022",
+              "id": "1d0c020",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -1144,9 +1034,9 @@
                 },
                 "padding": {
                   "unit": "px",
-                  "top": "56",
+                  "top": "44",
                   "right": "0",
-                  "bottom": "56",
+                  "bottom": "44",
                   "left": "0",
                   "isLinked": false
                 },
@@ -1154,28 +1044,18 @@
                 "flex_align_items_mobile": "flex-start",
                 "flex_justify_content": "space-between",
                 "flex_align_items": "flex-start",
-                "border_border": "solid",
-                "border_width": {
-                  "unit": "px",
-                  "top": "1",
-                  "right": "0",
-                  "bottom": "0",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "border_color": "#D9D6CC",
                 "padding_mobile": {
                   "unit": "px",
-                  "top": "36",
+                  "top": "28",
                   "right": "0",
-                  "bottom": "36",
+                  "bottom": "28",
                   "left": "0",
                   "isLinked": false
                 }
               },
               "elements": [
                 {
-                  "id": "1d0c01d",
+                  "id": "1d0c01b",
                   "elType": "container",
                   "settings": {
                     "content_width": "full",
@@ -1213,13 +1093,13 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c01c",
+                      "id": "1d0c01a",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
                         "title": "01",
                         "header_size": "p",
-                        "title_color": "#2A87B4",
+                        "title_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "700",
@@ -1236,6 +1116,84 @@
                         "typography_line_height": {
                           "unit": "em",
                           "size": 1.2,
+                          "sizes": []
+                        }
+                      },
+                      "elements": []
+                    }
+                  ],
+                  "isInner": true
+                },
+                {
+                  "id": "1d0c01d",
+                  "elType": "container",
+                  "settings": {
+                    "content_width": "full",
+                    "flex_direction": "column",
+                    "flex_gap": {
+                      "unit": "px",
+                      "row": "0",
+                      "column": "0",
+                      "isLinked": true,
+                      "size": 0
+                    },
+                    "padding": {
+                      "unit": "px",
+                      "top": "18",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 44,
+                      "sizes": []
+                    },
+                    "width_tablet": {
+                      "unit": "%",
+                      "size": 38,
+                      "sizes": []
+                    },
+                    "width_mobile": {
+                      "unit": "%",
+                      "size": 100,
+                      "sizes": []
+                    },
+                    "padding_mobile": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    }
+                  },
+                  "elements": [
+                    {
+                      "id": "1d0c01c",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "Human Resources",
+                        "header_size": "h3",
+                        "title_color": "#000000",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Inter Tight",
+                        "typography_font_weight": "600",
+                        "typography_font_size": {
+                          "unit": "custom",
+                          "size": "clamp(30px, 2.7vw, 54px)",
+                          "sizes": []
+                        },
+                        "typography_line_height": {
+                          "unit": "em",
+                          "size": 1.05,
+                          "sizes": []
+                        },
+                        "typography_letter_spacing": {
+                          "unit": "em",
+                          "size": -0.04,
                           "sizes": []
                         }
                       },
@@ -1259,84 +1217,6 @@
                     },
                     "padding": {
                       "unit": "px",
-                      "top": "18",
-                      "right": "0",
-                      "bottom": "0",
-                      "left": "0",
-                      "isLinked": false
-                    },
-                    "width": {
-                      "unit": "%",
-                      "size": 44,
-                      "sizes": []
-                    },
-                    "width_tablet": {
-                      "unit": "%",
-                      "size": 38,
-                      "sizes": []
-                    },
-                    "width_mobile": {
-                      "unit": "%",
-                      "size": 100,
-                      "sizes": []
-                    },
-                    "padding_mobile": {
-                      "unit": "px",
-                      "top": "0",
-                      "right": "0",
-                      "bottom": "0",
-                      "left": "0",
-                      "isLinked": false
-                    }
-                  },
-                  "elements": [
-                    {
-                      "id": "1d0c01e",
-                      "elType": "widget",
-                      "widgetType": "heading",
-                      "settings": {
-                        "title": "Human Resources",
-                        "header_size": "h3",
-                        "title_color": "#1A1A1A",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Inter Tight",
-                        "typography_font_weight": "600",
-                        "typography_font_size": {
-                          "unit": "custom",
-                          "size": "clamp(30px, 2.7vw, 54px)",
-                          "sizes": []
-                        },
-                        "typography_line_height": {
-                          "unit": "em",
-                          "size": 1.05,
-                          "sizes": []
-                        },
-                        "typography_letter_spacing": {
-                          "unit": "em",
-                          "size": -0.04,
-                          "sizes": []
-                        }
-                      },
-                      "elements": []
-                    }
-                  ],
-                  "isInner": true
-                },
-                {
-                  "id": "1d0c021",
-                  "elType": "container",
-                  "settings": {
-                    "content_width": "full",
-                    "flex_direction": "column",
-                    "flex_gap": {
-                      "unit": "px",
-                      "row": "0",
-                      "column": "0",
-                      "isLinked": true,
-                      "size": 0
-                    },
-                    "padding": {
-                      "unit": "px",
                       "top": "0",
                       "right": "0",
                       "bottom": "0",
@@ -1361,12 +1241,12 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c020",
+                      "id": "1d0c01e",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "settings": {
                         "editor": "Employee lifecycle systems, onboarding, policy development, compliance workflows, and performance processes designed for a growing team.",
-                        "text_color": "#6B6B66",
+                        "text_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "400",
@@ -1390,7 +1270,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c029",
+              "id": "1d0c027",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -1404,9 +1284,9 @@
                 },
                 "padding": {
                   "unit": "px",
-                  "top": "56",
+                  "top": "44",
                   "right": "0",
-                  "bottom": "56",
+                  "bottom": "44",
                   "left": "0",
                   "isLinked": false
                 },
@@ -1414,28 +1294,18 @@
                 "flex_align_items_mobile": "flex-start",
                 "flex_justify_content": "space-between",
                 "flex_align_items": "flex-start",
-                "border_border": "solid",
-                "border_width": {
-                  "unit": "px",
-                  "top": "1",
-                  "right": "0",
-                  "bottom": "0",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "border_color": "#D9D6CC",
                 "padding_mobile": {
                   "unit": "px",
-                  "top": "36",
+                  "top": "28",
                   "right": "0",
-                  "bottom": "36",
+                  "bottom": "28",
                   "left": "0",
                   "isLinked": false
                 }
               },
               "elements": [
                 {
-                  "id": "1d0c024",
+                  "id": "1d0c022",
                   "elType": "container",
                   "settings": {
                     "content_width": "full",
@@ -1473,13 +1343,13 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c023",
+                      "id": "1d0c021",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
                         "title": "02",
                         "header_size": "p",
-                        "title_color": "#2A87B4",
+                        "title_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "700",
@@ -1496,6 +1366,84 @@
                         "typography_line_height": {
                           "unit": "em",
                           "size": 1.2,
+                          "sizes": []
+                        }
+                      },
+                      "elements": []
+                    }
+                  ],
+                  "isInner": true
+                },
+                {
+                  "id": "1d0c024",
+                  "elType": "container",
+                  "settings": {
+                    "content_width": "full",
+                    "flex_direction": "column",
+                    "flex_gap": {
+                      "unit": "px",
+                      "row": "0",
+                      "column": "0",
+                      "isLinked": true,
+                      "size": 0
+                    },
+                    "padding": {
+                      "unit": "px",
+                      "top": "18",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 44,
+                      "sizes": []
+                    },
+                    "width_tablet": {
+                      "unit": "%",
+                      "size": 38,
+                      "sizes": []
+                    },
+                    "width_mobile": {
+                      "unit": "%",
+                      "size": 100,
+                      "sizes": []
+                    },
+                    "padding_mobile": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    }
+                  },
+                  "elements": [
+                    {
+                      "id": "1d0c023",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "Internal Communications",
+                        "header_size": "h3",
+                        "title_color": "#000000",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Inter Tight",
+                        "typography_font_weight": "600",
+                        "typography_font_size": {
+                          "unit": "custom",
+                          "size": "clamp(30px, 2.7vw, 54px)",
+                          "sizes": []
+                        },
+                        "typography_line_height": {
+                          "unit": "em",
+                          "size": 1.05,
+                          "sizes": []
+                        },
+                        "typography_letter_spacing": {
+                          "unit": "em",
+                          "size": -0.04,
                           "sizes": []
                         }
                       },
@@ -1519,84 +1467,6 @@
                     },
                     "padding": {
                       "unit": "px",
-                      "top": "18",
-                      "right": "0",
-                      "bottom": "0",
-                      "left": "0",
-                      "isLinked": false
-                    },
-                    "width": {
-                      "unit": "%",
-                      "size": 44,
-                      "sizes": []
-                    },
-                    "width_tablet": {
-                      "unit": "%",
-                      "size": 38,
-                      "sizes": []
-                    },
-                    "width_mobile": {
-                      "unit": "%",
-                      "size": 100,
-                      "sizes": []
-                    },
-                    "padding_mobile": {
-                      "unit": "px",
-                      "top": "0",
-                      "right": "0",
-                      "bottom": "0",
-                      "left": "0",
-                      "isLinked": false
-                    }
-                  },
-                  "elements": [
-                    {
-                      "id": "1d0c025",
-                      "elType": "widget",
-                      "widgetType": "heading",
-                      "settings": {
-                        "title": "Internal Communications",
-                        "header_size": "h3",
-                        "title_color": "#1A1A1A",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Inter Tight",
-                        "typography_font_weight": "600",
-                        "typography_font_size": {
-                          "unit": "custom",
-                          "size": "clamp(30px, 2.7vw, 54px)",
-                          "sizes": []
-                        },
-                        "typography_line_height": {
-                          "unit": "em",
-                          "size": 1.05,
-                          "sizes": []
-                        },
-                        "typography_letter_spacing": {
-                          "unit": "em",
-                          "size": -0.04,
-                          "sizes": []
-                        }
-                      },
-                      "elements": []
-                    }
-                  ],
-                  "isInner": true
-                },
-                {
-                  "id": "1d0c028",
-                  "elType": "container",
-                  "settings": {
-                    "content_width": "full",
-                    "flex_direction": "column",
-                    "flex_gap": {
-                      "unit": "px",
-                      "row": "0",
-                      "column": "0",
-                      "isLinked": true,
-                      "size": 0
-                    },
-                    "padding": {
-                      "unit": "px",
                       "top": "0",
                       "right": "0",
                       "bottom": "0",
@@ -1621,12 +1491,12 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c027",
+                      "id": "1d0c025",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "settings": {
                         "editor": "Communication structures, leadership messaging, and change communications that keep teams informed and aligned.",
-                        "text_color": "#6B6B66",
+                        "text_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "400",
@@ -1650,7 +1520,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c030",
+              "id": "1d0c02e",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -1664,9 +1534,9 @@
                 },
                 "padding": {
                   "unit": "px",
-                  "top": "56",
+                  "top": "44",
                   "right": "0",
-                  "bottom": "56",
+                  "bottom": "44",
                   "left": "0",
                   "isLinked": false
                 },
@@ -1674,28 +1544,18 @@
                 "flex_align_items_mobile": "flex-start",
                 "flex_justify_content": "space-between",
                 "flex_align_items": "flex-start",
-                "border_border": "solid",
-                "border_width": {
-                  "unit": "px",
-                  "top": "1",
-                  "right": "0",
-                  "bottom": "0",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "border_color": "#D9D6CC",
                 "padding_mobile": {
                   "unit": "px",
-                  "top": "36",
+                  "top": "28",
                   "right": "0",
-                  "bottom": "36",
+                  "bottom": "28",
                   "left": "0",
                   "isLinked": false
                 }
               },
               "elements": [
                 {
-                  "id": "1d0c02b",
+                  "id": "1d0c029",
                   "elType": "container",
                   "settings": {
                     "content_width": "full",
@@ -1733,13 +1593,13 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c02a",
+                      "id": "1d0c028",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
                         "title": "03",
                         "header_size": "p",
-                        "title_color": "#2A87B4",
+                        "title_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "700",
@@ -1756,6 +1616,84 @@
                         "typography_line_height": {
                           "unit": "em",
                           "size": 1.2,
+                          "sizes": []
+                        }
+                      },
+                      "elements": []
+                    }
+                  ],
+                  "isInner": true
+                },
+                {
+                  "id": "1d0c02b",
+                  "elType": "container",
+                  "settings": {
+                    "content_width": "full",
+                    "flex_direction": "column",
+                    "flex_gap": {
+                      "unit": "px",
+                      "row": "0",
+                      "column": "0",
+                      "isLinked": true,
+                      "size": 0
+                    },
+                    "padding": {
+                      "unit": "px",
+                      "top": "18",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 44,
+                      "sizes": []
+                    },
+                    "width_tablet": {
+                      "unit": "%",
+                      "size": 38,
+                      "sizes": []
+                    },
+                    "width_mobile": {
+                      "unit": "%",
+                      "size": 100,
+                      "sizes": []
+                    },
+                    "padding_mobile": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    }
+                  },
+                  "elements": [
+                    {
+                      "id": "1d0c02a",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "Customer Retention & Recovery",
+                        "header_size": "h3",
+                        "title_color": "#000000",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Inter Tight",
+                        "typography_font_weight": "600",
+                        "typography_font_size": {
+                          "unit": "custom",
+                          "size": "clamp(30px, 2.7vw, 54px)",
+                          "sizes": []
+                        },
+                        "typography_line_height": {
+                          "unit": "em",
+                          "size": 1.05,
+                          "sizes": []
+                        },
+                        "typography_letter_spacing": {
+                          "unit": "em",
+                          "size": -0.04,
                           "sizes": []
                         }
                       },
@@ -1779,84 +1717,6 @@
                     },
                     "padding": {
                       "unit": "px",
-                      "top": "18",
-                      "right": "0",
-                      "bottom": "0",
-                      "left": "0",
-                      "isLinked": false
-                    },
-                    "width": {
-                      "unit": "%",
-                      "size": 44,
-                      "sizes": []
-                    },
-                    "width_tablet": {
-                      "unit": "%",
-                      "size": 38,
-                      "sizes": []
-                    },
-                    "width_mobile": {
-                      "unit": "%",
-                      "size": 100,
-                      "sizes": []
-                    },
-                    "padding_mobile": {
-                      "unit": "px",
-                      "top": "0",
-                      "right": "0",
-                      "bottom": "0",
-                      "left": "0",
-                      "isLinked": false
-                    }
-                  },
-                  "elements": [
-                    {
-                      "id": "1d0c02c",
-                      "elType": "widget",
-                      "widgetType": "heading",
-                      "settings": {
-                        "title": "Customer Retention & Recovery",
-                        "header_size": "h3",
-                        "title_color": "#1A1A1A",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Inter Tight",
-                        "typography_font_weight": "600",
-                        "typography_font_size": {
-                          "unit": "custom",
-                          "size": "clamp(30px, 2.7vw, 54px)",
-                          "sizes": []
-                        },
-                        "typography_line_height": {
-                          "unit": "em",
-                          "size": 1.05,
-                          "sizes": []
-                        },
-                        "typography_letter_spacing": {
-                          "unit": "em",
-                          "size": -0.04,
-                          "sizes": []
-                        }
-                      },
-                      "elements": []
-                    }
-                  ],
-                  "isInner": true
-                },
-                {
-                  "id": "1d0c02f",
-                  "elType": "container",
-                  "settings": {
-                    "content_width": "full",
-                    "flex_direction": "column",
-                    "flex_gap": {
-                      "unit": "px",
-                      "row": "0",
-                      "column": "0",
-                      "isLinked": true,
-                      "size": 0
-                    },
-                    "padding": {
-                      "unit": "px",
                       "top": "0",
                       "right": "0",
                       "bottom": "0",
@@ -1881,12 +1741,12 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c02e",
+                      "id": "1d0c02c",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "settings": {
                         "editor": "Escalation protocols, service recovery systems, and response standards that help resolve issues and rebuild trust.",
-                        "text_color": "#6B6B66",
+                        "text_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "400",
@@ -1910,7 +1770,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c037",
+              "id": "1d0c035",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -1924,9 +1784,9 @@
                 },
                 "padding": {
                   "unit": "px",
-                  "top": "56",
+                  "top": "44",
                   "right": "0",
-                  "bottom": "56",
+                  "bottom": "44",
                   "left": "0",
                   "isLinked": false
                 },
@@ -1934,28 +1794,18 @@
                 "flex_align_items_mobile": "flex-start",
                 "flex_justify_content": "space-between",
                 "flex_align_items": "flex-start",
-                "border_border": "solid",
-                "border_width": {
-                  "unit": "px",
-                  "top": "1",
-                  "right": "0",
-                  "bottom": "1",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "border_color": "#D9D6CC",
                 "padding_mobile": {
                   "unit": "px",
-                  "top": "36",
+                  "top": "28",
                   "right": "0",
-                  "bottom": "36",
+                  "bottom": "28",
                   "left": "0",
                   "isLinked": false
                 }
               },
               "elements": [
                 {
-                  "id": "1d0c032",
+                  "id": "1d0c030",
                   "elType": "container",
                   "settings": {
                     "content_width": "full",
@@ -1993,13 +1843,13 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c031",
+                      "id": "1d0c02f",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
                         "title": "04",
                         "header_size": "p",
-                        "title_color": "#2A87B4",
+                        "title_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "700",
@@ -2025,7 +1875,7 @@
                   "isInner": true
                 },
                 {
-                  "id": "1d0c034",
+                  "id": "1d0c032",
                   "elType": "container",
                   "settings": {
                     "content_width": "full",
@@ -2071,13 +1921,13 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c033",
+                      "id": "1d0c031",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
                         "title": "Marketing Operations",
                         "header_size": "h3",
-                        "title_color": "#1A1A1A",
+                        "title_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "Inter Tight",
                         "typography_font_weight": "600",
@@ -2103,7 +1953,7 @@
                   "isInner": true
                 },
                 {
-                  "id": "1d0c036",
+                  "id": "1d0c034",
                   "elType": "container",
                   "settings": {
                     "content_width": "full",
@@ -2141,12 +1991,12 @@
                   },
                   "elements": [
                     {
-                      "id": "1d0c035",
+                      "id": "1d0c033",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "settings": {
                         "editor": "Campaign workflows, content processes, and clear team responsibilities that help turn plans into consistent execution.",
-                        "text_color": "#6B6B66",
+                        "text_color": "#000000",
                         "typography_typography": "custom",
                         "typography_font_family": "DM Sans",
                         "typography_font_weight": "400",
@@ -2176,7 +2026,7 @@
       "isInner": false
     },
     {
-      "id": "1d0c050",
+      "id": "1d0c04e",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -2197,7 +2047,7 @@
           "isLinked": false
         },
         "background_background": "classic",
-        "background_color": "#DFF0FA",
+        "background_color": "#000000",
         "padding_tablet": {
           "unit": "px",
           "top": "100",
@@ -2219,7 +2069,7 @@
       },
       "elements": [
         {
-          "id": "1d0c03f",
+          "id": "1d0c03d",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -2248,7 +2098,7 @@
           },
           "elements": [
             {
-              "id": "1d0c03c",
+              "id": "1d0c03a",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2281,13 +2131,13 @@
               },
               "elements": [
                 {
-                  "id": "1d0c03a",
+                  "id": "1d0c038",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
                     "title": "Our process",
                     "header_size": "p",
-                    "title_color": "#2A87B4",
+                    "title_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "700",
@@ -2321,13 +2171,13 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c03b",
+                  "id": "1d0c039",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
                     "title": "Listen.<br>Diagnose. Build.",
                     "header_size": "h2",
-                    "title_color": "#1A1A1A",
+                    "title_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "Inter Tight",
                     "typography_font_weight": "600",
@@ -2353,7 +2203,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c03e",
+              "id": "1d0c03c",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2391,12 +2241,12 @@
               },
               "elements": [
                 {
-                  "id": "1d0c03d",
+                  "id": "1d0c03b",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
-                    "editor": "We do not hand you a glossy strategy that collects dust. We learn the business, find what is getting in the way, and build a clear path forward.",
-                    "text_color": "#1A1A1A",
+                    "editor": "We assess how your business runs, pinpoint what needs to improve, and put practical solutions in place to help it run more effectively.",
+                    "text_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "400",
@@ -2420,7 +2270,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c04f",
+          "id": "1d0c04d",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -2452,7 +2302,7 @@
           },
           "elements": [
             {
-              "id": "1d0c044",
+              "id": "1d0c042",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2496,7 +2346,7 @@
                   "left": "0",
                   "isLinked": false
                 },
-                "border_color": "#1A1A1A",
+                "border_color": "#FFFFFF",
                 "padding_tablet": {
                   "unit": "px",
                   "top": "56",
@@ -2516,7 +2366,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c040",
+                  "id": "1d0c03e",
                   "elType": "widget",
                   "widgetType": "icon",
                   "settings": {
@@ -2524,7 +2374,7 @@
                       "value": "fas fa-circle",
                       "library": "fa-solid"
                     },
-                    "primary_color": "#1A1A1A",
+                    "primary_color": "#FFFFFF",
                     "size": {
                       "unit": "px",
                       "size": 20,
@@ -2545,80 +2395,80 @@
                       "sizes": []
                     },
                     "_z_index": 2
+                  },
+                  "elements": []
+                },
+                {
+                  "id": "1d0c03f",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "settings": {
+                    "title": "01 / Discover",
+                    "header_size": "p",
+                    "title_color": "#FFFFFF",
+                    "typography_typography": "custom",
+                    "typography_font_family": "DM Sans",
+                    "typography_font_weight": "700",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 20,
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "unit": "px",
+                      "size": 16,
+                      "sizes": []
+                    },
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.2,
+                      "sizes": []
+                    },
+                    "typography_letter_spacing": {
+                      "unit": "em",
+                      "size": 0,
+                      "sizes": []
+                    },
+                    "typography_text_transform": "uppercase"
+                  },
+                  "elements": []
+                },
+                {
+                  "id": "1d0c040",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "settings": {
+                    "title": "Understand Your Business",
+                    "header_size": "h3",
+                    "title_color": "#FFFFFF",
+                    "typography_typography": "custom",
+                    "typography_font_family": "Inter Tight",
+                    "typography_font_weight": "600",
+                    "typography_font_size": {
+                      "unit": "custom",
+                      "size": "clamp(26px, 1.9vw, 38px)",
+                      "sizes": []
+                    },
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.1,
+                      "sizes": []
+                    },
+                    "typography_letter_spacing": {
+                      "unit": "em",
+                      "size": -0.04,
+                      "sizes": []
+                    }
                   },
                   "elements": []
                 },
                 {
                   "id": "1d0c041",
                   "elType": "widget",
-                  "widgetType": "heading",
-                  "settings": {
-                    "title": "01 / Discover",
-                    "header_size": "p",
-                    "title_color": "#1A1A1A",
-                    "typography_typography": "custom",
-                    "typography_font_family": "DM Sans",
-                    "typography_font_weight": "700",
-                    "typography_font_size": {
-                      "unit": "px",
-                      "size": 20,
-                      "sizes": []
-                    },
-                    "typography_font_size_mobile": {
-                      "unit": "px",
-                      "size": 16,
-                      "sizes": []
-                    },
-                    "typography_line_height": {
-                      "unit": "em",
-                      "size": 1.2,
-                      "sizes": []
-                    },
-                    "typography_letter_spacing": {
-                      "unit": "em",
-                      "size": 0,
-                      "sizes": []
-                    },
-                    "typography_text_transform": "uppercase"
-                  },
-                  "elements": []
-                },
-                {
-                  "id": "1d0c042",
-                  "elType": "widget",
-                  "widgetType": "heading",
-                  "settings": {
-                    "title": "Understand the reality",
-                    "header_size": "h3",
-                    "title_color": "#1A1A1A",
-                    "typography_typography": "custom",
-                    "typography_font_family": "Inter Tight",
-                    "typography_font_weight": "600",
-                    "typography_font_size": {
-                      "unit": "custom",
-                      "size": "clamp(26px, 1.9vw, 38px)",
-                      "sizes": []
-                    },
-                    "typography_line_height": {
-                      "unit": "em",
-                      "size": 1.1,
-                      "sizes": []
-                    },
-                    "typography_letter_spacing": {
-                      "unit": "em",
-                      "size": -0.04,
-                      "sizes": []
-                    }
-                  },
-                  "elements": []
-                },
-                {
-                  "id": "1d0c043",
-                  "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
-                    "editor": "We listen to leadership, review current workflows, and uncover the issues beneath the symptoms.",
-                    "text_color": "#1A1A1A",
+                    "editor": "We review how work gets done, listen to your team, and identify the gaps affecting efficiency, performance, and customer experience.",
+                    "text_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "400",
@@ -2639,7 +2489,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c049",
+              "id": "1d0c047",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2683,7 +2533,7 @@
                   "left": "0",
                   "isLinked": false
                 },
-                "border_color": "#1A1A1A",
+                "border_color": "#FFFFFF",
                 "padding_tablet": {
                   "unit": "px",
                   "top": "56",
@@ -2703,7 +2553,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c045",
+                  "id": "1d0c043",
                   "elType": "widget",
                   "widgetType": "icon",
                   "settings": {
@@ -2711,7 +2561,7 @@
                       "value": "fas fa-circle",
                       "library": "fa-solid"
                     },
-                    "primary_color": "#1A1A1A",
+                    "primary_color": "#FFFFFF",
                     "size": {
                       "unit": "px",
                       "size": 20,
@@ -2732,80 +2582,80 @@
                       "sizes": []
                     },
                     "_z_index": 2
+                  },
+                  "elements": []
+                },
+                {
+                  "id": "1d0c044",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "settings": {
+                    "title": "02 / Design",
+                    "header_size": "p",
+                    "title_color": "#FFFFFF",
+                    "typography_typography": "custom",
+                    "typography_font_family": "DM Sans",
+                    "typography_font_weight": "700",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 20,
+                      "sizes": []
+                    },
+                    "typography_font_size_mobile": {
+                      "unit": "px",
+                      "size": 16,
+                      "sizes": []
+                    },
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.2,
+                      "sizes": []
+                    },
+                    "typography_letter_spacing": {
+                      "unit": "em",
+                      "size": 0,
+                      "sizes": []
+                    },
+                    "typography_text_transform": "uppercase"
+                  },
+                  "elements": []
+                },
+                {
+                  "id": "1d0c045",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "settings": {
+                    "title": "Develop the Right Solution",
+                    "header_size": "h3",
+                    "title_color": "#FFFFFF",
+                    "typography_typography": "custom",
+                    "typography_font_family": "Inter Tight",
+                    "typography_font_weight": "600",
+                    "typography_font_size": {
+                      "unit": "custom",
+                      "size": "clamp(26px, 1.9vw, 38px)",
+                      "sizes": []
+                    },
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.1,
+                      "sizes": []
+                    },
+                    "typography_letter_spacing": {
+                      "unit": "em",
+                      "size": -0.04,
+                      "sizes": []
+                    }
                   },
                   "elements": []
                 },
                 {
                   "id": "1d0c046",
                   "elType": "widget",
-                  "widgetType": "heading",
-                  "settings": {
-                    "title": "02 / Design",
-                    "header_size": "p",
-                    "title_color": "#1A1A1A",
-                    "typography_typography": "custom",
-                    "typography_font_family": "DM Sans",
-                    "typography_font_weight": "700",
-                    "typography_font_size": {
-                      "unit": "px",
-                      "size": 20,
-                      "sizes": []
-                    },
-                    "typography_font_size_mobile": {
-                      "unit": "px",
-                      "size": 16,
-                      "sizes": []
-                    },
-                    "typography_line_height": {
-                      "unit": "em",
-                      "size": 1.2,
-                      "sizes": []
-                    },
-                    "typography_letter_spacing": {
-                      "unit": "em",
-                      "size": 0,
-                      "sizes": []
-                    },
-                    "typography_text_transform": "uppercase"
-                  },
-                  "elements": []
-                },
-                {
-                  "id": "1d0c047",
-                  "elType": "widget",
-                  "widgetType": "heading",
-                  "settings": {
-                    "title": "Build the right system",
-                    "header_size": "h3",
-                    "title_color": "#1A1A1A",
-                    "typography_typography": "custom",
-                    "typography_font_family": "Inter Tight",
-                    "typography_font_weight": "600",
-                    "typography_font_size": {
-                      "unit": "custom",
-                      "size": "clamp(26px, 1.9vw, 38px)",
-                      "sizes": []
-                    },
-                    "typography_line_height": {
-                      "unit": "em",
-                      "size": 1.1,
-                      "sizes": []
-                    },
-                    "typography_letter_spacing": {
-                      "unit": "em",
-                      "size": -0.04,
-                      "sizes": []
-                    }
-                  },
-                  "elements": []
-                },
-                {
-                  "id": "1d0c048",
-                  "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
-                    "editor": "We create a focused solution around your goals, team capacity, and stage of growth.",
-                    "text_color": "#1A1A1A",
+                    "editor": "We create practical processes, clarify responsibilities, and build an action plan around your business goals and team’s needs.",
+                    "text_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "400",
@@ -2826,7 +2676,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c04e",
+              "id": "1d0c04c",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -2870,7 +2720,7 @@
                   "left": "0",
                   "isLinked": false
                 },
-                "border_color": "#1A1A1A",
+                "border_color": "#FFFFFF",
                 "padding_tablet": {
                   "unit": "px",
                   "top": "56",
@@ -2890,7 +2740,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c04a",
+                  "id": "1d0c048",
                   "elType": "widget",
                   "widgetType": "icon",
                   "settings": {
@@ -2898,7 +2748,7 @@
                       "value": "fas fa-circle",
                       "library": "fa-solid"
                     },
-                    "primary_color": "#1A1A1A",
+                    "primary_color": "#FFFFFF",
                     "size": {
                       "unit": "px",
                       "size": 20,
@@ -2923,13 +2773,13 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c04b",
+                  "id": "1d0c049",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
                     "title": "03 / Implement",
                     "header_size": "p",
-                    "title_color": "#1A1A1A",
+                    "title_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "700",
@@ -2958,13 +2808,13 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c04c",
+                  "id": "1d0c04a",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
-                    "title": "Make it operational",
+                    "title": "Make It Work Every Day",
                     "header_size": "h3",
-                    "title_color": "#1A1A1A",
+                    "title_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "Inter Tight",
                     "typography_font_weight": "600",
@@ -2987,12 +2837,12 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c04d",
+                  "id": "1d0c04b",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "settings": {
-                    "editor": "We support execution, clarify ownership, and help your team put the new process to work.",
-                    "text_color": "#1A1A1A",
+                    "editor": "We help your team put the plan into action with clear guidance, defined ownership, and support to keep improvements on track.",
+                    "text_color": "#FFFFFF",
                     "typography_typography": "custom",
                     "typography_font_family": "DM Sans",
                     "typography_font_weight": "400",
@@ -3019,7 +2869,7 @@
       "isInner": false
     },
     {
-      "id": "1d0c057",
+      "id": "1d0c055",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -3046,7 +2896,7 @@
         "flex_justify_content": "space-between",
         "flex_align_items": "center",
         "background_background": "classic",
-        "background_color": "#1A1A1A",
+        "background_color": "#000000",
         "padding_tablet": {
           "unit": "px",
           "top": "100",
@@ -3067,7 +2917,7 @@
       },
       "elements": [
         {
-          "id": "1d0c055",
+          "id": "1d0c053",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -3100,7 +2950,7 @@
           },
           "elements": [
             {
-              "id": "1d0c053",
+              "id": "1d0c051",
               "elType": "container",
               "settings": {
                 "content_width": "full",
@@ -3127,7 +2977,7 @@
               },
               "elements": [
                 {
-                  "id": "1d0c051",
+                  "id": "1d0c04f",
                   "elType": "widget",
                   "widgetType": "divider",
                   "settings": {
@@ -3158,7 +3008,7 @@
                   "elements": []
                 },
                 {
-                  "id": "1d0c052",
+                  "id": "1d0c050",
                   "elType": "widget",
                   "widgetType": "heading",
                   "settings": {
@@ -3201,7 +3051,7 @@
               "isInner": true
             },
             {
-              "id": "1d0c054",
+              "id": "1d0c052",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
@@ -3233,7 +3083,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c056",
+          "id": "1d0c054",
           "elType": "widget",
           "widgetType": "button",
           "settings": {

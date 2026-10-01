@@ -24,15 +24,26 @@ INK = "#1A1A1A"          # dark sections + text on light sections
 CREAM = "#F6F4E6"        # text on dark sections
 SKY = "#6EC6EE"          # accent line + highlighted phrase
 EYEBROW = "#2A87B4"      # small uppercase labels on light sections
-MUTED = "#6B6B66"        # secondary copy on the services list
-RULE_LIGHT = "#D9D6CC"   # hairlines on light sections
-RULE_DARK = "#3A3A3A"    # hairlines on dark sections
 
 BG_ABOUT = "#F4F3EF"
-BG_SERVICES = "#F8F6EB"
-BG_PROCESS = "#DFF0FA"
 
 CONTACT_URL = "/contact/"
+
+BLACK = "#000000"
+WHITE = "#FFFFFF"
+
+# Footer contact details: placeholders until the client confirms them.
+FOOTER_PHONE = "(000) 000-0000"
+FOOTER_PHONE_LINK = "tel:+10000000000"
+FOOTER_EMAIL = "nadiaworsley@gmail.com"
+
+# Hero photo (generated with Higgsfield, option 1: team around a conference
+# table). Elementor downloads it into the Media Library on import.
+HERO_IMAGE = {
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3K2VyhBi5YY9ZE0uS8kzZI19UlC/"
+           "hf_20261001_190615_008c59d6-7671-4d96-96d9-35ed4fbd3615.png",
+    "id": "", "size": "", "alt": "Diverse team collaborating around a conference table", "source": "library",
+}
 
 FONT_DISPLAY = "Inter Tight"
 FONT_LEAD = "Manrope"
@@ -225,30 +236,6 @@ def pill_button(label, url, *, on_dark=True, extra=None):
     return widget("button", s)
 
 
-def arrow_link(label, url, css="clamp(18px, 1.35vw, 26px)", underline_gap=12):
-    """Underlined text link with a trailing arrow, built from the button widget."""
-    return widget("button", {
-        "text": label,
-        "link": {"url": url, "is_external": "", "nofollow": "", "custom_attributes": ""},
-        "selected_icon": {"value": "fas fa-arrow-right", "library": "fa-solid"},
-        "icon_align": "row-reverse",
-        "icon_indent": size(14),
-        "button_text_color": INK,
-        "hover_color": EYEBROW,
-        "button_hover_border_color": EYEBROW,
-        "background_background": "classic",
-        "background_color": "rgba(0,0,0,0)",
-        "button_background_hover_background": "classic",
-        "button_background_hover_color": "rgba(0,0,0,0)",
-        "border_border": "solid",
-        "border_width": box(0, 0, 2, 0),
-        "border_color": INK,
-        "border_radius": box(0, 0, 0, 0),
-        "text_padding": box(0, 0, underline_gap, 0),
-        **typo(FONT_BODY, css, "700", 1.2),
-    })
-
-
 def rule(color, weight=1, width_pct=100, width_px=None):
     s = {
         "style": "solid",
@@ -263,11 +250,11 @@ def rule(color, weight=1, width_pct=100, width_px=None):
     return widget("divider", s)
 
 
-def timeline_dot():
+def timeline_dot(color=INK):
     """Filled circle that sits on the process timeline line."""
     return widget("icon", {
         "selected_icon": {"value": "fas fa-circle", "library": "fa-solid"},
-        "primary_color": INK,
+        "primary_color": color,
         "size": size(20),
         "align": "left",
         "_position": "absolute",
@@ -279,13 +266,6 @@ def timeline_dot():
     })
 
 
-def sky(text_):
-    return f'<span style="color:{SKY};">{text_}</span>'
-
-
-# --------------------------------------------------------------------------
-# Sections
-# --------------------------------------------------------------------------
 def nav_link(label, href, size_px=17, hide_mobile=True):
     return heading(
         f'<a href="{href}">{label}</a>', tag="p", color=CREAM,
@@ -321,52 +301,56 @@ def site_header():
         [
             logo(),
             *[nav_link(label, href) for label, href in NAV],
-            pill_button("Contact Us", CONTACT_URL,
-                        extra={**typo(FONT_BODY, 16, "700", 1),
-                               "text_padding": box(12, 24, 12, 24),
-                               "text_padding_mobile": box(10, 18, 10, 18),
-                               "border_width": box(1.5, 1.5, 1.5, 1.5)}),
+            nav_link("Contact Us", CONTACT_URL, hide_mobile=False),
         ],
-        direction="row", align="center", bg=INK, stack_on=None, row_gap=36,
+        direction="row", align="center", bg=BLACK, stack_on=None, row_gap=36,
         padding=section_padding(top=(18, 16, 14), bottom=(18, 16, 14)),
         is_inner=False,
-        extra={"border_border": "solid", "border_width": box(0, 0, 1, 0), "border_color": RULE_DARK},
     )
 
 
 def hero():
-    """Full-width photo hero. Set the photo in Elementor: select this container,
-    then Style > Background > Image. The dark gradient keeps text legible."""
+    """Full-width photo hero. The photo is the container's background image
+    (Style > Background > Image in Elementor); the dark gradient keeps the
+    headline legible."""
     return container(
         [
             container(
                 [
-                    eyebrow("Business operations consulting", color=CREAM),
-                    display("Better systems make better work possible.", color=CREAM, tag="h1",
-                            css="clamp(48px, 6.6vw, 136px)"),
-                    lead_copy("For leaders ready to move from reactive problem-solving to intentional growth.",
-                              css="clamp(19px, 1.6vw, 30px)"),
-                    pill_button("Start the conversation", CONTACT_URL),
+                    display("Your business can’t grow on broken systems.", color=WHITE, tag="h1",
+                            css="clamp(44px, 5.6vw, 116px)"),
+                    lead_copy("NDC Consulting Group strengthens the systems, processes, and teams your "
+                              "business depends on to operate efficiently and deliver a better customer "
+                              "experience.", color=WHITE, css="clamp(18px, 1.5vw, 28px)"),
+                    pill_button("Contact Us", CONTACT_URL, on_dark=True,
+                                extra={**typo(FONT_BODY, 17, "700", 1, 0, mobile=16),
+                                       "text_padding": box(14, 28, 14, 28),
+                                       "text_padding_mobile": box(12, 24, 12, 24),
+                                       "border_width": box(1.5, 1.5, 1.5, 1.5),
+                                       "button_text_color": WHITE, "border_color": WHITE,
+                                       "button_background_hover_color": WHITE,
+                                       "button_hover_border_color": WHITE, "hover_color": BLACK}),
                 ],
-                width=62, width_tablet=90, width_mobile=100, row_gap=32, align="flex-start",
+                width=60, width_tablet=90, width_mobile=100, row_gap=28, align="flex-start",
             ),
         ],
-        justify="flex-end", bg=INK, anchor="top", html_tag="section", is_inner=False,
+        justify="flex-end", bg=BLACK, anchor="top", html_tag="section", is_inner=False,
         padding=section_padding(top=(200, 160, 120), bottom=(120, 96, 72)),
         extra={
             "min_height": size(88, "vh"),
             "min_height_mobile": size(80, "vh"),
-            "background_image": {"url": "", "id": "", "size": "", "alt": "", "source": "library"},
+            "background_image": HERO_IMAGE,
             "background_position": "center center",
+            "background_position_mobile": "center right",
             "background_repeat": "no-repeat",
             "background_size": "cover",
             "background_overlay_background": "gradient",
-            "background_overlay_color": "rgba(26,26,26,0.88)",
+            "background_overlay_color": "rgba(0,0,0,0.86)",
             "background_overlay_color_stop": size(0, "%"),
-            "background_overlay_color_b": "rgba(26,26,26,0.35)",
+            "background_overlay_color_b": "rgba(0,0,0,0.15)",
             "background_overlay_color_b_stop": size(100, "%"),
             "background_overlay_gradient_type": "linear",
-            "background_overlay_gradient_angle": size(20, "deg"),
+            "background_overlay_gradient_angle": size(70, "deg"),
             "background_overlay_opacity": size(1, ""),
         },
     )
@@ -375,23 +359,23 @@ def hero():
 def why_ndc():
     return container(
         [
-            container([display("Why<br>NDC?", color=CREAM, tag="h2", css="clamp(64px, 7.1vw, 148px)")],
+            container([display("Why<br>NDC?", color=WHITE, tag="h2", css="clamp(64px, 7.1vw, 148px)")],
                       width=45, width_tablet=100),
             container(
                 [
                     lead_copy("As businesses grow, the systems that once worked often become "
-                              "the very things holding them back."),
+                              "the very things holding them back.", color=WHITE),
                     lead_copy("NDC Consulting Group identifies the gaps, inefficiencies, and operational "
-                              "challenges affecting your company’s performance. We provide "
-                              + sky("clear direction, practical solutions, and disciplined execution")
-                              + " to help your business operate more effectively."),
+                              "challenges affecting your company’s performance. We provide clear direction, "
+                              "practical solutions, and disciplined execution to help your business operate "
+                              "more effectively.", color=WHITE),
                     lead_copy("Sustainable growth depends on more than ambition. It requires the right "
-                              "systems, structure, and support to move your business forward."),
+                              "systems, structure, and support to move your business forward.", color=WHITE),
                 ],
                 width=50, width_tablet=100, row_gap=28,
             ),
         ],
-        direction="row", justify="space-between", align="flex-start", bg=INK, stack_on="tablet",
+        direction="row", justify="space-between", align="flex-start", bg=BLACK, stack_on="tablet",
         row_gap=48, padding=section_padding(), anchor="why", html_tag="section", is_inner=False,
     )
 
@@ -401,7 +385,7 @@ def about():
         [
             container(
                 [
-                    eyebrow("About us", css="clamp(12px, 1.05vw, 17px)"),
+                    eyebrow("About us", color=BLACK, css="clamp(12px, 1.05vw, 17px)"),
                     heading("We make the business work better.", tag="h2", color=INK,
                             typography=typo(FONT_DISPLAY, "clamp(48px, 6.4vw, 132px)", "600", 0.92, -0.05)),
                 ],
@@ -414,11 +398,9 @@ def about():
                          color=INK, typography=typo(FONT_DISPLAY, "clamp(22px, 2.45vw, 48px)", "500", 1.27, -0.015)),
                     body_copy("We evaluate how work gets done, identify the gaps costing your company time "
                               "and trust, and build practical systems your team can actually use. Our work "
-                              "connects strategy to execution across human resources, talent acquisition, "
-                              "internal communications, customer retention, and marketing operations.",
+                              "connects strategy to execution across human resources, internal communications, "
+                              "customer retention, and marketing operations.",
                               css="clamp(16px, 1.45vw, 25px)", line_height=1.4),
-                    arrow_link("Let’s talk about your business", CONTACT_URL,
-                               css="clamp(16px, 1.5vw, 26px)", underline_gap=8),
                 ],
                 width=56, width_tablet=100, row_gap=30, align="flex-start",
             ),
@@ -445,26 +427,22 @@ SERVICES = [
 ]
 
 
-def service_row(num, title, desc, last=False):
-    border = box(1, 0, 1 if last else 0, 0)
+def service_row(num, title, desc):
     return container(
         [
-            container([heading(num, tag="p", color=EYEBROW, typography=typo(FONT_BODY, 20, "700", 1.2, mobile=16))],
+            container([heading(num, tag="p", color=BLACK, typography=typo(FONT_BODY, 20, "700", 1.2, mobile=16))],
                       width=9, width_tablet=10, width_mobile=100),
-            container([heading(title, tag="h3", color=INK,
+            container([heading(title, tag="h3", color=BLACK,
                                typography=typo(FONT_DISPLAY, "clamp(30px, 2.7vw, 54px)", "600", 1.05, -0.04))],
                       width=44, width_tablet=38, width_mobile=100, extra={"padding": box(18, 0, 0, 0),
                                                                          "padding_mobile": box(0, 0, 0, 0)}),
-            container([body_copy(desc, color=MUTED, css="clamp(17px, 1.2vw, 24px)")],
+            container([body_copy(desc, color=BLACK, css="clamp(17px, 1.2vw, 24px)")],
                       width=43, width_tablet=48, width_mobile=100),
         ],
         direction="row", justify="space-between", align="flex-start", row_gap=16,
         extra={
-            "border_border": "solid",
-            "border_width": border,
-            "border_color": RULE_LIGHT,
-            "padding": box(56, 0, 56, 0),
-            "padding_mobile": box(36, 0, 36, 0),
+            "padding": box(44, 0, 44, 0),
+            "padding_mobile": box(28, 0, 28, 0),
         },
     )
 
@@ -474,45 +452,49 @@ def services():
         [
             container(
                 [
-                    container([eyebrow("What we do"), display("Operational clarity, where it counts.")],
+                    container([eyebrow("What we do", color=BLACK),
+                               display("Operational clarity, where it counts.", color=BLACK)],
                               width=55, width_tablet=100, row_gap=28),
                     container([body_copy("Focused consulting support for the parts of your business that "
-                                         "shape performance, culture, and customer trust.")],
+                                         "shape performance, culture, and customer trust.", color=BLACK)],
                               width=36, width_tablet=80, width_mobile=100),
                 ],
                 direction="row", justify="space-between", align="flex-end", stack_on="tablet", row_gap=32,
             ),
-            container([service_row(*s, last=i == len(SERVICES) - 1) for i, s in enumerate(SERVICES)]),
+            container([service_row(*s) for s in SERVICES]),
         ],
-        bg=BG_SERVICES, row_gap=88, padding=section_padding(), anchor="services", html_tag="section",
+        bg=WHITE, row_gap=56, padding=section_padding(), anchor="services", html_tag="section",
         is_inner=False,
     )
 
 
 STEPS = [
-    ("01 / Discover", "Understand the reality",
-     "We listen to leadership, review current workflows, and uncover the issues beneath the symptoms."),
-    ("02 / Design", "Build the right system",
-     "We create a focused solution around your goals, team capacity, and stage of growth."),
-    ("03 / Implement", "Make it operational",
-     "We support execution, clarify ownership, and help your team put the new process to work."),
+    ("01 / Discover", "Understand Your Business",
+     "We review how work gets done, listen to your team, and identify the gaps affecting efficiency, "
+     "performance, and customer experience."),
+    ("02 / Design", "Develop the Right Solution",
+     "We create practical processes, clarify responsibilities, and build an action plan around your "
+     "business goals and team’s needs."),
+    ("03 / Implement", "Make It Work Every Day",
+     "We help your team put the plan into action with clear guidance, defined ownership, and support "
+     "to keep improvements on track."),
 ]
 
 
 def process_step(label, title, desc):
     return container(
         [
-            timeline_dot(),
-            heading(label, tag="p", color=INK, typography=typo(FONT_BODY, 20, "700", 1.2, 0, "uppercase", mobile=16)),
-            heading(title, tag="h3", color=INK,
+            timeline_dot(WHITE),
+            heading(label, tag="p", color=WHITE, typography=typo(FONT_BODY, 20, "700", 1.2, 0, "uppercase", mobile=16)),
+            heading(title, tag="h3", color=WHITE,
                     typography=typo(FONT_DISPLAY, "clamp(26px, 1.9vw, 38px)", "600", 1.1, -0.04)),
-            body_copy(desc),
+            body_copy(desc, color=WHITE),
         ],
         width=33.333, width_tablet=33.333, width_mobile=100, row_gap=24,
         extra={
             "border_border": "solid",
             "border_width": box(2, 0, 0, 0),
-            "border_color": INK,
+            "border_color": WHITE,
             "padding": box(72, 96, 0, 0),
             "padding_tablet": box(56, 32, 0, 0),
             "padding_mobile": box(48, 0, 16, 0),
@@ -525,11 +507,12 @@ def process():
         [
             container(
                 [
-                    container([eyebrow("Our process"), display("Listen.<br>Diagnose. Build.")],
+                    container([eyebrow("Our process", color=WHITE),
+                               display("Listen.<br>Diagnose. Build.", color=WHITE)],
                               width=52, width_tablet=100, row_gap=28),
-                    container([body_copy("We do not hand you a glossy strategy that collects dust. We learn "
-                                         "the business, find what is getting in the way, and build a clear "
-                                         "path forward.")],
+                    container([body_copy("We assess how your business runs, pinpoint what needs to improve, and "
+                                         "put practical solutions in place to help it run more effectively.",
+                                         color=WHITE)],
                               width=43, width_tablet=80, width_mobile=100),
                 ],
                 direction="row", justify="space-between", align="center", stack_on="tablet", row_gap=32,
@@ -537,39 +520,48 @@ def process():
             container([process_step(*s) for s in STEPS], direction="row", row_gap=0, col_gap=0,
                       extra={"flex_gap_mobile": gap(24, 0)}),
         ],
-        bg=BG_PROCESS, row_gap=96, padding=section_padding(), anchor="process", html_tag="section",
+        bg=BLACK, row_gap=96, padding=section_padding(), anchor="process", html_tag="section",
         is_inner=False,
     )
 
 
 def site_footer():
-    small = typo(FONT_BODY, 16, "400", 1.4, mobile=14)
-    links = [*NAV, ("Contact", CONTACT_URL)]
-    top = container(
-        [
-            container([logo(height=96, height_mobile=72)], width=40, width_mobile=100,
-                      extra={"_flex_size": "none"}),
-            container([nav_link(label, href, size_px=18, hide_mobile=False) for label, href in links],
-                      direction="row", stack_on=None, row_gap=36, col_gap=36, wrap=True,
-                      justify="flex-end", align="center",
-                      extra={"flex_justify_content_mobile": "flex-start", "_flex_size": "none",
-                             "width": size(55, "%"), "width_mobile": size(100, "%"),
-                             "flex_gap_mobile": gap(16, 28)}),
+    """One black bar: phone and email on the left, copyright on the right."""
+    small = typo(FONT_BODY, 15, "400", 1.5, mobile=13)
+    contact = widget("icon-list", {
+        "view": "inline",
+        "icon_list": [
+            {"_id": uid(), "text": FOOTER_PHONE,
+             "selected_icon": {"value": "fas fa-phone", "library": "fa-solid"},
+             "link": {"url": FOOTER_PHONE_LINK, "is_external": "", "nofollow": "", "custom_attributes": ""}},
+            {"_id": uid(), "text": FOOTER_EMAIL,
+             "selected_icon": {"value": "far fa-envelope-open", "library": "fa-regular"},
+             "link": {"url": f"mailto:{FOOTER_EMAIL}", "is_external": "", "nofollow": "", "custom_attributes": ""}},
         ],
-        direction="row", justify="space-between", align="center", row_gap=32,
-        padding=section_padding(top=(72, 64, 56), bottom=(56, 48, 40)),
-    )
-    bottom = container(
+        "space_between": size(36),
+        "icon_color": WHITE,
+        "icon_size": size(18),
+        "text_indent": size(10),
+        "text_color": WHITE,
+        "text_color_hover": SKY,
+        **{k.replace("typography_", "icon_typography_", 1): v
+           for k, v in typo(FONT_BODY, 19, "400", 1.3, mobile=16).items()},
+    })
+    legal = container(
         [
-            heading("© 2026 NDC Consulting Group. All rights reserved.", tag="p", color="#BDBBAF", typography=small),
-            heading("Built for better business.", tag="p", color="#BDBBAF", typography=small),
+            heading("Copyright 2026 © NDC Consulting Group", tag="p", color=WHITE, typography=small,
+                    align="right", extra={"align_mobile": "left"}),
         ],
-        direction="row", justify="space-between", align="center", row_gap=8,
-        padding=section_padding(top=(24, 24, 20), bottom=(28, 24, 24)),
-        extra={"border_border": "solid", "border_width": box(1, 0, 0, 0), "border_color": RULE_DARK},
+        row_gap=4, align="flex-end",
+        extra={"_flex_size": "none", "width": size(40, "%"), "width_mobile": size(100, "%"),
+               "flex_align_items_mobile": "flex-start"},
     )
-    return container([top, bottom], bg=INK, is_inner=False,
-                     extra={"border_border": "solid", "border_width": box(1, 0, 0, 0), "border_color": RULE_DARK})
+    return container(
+        [container([contact], extra={"_flex_size": "none", "width": size(58, "%"), "width_mobile": size(100, "%")}),
+         legal],
+        direction="row", justify="space-between", align="center", row_gap=20, bg=BLACK, is_inner=False,
+        padding=section_padding(top=(28, 24, 24), bottom=(28, 24, 28)),
+    )
 
 
 def contact_cta():
@@ -587,7 +579,7 @@ def contact_cta():
         ],
         direction="row", justify="space-between", align="center", stack_on="tablet", row_gap=40,
         padding=section_padding(top=(140, 100, 72), bottom=(140, 100, 72)),
-        anchor="contact", bg=INK, is_inner=False,
+        anchor="contact", bg=BLACK, is_inner=False,
     )
 
 
@@ -596,7 +588,7 @@ def contact_form_section():
         [
             container(
                 [
-                    eyebrow("Contact", css="clamp(12px, 1.05vw, 17px)"),
+                    eyebrow("Contact", color=BLACK, css="clamp(12px, 1.05vw, 17px)"),
                     display("Let’s talk about your business.", css="clamp(44px, 5vw, 104px)"),
                     body_copy("Tell us about your company and what you are looking for. "
                               "All fields are required, and we will be in touch soon.",

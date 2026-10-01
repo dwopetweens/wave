@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       NDC Contact Form
  * Description:       Contact form for NDC Consulting Group with layered spam protection. Use the [ndc_contact_form] shortcode (Elementor: Shortcode widget).
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            NDC Consulting Group
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 final class NDC_Contact_Form {
 
-	const VERSION          = '1.0.0';
+	const VERSION          = '1.1.0';
 	const OPTION           = 'ndc_contact_form';
 	const POST_TYPE        = 'ndc_enquiry';
 	const DEFAULT_TO       = 'nadiaworsley@gmail.com';

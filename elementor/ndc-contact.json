@@ -1,7 +1,7 @@
 {
   "content": [
     {
-      "id": "1d0c05e",
+      "id": "1d0c05c",
       "elType": "container",
       "settings": {
         "content_width": "full",
@@ -50,7 +50,7 @@
       },
       "elements": [
         {
-          "id": "1d0c05b",
+          "id": "1d0c059",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -83,13 +83,13 @@
           },
           "elements": [
             {
-              "id": "1d0c058",
+              "id": "1d0c056",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
                 "title": "Contact",
                 "header_size": "p",
-                "title_color": "#2A87B4",
+                "title_color": "#000000",
                 "typography_typography": "custom",
                 "typography_font_family": "DM Sans",
                 "typography_font_weight": "700",
@@ -113,7 +113,7 @@
               "elements": []
             },
             {
-              "id": "1d0c059",
+              "id": "1d0c057",
               "elType": "widget",
               "widgetType": "heading",
               "settings": {
@@ -142,7 +142,7 @@
               "elements": []
             },
             {
-              "id": "1d0c05a",
+              "id": "1d0c058",
               "elType": "widget",
               "widgetType": "text-editor",
               "settings": {
@@ -168,7 +168,7 @@
           "isInner": true
         },
         {
-          "id": "1d0c05d",
+          "id": "1d0c05b",
           "elType": "container",
           "settings": {
             "content_width": "full",
@@ -201,7 +201,7 @@
           },
           "elements": [
             {
-              "id": "1d0c05c",
+              "id": "1d0c05a",
               "elType": "widget",
               "widgetType": "shortcode",
               "settings": {
