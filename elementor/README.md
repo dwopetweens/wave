@@ -26,6 +26,11 @@ The header and footer are **separate templates**. You edit each one once in Elem
 
 Click **Repair header & footer** to re-import both templates and clear Elementor's cache.
 
+**If one page shows the header and another doesn't:** the **Pages** list at the bottom of the same status page checks each page. Pages built from the first NDC templates used the *Elementor Canvas* layout and had an old header and footer built into the page, so they hide the site header with the logo. Click **Fix pages** to:
+- switch those pages to *Elementor Full Width*
+- remove the old built-in header and footer
+- keep a backup of each page, which **Undo fix** restores
+
 **The logo always appears.** It's embedded directly in the header and footer templates. If the Elementor templates can't be found at all, the theme shows its own built-in header and footer, which also include the logo and links.
 
 Free Elementor can't share a header and footer across pages by itself; that feature is the Pro "Theme Builder". The NDC Hello Child theme does it instead:

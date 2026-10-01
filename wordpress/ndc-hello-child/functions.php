@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NDC_CHILD_VERSION', '1.1.0' );
+define( 'NDC_CHILD_VERSION', '1.2.0' );
 
 /** Template titles looked up when nothing is chosen in the Customizer. */
 const NDC_PART_TITLES = array(
@@ -313,6 +313,195 @@ function ndc_status_page() {
 			<p><?php esc_html_e( 'Re-import the NDC header and footer from the theme, select them, and clear Elementor\'s cache:', 'ndc-hello-child' ); ?></p>
 			<?php submit_button( __( 'Repair header & footer', 'ndc-hello-child' ), 'primary', 'ndc_repair', false ); ?>
 		</form>
+		<?php do_action( 'ndc_status_page_after' ); ?>
 	</div>
 	<?php
 }
+
+/* -------------------------------------------------------------------------
+ * Page check: pages built from the first NDC templates had their own header
+ * and footer inside the page and used the "Elementor Canvas" layout, which
+ * hides the site header/footer. These helpers find and fix such pages.
+ * ---------------------------------------------------------------------- */
+
+/** Recursively drop old built-in header/footer containers. */
+function ndc_strip_embedded_parts( array $elements, $depth = 0, &$removed = 0 ) {
+	$out = array();
+	foreach ( $elements as $el ) {
+		$tag = $el['settings']['html_tag'] ?? '';
+		if ( ( 'header' === $tag && 0 === $depth ) || 'footer' === $tag ) {
+			++$removed;
+			continue;
+		}
+		if ( ! empty( $el['elements'] ) && is_array( $el['elements'] ) ) {
+			$el['elements'] = ndc_strip_embedded_parts( $el['elements'], $depth + 1, $removed );
+		}
+		$out[] = $el;
+	}
+	return $out;
+}
+
+/** @return string[] Problems found on a page. */
+function ndc_page_issues( $post_id ) {
+	$issues = array();
+	if ( 'elementor_canvas' === get_page_template_slug( $post_id ) ) {
+		$issues[] = 'canvas';
+	}
+	$data = json_decode( (string) get_post_meta( $post_id, '_elementor_data', true ), true );
+	if ( is_array( $data ) ) {
+		$removed = 0;
+		ndc_strip_embedded_parts( $data, 0, $removed );
+		if ( $removed ) {
+			$issues[] = 'embedded';
+		}
+	}
+	return $issues;
+}
+
+/** Pages to check: the homepage plus every Elementor page. */
+function ndc_pages_to_check() {
+	$ids = get_posts(
+		array(
+			'post_type'      => 'page',
+			'post_status'    => array( 'publish', 'draft', 'private' ),
+			'posts_per_page' => 100,
+			'fields'         => 'ids',
+			'meta_key'       => '_elementor_edit_mode', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_value'     => 'builder', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+		)
+	);
+	$front = (int) get_option( 'page_on_front' );
+	if ( $front && ! in_array( $front, $ids, true ) ) {
+		array_unshift( $ids, $front );
+	}
+	return $ids;
+}
+
+/** Fix one page: Full Width layout and no embedded header/footer. Keeps a backup. */
+function ndc_fix_page( $post_id ) {
+	$raw  = (string) get_post_meta( $post_id, '_elementor_data', true );
+	$data = json_decode( $raw, true );
+	if ( is_array( $data ) ) {
+		$removed = 0;
+		$clean   = ndc_strip_embedded_parts( $data, 0, $removed );
+		if ( $removed ) {
+			if ( ! get_post_meta( $post_id, '_ndc_backup_elementor_data', true ) ) {
+				update_post_meta( $post_id, '_ndc_backup_elementor_data', wp_slash( $raw ) );
+			}
+			update_post_meta( $post_id, '_elementor_data', wp_slash( wp_json_encode( $clean ) ) );
+		}
+	}
+	if ( 'elementor_canvas' === get_page_template_slug( $post_id ) ) {
+		update_post_meta( $post_id, '_wp_page_template', 'elementor_header_footer' );
+		$settings = get_post_meta( $post_id, '_elementor_page_settings', true );
+		if ( is_array( $settings ) ) {
+			$settings['template'] = 'elementor_header_footer';
+			update_post_meta( $post_id, '_elementor_page_settings', $settings );
+		}
+	}
+	delete_post_meta( $post_id, '_elementor_css' );
+	delete_post_meta( $post_id, '_elementor_element_cache' );
+}
+
+/** Restore a page from the backup made by ndc_fix_page(). */
+function ndc_restore_page( $post_id ) {
+	$backup = get_post_meta( $post_id, '_ndc_backup_elementor_data', true );
+	if ( $backup ) {
+		update_post_meta( $post_id, '_elementor_data', wp_slash( $backup ) );
+		delete_post_meta( $post_id, '_ndc_backup_elementor_data' );
+		delete_post_meta( $post_id, '_elementor_css' );
+		delete_post_meta( $post_id, '_elementor_element_cache' );
+	}
+}
+
+/** Pages section of Appearance > NDC Site Status. */
+add_action(
+	'ndc_status_page_after',
+	static function () {
+		$notice = '';
+		if ( isset( $_POST['ndc_fix_pages'] ) && check_admin_referer( 'ndc_fix_pages' ) ) {
+			$fixed = 0;
+			foreach ( ndc_pages_to_check() as $id ) {
+				if ( ndc_page_issues( $id ) ) {
+					ndc_fix_page( $id );
+					++$fixed;
+				}
+			}
+			if ( class_exists( '\Elementor\Plugin' ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+			/* translators: %d: number of pages. */
+			$notice = sprintf( _n( 'Fixed %d page.', 'Fixed %d pages.', $fixed, 'ndc-hello-child' ), $fixed );
+		}
+		if ( isset( $_POST['ndc_restore_page'] ) && check_admin_referer( 'ndc_fix_pages' ) ) {
+			ndc_restore_page( absint( $_POST['ndc_restore_page'] ) );
+			if ( class_exists( '\Elementor\Plugin' ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+			$notice = __( 'Page restored from backup.', 'ndc-hello-child' );
+		}
+
+		$labels = array(
+			'canvas'   => __( 'uses the "Elementor Canvas" layout, which hides the site header and footer', 'ndc-hello-child' ),
+			'embedded' => __( 'still has the old header/footer built into the page', 'ndc-hello-child' ),
+		);
+		$front   = (int) get_option( 'page_on_front' );
+		$pending = 0;
+		?>
+		<h2 style="margin-top:32px"><?php esc_html_e( 'Pages', 'ndc-hello-child' ); ?></h2>
+		<?php if ( $notice ) : ?><div class="notice notice-success"><p><?php echo esc_html( $notice ); ?></p></div><?php endif; ?>
+		<?php if ( ! $front ) : ?>
+			<p>&#10060; <?php esc_html_e( 'No homepage is set. Go to Settings → Reading → "A static page" and choose Home.', 'ndc-hello-child' ); ?></p>
+		<?php endif; ?>
+		<form method="post">
+			<?php wp_nonce_field( 'ndc_fix_pages' ); ?>
+			<table class="widefat striped" style="max-width:820px">
+				<tbody>
+				<?php foreach ( ndc_pages_to_check() as $id ) : ?>
+					<?php
+					$issues   = ndc_page_issues( $id );
+					$pending += $issues ? 1 : 0;
+					?>
+					<tr>
+						<td style="width:240px"><strong><?php echo esc_html( get_the_title( $id ) ); ?></strong><?php echo $id === $front ? ' <em>(' . esc_html__( 'homepage', 'ndc-hello-child' ) . ')</em>' : ''; ?></td>
+						<td>
+							<?php if ( $issues ) : ?>
+								&#10060; <?php echo esc_html( implode( '; ', array_map( static fn( $i ) => $labels[ $i ], $issues ) ) ); ?>
+							<?php else : ?>
+								&#9989; <?php esc_html_e( 'OK', 'ndc-hello-child' ); ?>
+							<?php endif; ?>
+							<?php if ( get_post_meta( $id, '_ndc_backup_elementor_data', true ) ) : ?>
+								<button class="button-link" name="ndc_restore_page" value="<?php echo esc_attr( $id ); ?>" style="margin-left:12px"><?php esc_html_e( 'Undo fix', 'ndc-hello-child' ); ?></button>
+							<?php endif; ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
+			<?php if ( $pending ) : ?>
+				<p><?php esc_html_e( 'Switch these pages to "Elementor Full Width" and remove the old built-in header/footer, so the site header and footer with the logo show. A backup of each page is kept.', 'ndc-hello-child' ); ?></p>
+				<?php submit_button( __( 'Fix pages', 'ndc-hello-child' ), 'primary', 'ndc_fix_pages', false ); ?>
+			<?php endif; ?>
+		</form>
+		<?php
+	}
+);
+
+/** Point admins at the status page while any page still needs fixing. */
+add_action(
+	'admin_notices',
+	static function () {
+		if ( ! current_user_can( 'manage_options' ) || ( isset( $_GET['page'] ) && 'ndc-site-status' === $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return;
+		}
+		$front = (int) get_option( 'page_on_front' );
+		if ( $front && ndc_page_issues( $front ) ) {
+			printf(
+				'<div class="notice notice-warning"><p>%s <a href="%s">%s</a></p></div>',
+				esc_html__( 'Your homepage was built from an earlier NDC template and is hiding the site header and footer.', 'ndc-hello-child' ),
+				esc_url( admin_url( 'themes.php?page=ndc-site-status' ) ),
+				esc_html__( 'Fix it on the NDC Site Status page →', 'ndc-hello-child' )
+			);
+		}
+	}
+);
