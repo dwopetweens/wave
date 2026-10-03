@@ -28,7 +28,7 @@
         "flex_justify_content": "space-between",
         "flex_align_items": "flex-start",
         "background_background": "classic",
-        "background_color": "#F4F3EF",
+        "background_color": "#FFFFFF",
         "padding_tablet": {
           "unit": "px",
           "top": "96",

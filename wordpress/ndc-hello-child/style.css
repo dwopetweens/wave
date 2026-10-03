@@ -3,7 +3,7 @@ Theme Name:   NDC Hello Child
 Description:  Child theme of Hello Elementor for NDC Consulting Group. Shows the "NDC Site Header" and "NDC Site Footer" Elementor templates on every page, and provides the [ndc_logo] shortcode.
 Author:       NDC Consulting Group
 Template:     hello-elementor
-Version:      1.5.0
+Version:      1.6.0
 Requires at least: 6.0
 Requires PHP: 7.4
 License:      GNU General Public License v3 or later
@@ -36,7 +36,12 @@ img.ndc-logo,
    caching plugin drops Elementor's icon-list stylesheet. */
 .ndc-site-footer .elementor-icon-list-items { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 36px; list-style: none; margin: 0; padding: 0; }
 .ndc-site-footer .elementor-icon-list-item,
-.ndc-site-footer .elementor-icon-list-item > a { display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; }
+.ndc-site-footer .elementor-icon-list-item > a { display: flex; align-items: center; gap: 0; margin: 0; padding: 0; }
+/* Exactly 8px between each icon and its text. Elementor otherwise stacks its
+   own icon margin and text padding on top of the template's spacing. */
+.ndc-site-footer .elementor-widget-icon-list .elementor-icon-list-item .elementor-icon-list-icon { padding-inline-end: 8px; }
+.ndc-site-footer .elementor-widget-icon-list .elementor-icon-list-item .elementor-icon-list-icon svg { margin: 0; }
+.ndc-site-footer .elementor-widget-icon-list .elementor-icon-list-item .elementor-icon-list-text { padding-inline-start: 0; }
 .ndc-site-footer .elementor-icon-list-item::after { display: none; }
 .ndc-site-footer .elementor-icon-list-icon { display: inline-flex; flex: none; }
 .ndc-site-footer .elementor-icon-list-icon svg { width: 18px; height: 18px; fill: currentColor; }

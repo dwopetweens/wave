@@ -59,7 +59,7 @@ The theme includes the logo in two colours. Both are cropped, transparent PNGs:
 **Homepage sections** (between the site header and footer):
 1. **Hero**: the team photo with "Your business can’t grow on broken systems.", a supporting line, and a small **Contact Us** button that goes to the contact page.
 2. **Why NDC?**: black background, white text; the copy from *Why NDC Consulting Group – Homepage.docx*.
-3. **About us**.
+3. **About us**: white background.
 4. **What we do**: white background, black text, no dividing lines. Human Resources, Internal Communications, Customer Retention & Recovery, Marketing Operations.
 5. **Our process**: black background, white text. Discover → Design → Implement, with copy from *Our Process – Biz Ops Website.docx*.
 6. **Start the conversation**: a call to action.
@@ -158,11 +158,10 @@ Turnstile adds Cloudflare's own check on top of the checks above. It's free, and
 | Token | Value | Used for |
 | --- | --- | --- |
 | Black | `#000000` | Header, hero, "Why NDC?", "Our Process", call to action, footer |
-| White | `#FFFFFF` | Text on black sections; "What We Do" background |
+| White | `#FFFFFF` | Text on black sections; About, What We Do and Contact backgrounds |
 | Ink | `#1A1A1A` | Text on light sections |
 | Cream | `#F6F4E6` | Logo and header links |
 | Sky | `#6EC6EE` | Accent line above "Start the conversation" |
-| About / Contact background | `#F4F3EF` | |
 
 **Fonts (loaded automatically from Google Fonts by Elementor):**
 - **Inter Tight** for headlines.

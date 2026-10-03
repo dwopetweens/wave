@@ -128,7 +128,7 @@
                 },
                 "text_indent": {
                   "unit": "px",
-                  "size": 10,
+                  "size": 8,
                   "sizes": []
                 },
                 "text_color": "#FFFFFF",

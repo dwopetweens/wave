@@ -25,7 +25,6 @@ CREAM = "#F6F4E6"        # text on dark sections
 SKY = "#6EC6EE"          # accent line + highlighted phrase
 EYEBROW = "#2A87B4"      # small uppercase labels on light sections
 
-BG_ABOUT = "#F4F3EF"
 
 CONTACT_URL = "/contact/"
 
@@ -402,7 +401,7 @@ def about():
                 width=56, width_tablet=100, row_gap=30, align="flex-start",
             ),
         ],
-        direction="row", justify="space-between", align="flex-start", bg=BG_ABOUT, stack_on="tablet",
+        direction="row", justify="space-between", align="flex-start", bg=WHITE, stack_on="tablet",
         row_gap=48, padding=section_padding(top=(88, 80, 64), bottom=(104, 88, 72)),
         anchor="about", html_tag="section", is_inner=False,
     )
@@ -450,10 +449,10 @@ def services():
             container(
                 [
                     container([eyebrow("What we do", color=BLACK),
-                               display("Operational clarity, where it counts.", color=BLACK)],
+                               display('<span style="margin-left:-0.047em">Operational</span> clarity, where it counts.', color=BLACK)],
                               width=55, width_tablet=100, row_gap=28),
-                    container([body_copy("Focused consulting support for the parts of your business that "
-                                         "shape performance, culture, and customer trust.", color=BLACK)],
+                    container([body_copy("We improve how work gets done, give your team clear direction, and "
+                                         "strengthen the experience you deliver to customers.", color=BLACK)],
                               width=36, width_tablet=80, width_mobile=100),
                 ],
                 direction="row", justify="space-between", align="flex-end", stack_on="tablet", row_gap=32,
@@ -538,7 +537,7 @@ def site_footer():
         "space_between": size(36),
         "icon_color": WHITE,
         "icon_size": size(18),
-        "text_indent": size(10),
+        "text_indent": size(8),
         "text_color": WHITE,
         "text_color_hover": SKY,
         **{k.replace("typography_", "icon_typography_", 1): v
@@ -572,7 +571,9 @@ def contact_cta():
                 ],
                 row_gap=24, width=62, width_tablet=100,
             ),
-            pill_button("Contact Us", CONTACT_URL),
+            heading(f'<a href="{CONTACT_URL}">Contact Us</a>', tag="p", color=CREAM,
+                    typography=typo(FONT_BODY, 20, "600", 1.2, mobile=18),
+                    extra={"title_hover_color": SKY, "_flex_size": "none"}),
         ],
         direction="row", justify="space-between", align="center", stack_on="tablet", row_gap=40,
         padding=section_padding(top=(140, 100, 72), bottom=(140, 100, 72)),
@@ -598,7 +599,7 @@ def contact_form_section():
                 width=58, width_tablet=100,
             ),
         ],
-        direction="row", justify="space-between", align="flex-start", bg=BG_ABOUT, stack_on="tablet",
+        direction="row", justify="space-between", align="flex-start", bg=WHITE, stack_on="tablet",
         row_gap=56, padding=section_padding(top=(120, 96, 64), bottom=(140, 104, 80)),
         anchor="contact-form", html_tag="section", is_inner=False,
     )

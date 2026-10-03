@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NDC_CHILD_VERSION', '1.5.0' );
+define( 'NDC_CHILD_VERSION', '1.6.0' );
 
 /** Template titles looked up when nothing is chosen in the Customizer. */
 const NDC_PART_TITLES = array(
