@@ -528,7 +528,7 @@ def site_footer():
         "view": "inline",
         "icon_list": [
             {"_id": uid(), "text": FOOTER_PHONE,
-             "selected_icon": {"value": "fas fa-phone", "library": "fa-solid"},
+             "selected_icon": {"value": "fas fa-phone-alt", "library": "fa-solid"},
              "link": {"url": FOOTER_PHONE_LINK, "is_external": "", "nofollow": "", "custom_attributes": ""}},
             {"_id": uid(), "text": FOOTER_EMAIL,
              "selected_icon": {"value": "far fa-envelope-open", "library": "fa-regular"},

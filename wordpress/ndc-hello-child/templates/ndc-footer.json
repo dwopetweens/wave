@@ -90,7 +90,7 @@
                     "_id": "1d0c063",
                     "text": "(818)213-6313",
                     "selected_icon": {
-                      "value": "fas fa-phone",
+                      "value": "fas fa-phone-alt",
                       "library": "fa-solid"
                     },
                     "link": {
