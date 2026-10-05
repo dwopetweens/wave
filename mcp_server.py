@@ -29,7 +29,7 @@ from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from freelancer_mcp.backend import Backend, BackendError, BidStatus, FakeBackend, RateLimited
+from freelancer_mcp.backend import Backend, BackendError, BidStatus, FakeBackend
 from freelancer_mcp.config import ConfigError, Settings, load_settings
 from freelancer_mcp.oauth import SCOPE, SingleUserOAuthProvider, hash_password
 from freelancer_mcp.ratelimit import RateLimiter
@@ -43,12 +43,20 @@ WRITE = ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent
 
 INSTRUCTIONS = """\
 Manage the owner's Freelancer.com bidding: find projects, research clients, place bids, and handle messages.
+An auto-bidding agent works the same account around the clock; this server shares its database.
 
-- search_projects already hides projects the owner (or their auto-bidding agent) has bid on.
-- Before place_bid: call get_project, write the proposal in the chat, show the owner the exact amount,
-  delivery period and text, and only call place_bid after they approve it. The server submits text as given.
-- An `already_bid` error means the auto-agent or an earlier call already bid. Do not retry.
-- A `rate_limited` error says how long to wait; tell the owner instead of retrying in a loop.
+- search_projects already hides projects the owner or the agent has bid on.
+- Before place_bid: call get_project, keep to its bid_rules (amount range, period, currency), write the
+  proposal in the chat, show the owner the exact amount, delivery period and text, and only call place_bid
+  after they approve it. The server submits the text as given and never rewrites it.
+- Write proposals the way the agent does: exactly three paragraphs separated by blank lines (a short
+  greeting; one or two sentences starting "I'll" or "I can" naming concrete deliverables from the post; one
+  short warm closing statement), 50 to 100 words in total, first person, plain text. Never: dashes used as
+  punctuation, questions, a price, a signature, or offers of calls or meetings.
+- Errors start with a code. `already_bid`: someone (often the agent) bid already; do not retry.
+  `agent_busy`: the agent is processing that project; check again later. `invalid_input`: the message says
+  what is allowed; ask the owner before changing any number. `rate_limited`: tell the owner how long to wait.
+  `freelancer_auth`: the owner must renew the Freelancer token.
 """
 
 
@@ -56,24 +64,20 @@ def load_backend(settings: Settings) -> Backend:
     if settings.backend == "fake":
         return FakeBackend()
     try:
-        from freelancer_mcp.agent_backend import AgentBackend  # type: ignore[import-not-found]
+        # Imports the agent's own modules (src/, portal.py), so the server must run from its directory.
+        from freelancer_mcp.agent_backend import AgentBackend
     except ModuleNotFoundError as exc:
-        if exc.name != "freelancer_mcp.agent_backend":
-            raise
-        raise ConfigError("MCP_BACKEND=agent, but the agent adapter is not wired yet. Use MCP_BACKEND=fake.") from exc
-    return AgentBackend()
+        raise ConfigError(
+            f"MCP_BACKEND=agent needs the bidding agent's code next to mcp_server.py (missing: {exc.name})"
+        ) from exc
+    limiter = RateLimiter(settings.api_max_calls, settings.api_period_seconds)
+    return AgentBackend(settings.agent_config, limiter=limiter)
 
 
 def build_server(settings: Settings, backend: Backend) -> MCPServer:
-    limiter = RateLimiter(settings.api_max_calls, settings.api_period_seconds)
-
     async def call(fn: Callable[..., Any], **kwargs: Any) -> Any:
-        await limiter.acquire()
         try:
             return await anyio.to_thread.run_sync(functools.partial(fn, **kwargs))
-        except RateLimited as exc:
-            limiter.back_off(exc.retry_after)
-            raise ToolError(f"{exc.code}: {exc.message}") from exc
         except BackendError as exc:
             raise ToolError(f"{exc.code}: {exc.message}") from exc
         except Exception as exc:
@@ -116,12 +120,24 @@ def build_server(settings: Settings, backend: Backend) -> MCPServer:
     @server.tool(title="Search projects", annotations=READ_ONLY)
     async def search_projects(
         query: Annotated[str, Field(description="Keywords, e.g. 'telegram bot'. Empty for all.")] = "",
-        min_budget: Annotated[float | None, Field(ge=0, description="Lowest budget to include.")] = None,
-        max_budget: Annotated[float | None, Field(ge=0, description="Highest budget to include.")] = None,
-        skills: Annotated[list[str] | None, Field(description="Skill names, matched if any overlap.")] = None,
+        min_budget: Annotated[
+            float | None, Field(ge=0, description="Lowest budget, in each project's currency.")
+        ] = None,
+        max_budget: Annotated[
+            float | None, Field(ge=0, description="Highest budget, in each project's currency.")
+        ] = None,
+        skills: Annotated[
+            list[str] | None,
+            Field(
+                description="Skill names, e.g. ['wordpress', 'dns']; a project matches if any overlap. "
+                "With no query, each skill (up to 5) is searched."
+            ),
+        ] = None,
         limit: Annotated[int, Field(ge=1, le=50)] = 20,
     ) -> list[dict[str, Any]]:
-        """Search active Freelancer.com projects. Projects already bid on are left out."""
+        """Search active Freelancer.com projects. Projects already bid on are left out.
+
+        Each result says whether the auto-agent has seen it (agent.status, agent.score)."""
         if min_budget is not None and max_budget is not None and min_budget > max_budget:
             raise ToolError("invalid_input: min_budget is greater than max_budget")
         return await call(
@@ -135,20 +151,24 @@ def build_server(settings: Settings, backend: Backend) -> MCPServer:
 
     @server.tool(title="Get project", annotations=READ_ONLY)
     async def get_project(project_id: Annotated[int, Field(gt=0)]) -> dict[str, Any]:
-        """Full project details plus the client's country, rating, payment verification,
-        hire rate and the number of bids so far."""
+        """Full project details: description, the client's country, rating, reviews and payment
+        verification, the number of bids so far, the agent's score or draft if any, and bid_rules
+        (the amount range and delivery period place_bid will accept)."""
         return await call(backend.get_project, project_id=project_id)
 
     @server.tool(title="Place bid", annotations=WRITE)
     async def place_bid(
         project_id: Annotated[int, Field(gt=0)],
-        amount: Annotated[float, Field(gt=0, description="Bid amount in the project's currency.")],
-        period_days: Annotated[int, Field(ge=1, le=365, description="Delivery time in days.")],
+        amount: Annotated[
+            float, Field(gt=0, description="In the project's currency; for hourly projects, the hourly rate.")
+        ],
+        period_days: Annotated[int, Field(ge=1, le=365, description="Delivery time in days; see bid_rules.")],
         description: Annotated[str, Field(min_length=1, description="The proposal text, submitted as given.")],
     ) -> dict[str, Any]:
-        """Submit a bid as the owner and record it in the agent's database.
+        """Submit a bid as the owner and record it in the agent's database. The milestone is always 100%.
 
-        Only call this after the owner has approved the exact amount, period and text."""
+        Only call this after the owner has approved the exact amount, period and text. The result
+        lists style_warnings where the text departs from the owner's proposal rules."""
         if not description.strip():
             raise ToolError("invalid_input: description is empty")
         if settings.max_bid_amount is not None and amount > settings.max_bid_amount:

@@ -1,16 +1,15 @@
 """Client-side throttle in front of the Freelancer API.
 
-Freelancer.com rate-limits per token, and the auto-agent shares that token, so the
-MCP server keeps its own budget well under the limit and backs off entirely after
-the API answers 429.
+Freelancer.com rate-limits per token, and the poller and portal share that token,
+so the MCP server keeps its own budget of API calls and backs off entirely after the
+API answers 429. Thread-safe: backend calls run in worker threads.
 """
 
 from __future__ import annotations
 
+import threading
 import time
 from collections import deque
-
-import anyio
 
 from freelancer_mcp.backend import RateLimited
 
@@ -22,14 +21,16 @@ class RateLimiter:
         self.max_wait = max_wait_seconds
         self._calls: deque[float] = deque()
         self._blocked_until = 0.0
-        self._lock = anyio.Lock()
+        self._lock = threading.Lock()
 
-    def back_off(self, seconds: float | None) -> None:
+    def back_off(self, seconds: float | None = None) -> None:
         """Called when the API itself answered 429."""
-        self._blocked_until = max(self._blocked_until, time.monotonic() + (seconds or self.period))
+        with self._lock:
+            self._blocked_until = max(self._blocked_until, time.monotonic() + (seconds or self.period))
 
-    async def acquire(self) -> None:
-        async with self._lock:
+    def acquire(self) -> None:
+        """Take one API call from the budget, waiting briefly if it is nearly free."""
+        with self._lock:
             now = time.monotonic()
             if now < self._blocked_until:
                 wait = self._blocked_until - now
@@ -43,10 +44,10 @@ class RateLimiter:
                 wait = self.period - (now - self._calls[0])
                 if wait > self.max_wait:
                     raise RateLimited(
-                        f"Local limit of {self.max_calls} Freelancer API calls per {self.period:.0f}s reached. "
-                        f"Try again in {wait:.0f} seconds.",
+                        f"This server's limit of {self.max_calls} Freelancer API calls per "
+                        f"{self.period:.0f}s is used up. Try again in {wait:.0f} seconds.",
                         retry_after=wait,
                     )
-                await anyio.sleep(wait)
+                time.sleep(wait)
                 self._calls.popleft()
             self._calls.append(time.monotonic())

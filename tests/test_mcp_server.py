@@ -51,6 +51,7 @@ def make_settings(tmp_path: Path, **overrides) -> Settings:
         host="127.0.0.1",
         port=port,
         backend="fake",
+        agent_config="config.yaml",
         dry_run=True,
         max_bid_amount=None,
         api_max_calls=1000,
@@ -404,11 +405,11 @@ def test_dry_run_submits_nothing(live):
 
     async def run():
         async with mcp_session(live.url, tokens["access_token"]) as session:
-            args = {"project_id": 40000001, "amount": 400, "period_days": 7, "description": "Proposal text"}
+            args = {"project_id": 40000001, "amount": 400, "period_days": 3, "description": "Proposal text"}
             result = _result(await session.call_tool("place_bid", args))
             assert result["dry_run"] is True and result["submitted"] is False
             # Still biddable: nothing was recorded.
-            projects = _result(await session.call_tool("search_projects", {}))
+            projects = _result(await session.call_tool("search_projects", {"query": "telegram"}))
             assert 40000001 in [p["id"] for p in projects]
 
             sent = _result(await session.call_tool("send_message", {"thread_id": 80000001, "text": "Hi"}))
@@ -426,14 +427,14 @@ def test_live_bid_is_recorded_and_never_doubled(tmp_path):
 
         async def run():
             async with mcp_session(server.url, tokens["access_token"]) as session:
-                args = {"project_id": 40000001, "amount": 400, "period_days": 7, "description": "Proposal text"}
+                args = {"project_id": 40000001, "amount": 400, "period_days": 3, "description": "Proposal text"}
                 result = _result(await session.call_tool("place_bid", args))
                 assert result["submitted"] is True
 
                 again = await session.call_tool("place_bid", args)
                 assert again.is_error and "already_bid" in again.content[0].text
 
-                projects = _result(await session.call_tool("search_projects", {}))
+                projects = _result(await session.call_tool("search_projects", {"query": "telegram"}))
                 assert 40000001 not in [p["id"] for p in projects]
 
                 too_big = await session.call_tool("place_bid", {**args, "project_id": 40000002, "amount": 5000})
@@ -455,7 +456,7 @@ def test_tool_errors_are_actionable(live):
             both = await session.call_tool("get_messages", {"thread_id": 1, "project_id": 2})
             assert both.is_error and "exactly one" in both.content[0].text
             bad = await session.call_tool(
-                "place_bid", {"project_id": 40000001, "amount": -5, "period_days": 7, "description": "x"}
+                "place_bid", {"project_id": 40000001, "amount": -5, "period_days": 3, "description": "x"}
             )
             assert bad.is_error
 

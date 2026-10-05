@@ -60,6 +60,8 @@ class Settings:
 
     # "agent" wires the tools to the existing bidding agent; "fake" serves sample data.
     backend: str
+    # The agent's config.yaml, relative to the agent directory the server runs from.
+    agent_config: str
     # When true, place_bid and send_message run every check but submit nothing.
     dry_run: bool
     # Optional hard ceiling on a single bid amount, whatever Claude passes.
@@ -101,7 +103,7 @@ def load_settings(env_file: str | os.PathLike[str] | None = ".env") -> Settings:
     if parsed.scheme == "http" and not public_is_loopback:
         raise ConfigError("MCP_PUBLIC_URL must use https unless it points at localhost")
 
-    backend = os.environ.get("MCP_BACKEND", "fake").strip().lower()
+    backend = os.environ.get("MCP_BACKEND", "agent").strip().lower()
     if backend not in {"agent", "fake"}:
         raise ConfigError(f"MCP_BACKEND must be 'agent' or 'fake', got {backend!r}")
 
@@ -129,6 +131,7 @@ def load_settings(env_file: str | os.PathLike[str] | None = ".env") -> Settings:
         host=host,
         port=port,
         backend=backend,
+        agent_config=os.environ.get("MCP_AGENT_CONFIG", "config.yaml"),
         dry_run=_bool("MCP_DRY_RUN", True),
         max_bid_amount=_float("MCP_MAX_BID_AMOUNT", None),
         api_max_calls=_int("MCP_API_MAX_CALLS", 30),

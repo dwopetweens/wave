@@ -1,8 +1,9 @@
 # /etc/systemd/system/freelancer-mcp.service
 #
-# Runs next to the existing agent service, as the same user and from the same
-# directory, so both use the same .env and the same SQLite database.
-# Replace AGENT_USER and AGENT_DIR (see DEPLOY_MCP.md).
+# Runs next to the bidding agent, as the same user and from the same directory, so
+# it reads the same .env and config.yaml and shares projects.db with the poller,
+# portal and Telegram bot. Uses its own Python 3.11 venv (.venv-mcp): the MCP SDK
+# needs Python 3.10+, and the agent's .venv stays on 3.9 untouched.
 
 [Unit]
 Description=Freelancer.com MCP server (remote connector for Claude)
@@ -11,21 +12,21 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=AGENT_USER
-Group=AGENT_USER
-WorkingDirectory=AGENT_DIR
-# mcp_server.py reads AGENT_DIR/.env itself.
-ExecStart=AGENT_DIR/venv/bin/python mcp_server.py serve
+User=denniskiama-portal
+Group=denniskiama-portal
+WorkingDirectory=/home/denniskiama-portal/freelancer-bidder
+ExecStart=/home/denniskiama-portal/freelancer-bidder/.venv-mcp/bin/python mcp_server.py serve
 Restart=on-failure
 RestartSec=5
 
-# Hardening. The server only needs to write the SQLite files in AGENT_DIR.
+# Hardening. Writes are limited to the agent directory (projects.db and the
+# server's mcp_auth.db live there); the rest of the system is read-only.
 NoNewPrivileges=yes
 PrivateTmp=yes
 PrivateDevices=yes
 ProtectSystem=strict
 ProtectHome=read-only
-ReadWritePaths=AGENT_DIR
+ReadWritePaths=/home/denniskiama-portal/freelancer-bidder
 ProtectKernelTunables=yes
 ProtectKernelModules=yes
 ProtectControlGroups=yes
