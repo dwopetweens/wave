@@ -1,0 +1,19 @@
+# Secrets and local state: never commit these.
+.env
+.env.*
+!.env.example
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node (MCP Inspector)
+node_modules/

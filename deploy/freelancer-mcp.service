@@ -1,0 +1,37 @@
+# /etc/systemd/system/freelancer-mcp.service
+#
+# Runs next to the existing agent service, as the same user and from the same
+# directory, so both use the same .env and the same SQLite database.
+# Replace AGENT_USER and AGENT_DIR (see DEPLOY_MCP.md).
+
+[Unit]
+Description=Freelancer.com MCP server (remote connector for Claude)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=AGENT_USER
+Group=AGENT_USER
+WorkingDirectory=AGENT_DIR
+# mcp_server.py reads AGENT_DIR/.env itself.
+ExecStart=AGENT_DIR/venv/bin/python mcp_server.py serve
+Restart=on-failure
+RestartSec=5
+
+# Hardening. The server only needs to write the SQLite files in AGENT_DIR.
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=AGENT_DIR
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=yes
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
