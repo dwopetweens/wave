@@ -1,7 +1,7 @@
 # Secrets and local state: never commit these.
 .env
 .env.*
-!.env.example
+
 *.db
 *.db-wal
 *.db-shm

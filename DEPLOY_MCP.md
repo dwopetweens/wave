@@ -84,16 +84,16 @@ On your laptop:
 ```bash
 git clone -b claude/vibrant-bell-ow54iy https://github.com/dwopetweens/wave.git freelancer-mcp
 cd freelancer-mcp
-tar czf mcp.tgz mcp_server.py freelancer_mcp requirements-mcp.txt deploy
+tar czf mcp.tgz mcp_server.py freelancer_mcp requirements-mcp.txt deploy mcp.env.example
 scp mcp.tgz root@YOUR_SERVER:/tmp/
 ```
 
-On the server (as root). The archive does not include `.env.example`, so the agent's own copy is kept:
+On the server (as root). Every file is new, so nothing of the agent is overwritten:
 
 ```bash
 D=/home/denniskiama-portal/freelancer-bidder
 tar xzf /tmp/mcp.tgz -C $D
-chown -R denniskiama-portal:denniskiama-portal $D/mcp_server.py $D/freelancer_mcp $D/requirements-mcp.txt $D/deploy
+chown -R denniskiama-portal:denniskiama-portal $D/mcp_server.py $D/freelancer_mcp $D/requirements-mcp.txt $D/deploy $D/mcp.env.example
 ```
 
 ## 3. Python 3.11 venv

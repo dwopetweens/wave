@@ -4,7 +4,7 @@
     python mcp_server.py init-auth     generate the owner password hash and TOTP secret for .env
     python mcp_server.py revoke-tokens sign every Claude client out
 
-Configuration comes from the environment or `.env`; see `.env.example`.
+Configuration comes from the environment or `.env`; see `mcp.env.example`.
 """
 
 from __future__ import annotations
