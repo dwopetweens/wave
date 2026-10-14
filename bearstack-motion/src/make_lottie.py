@@ -1,14 +1,18 @@
 """Builds the Signal trace Lottie files from the approved BearStack SVG geometry.
 
 Mirrors the CSS timeline in signal-trace.html (5 s loop, 60 fps).
-Usage: python3 make_lottie.py <out_dir>
+Writes, per colour: the 5 s loop and a play-once intro (ends on the full lockup),
+each as Lottie JSON and as dotLottie.
+Usage: python3 make_lottie.py <export_dir>
 """
 import json
 import re
 import sys
+import zipfile
 
 FPS, LOOP = 60, 5.0
 OP = int(FPS * LOOP)
+INTRO_OP = int(FPS * 3.4)  # build-in lands at ~2.9 s; hold on the full lockup until 3.4 s
 PAD = 16  # logo clear space at master size
 W, H = 408.08 + 2 * PAD, 80 + 2 * PAD
 
@@ -220,9 +224,34 @@ def build(sym, wm):
             "ddd": 0, "assets": [], "layers": layers, "markers": []}
 
 
+def trim(anim_, op, name):
+    """Cut the timeline at `op`; every value there is the finished lockup (the exit starts at 72%)."""
+    anim_ = json.loads(json.dumps(anim_))
+    anim_["op"], anim_["nm"] = op, name
+    for lyr in anim_["layers"]:
+        lyr["op"] = op
+    return anim_
+
+
+def dotlottie(path, anim_id, data, loop):
+    manifest = {"version": "1", "generator": "BearStack make_lottie.py", "author": "BearStack",
+                "animations": [{"id": anim_id, "speed": 1, "loop": loop, "autoplay": True}]}
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
+        z.writestr("manifest.json", json.dumps(manifest))
+        z.writestr(f"animations/{anim_id}.json", json.dumps(data, separators=(",", ":")))
+
+
 if __name__ == "__main__":
+    import os
     out = sys.argv[1] if len(sys.argv) > 1 else "."
+    os.makedirs(f"{out}/lottie", exist_ok=True)
+    os.makedirs(f"{out}/dotlottie", exist_ok=True)
     for name, sym, wm in [("bone", BONE, BONE), ("primary", ORANGE, ESPRESSO), ("espresso", ESPRESSO, ESPRESSO)]:
-        with open(f"{out}/bearstack-signal-trace-{name}.json", "w") as fh:
-            json.dump(build(sym, wm), fh, separators=(",", ":"))
+        loop = build(sym, wm)
+        intro = trim(loop, INTRO_OP, "BearStack Signal trace intro")
+        for kind, data, loops in [("loop", loop, True), ("intro", intro, False)]:
+            base = f"bearstack-signal-trace-{kind}-{name}"
+            with open(f"{out}/lottie/{base}.json", "w") as fh:
+                json.dump(data, fh, separators=(",", ":"))
+            dotlottie(f"{out}/dotlottie/{base}.lottie", base, data, loops)
         print("wrote", name)

@@ -4,16 +4,20 @@ A 5-second loop of the Signal B lockup. A stroke sweeps in and lands as the sign
 
 ## Files (`export/`)
 
-| File | Use |
-| --- | --- |
-| `bearstack-signal-trace-bone.json` | Lottie for dark (espresso) backgrounds: bone symbol and wordmark |
-| `bearstack-signal-trace-primary.json` | Lottie for light (bone) backgrounds: orange symbol, espresso wordmark |
-| `bearstack-signal-trace-espresso.json` | Lottie for orange or amber backgrounds |
-| `bearstack-signal-trace-1920x1080.mp4` | 16:9 video, bone on espresso, 60 fps, H.264 |
-| `bearstack-signal-trace-1080x1080.mp4` | Square video for social, bone on espresso |
-| `bearstack-signal-trace-transparent-1440x360.webm` | VP9 with alpha, bone, for placing over dark video or imagery |
+Two cuts of the same motion:
 
-The Lottie files are 440 × 112. That is the 408.08 × 80 master lockup plus the 16px clear space on every side. Each one is a seamless 300-frame loop at 60 fps.
+- **loop**: 5 s, seamless, for repeating placements.
+- **intro**: 3.4 s, plays once and ends on the full lockup (build-in plus a short hold). Use it for page loads, video openers and email.
+
+Colours: **bone** for dark (espresso) grounds, **primary** (orange symbol, espresso wordmark) for light (bone) grounds, **espresso** for orange or amber planes.
+
+| Folder | Files | Notes |
+| --- | --- | --- |
+| `lottie/` | `…-{loop,intro}-{bone,primary,espresso}.json` | Lottie JSON, 440 × 112 (master lockup plus 16px clear space), 60 fps, transparent |
+| `dotlottie/` | `…-{loop,intro}-{bone,primary,espresso}.lottie` | Same animations as dotLottie, with loop/autoplay set in the manifest (Webflow, Framer, LottieFiles players) |
+| `video/` | `…-{loop,intro}-1920x1080.mp4`, `…-1080x1080.mp4` | Bone on espresso, 60 fps, H.264 |
+| `video/` | `…-{loop,intro}-transparent-1440x360.webm` | Bone with alpha (VP9), for placing over dark footage or imagery |
+| `gif/` | `…-{loop,intro}-{bone,primary}-880x224.gif` | 25 fps. The loop GIF repeats; the intro GIF plays once and stops on the logo (email, docs, places without video) |
 
 ## Website embed
 
@@ -25,7 +29,7 @@ The Lottie files are 440 × 112. That is the 408.08 × 80 master lockup plus the
   const anim = lottie.loadAnimation({
     container: document.getElementById('bearstack-logo'),
     renderer: 'svg',
-    path: '/assets/bearstack-signal-trace-bone.json',
+    path: '/assets/bearstack-signal-trace-loop-bone.json',
     loop: !reduce,
     autoplay: !reduce,
   });
@@ -34,10 +38,17 @@ The Lottie files are 440 × 112. That is the 408.08 × 80 master lockup plus the
 </script>
 ```
 
-To play the animation once as an intro and end on the full logo, set `loop: false` and stop at the hold with `anim.playSegments([0, 216], true)` (frame 216 is 72%, just before the exit begins).
+For a one-time intro, point `path` at `bearstack-signal-trace-intro-bone.json` and set `loop: false`; it stops on the full lockup. With reduced motion, use `anim.goToAndStop(203, true)` (its last frame).
+
+dotLottie, with the official web component:
+
+```html
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+<dotlottie-wc src="/assets/bearstack-signal-trace-intro-bone.lottie" autoplay style="width: 408px; aspect-ratio: 440 / 112"></dotlottie-wc>
+```
 
 ## Rebuilding
 
 - `src/signal-trace.html`: standalone CSS version of the animation. Query params `bg`, `sym`, `wm` (hex without `#`, or `bg=none`), `lw` (logo width in px) and `t` (loop seconds).
-- `src/render.mjs`: renders that page frame by frame with Playwright, e.g. `node src/render.mjs frames/wide 1920 1080 60 "lw=1224"`, then `ffmpeg -framerate 60 -i frames/wide/f%04d.png -c:v libx264 -pix_fmt yuv420p -crf 16 out.mp4`.
-- `src/make_lottie.py`: writes the three Lottie files from the logo's vector geometry using the same timeline: `python3 src/make_lottie.py export`.
+- `src/render.mjs`: renders that page frame by frame with Playwright, e.g. `node src/render.mjs frames/wide 1920 1080 60 "lw=1224"`, then `ffmpeg -framerate 60 -i frames/wide/f%04d.png -c:v libx264 -pix_fmt yuv420p -crf 16 out.mp4` (add `-frames:v 204` for the intro).
+- `src/make_lottie.py`: writes every Lottie and dotLottie file from the logo's vector geometry using the same timeline: `python3 src/make_lottie.py export`.
