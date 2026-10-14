@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BearStack Signal trace</title>
+<style>
+html,body{margin:0;height:100%}
+body{background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden}
+#logo{width:var(--lw);height:auto;display:block}
+body{margin:0}
+.bs1-orbit,.bs1-dot{transform-box:fill-box;transform-origin:center}
+.bs1-shift{animation:bs1-shift var(--t,5s) linear infinite both}
+.bs1-orbit{animation:bs1-orbit var(--t,5s) linear infinite both}
+.bs1-dot{animation:bs1-dot var(--t,5s) linear infinite both}
+.bs1-pill{animation:bs1-pill var(--t,5s) linear infinite both}
+.bs1-a1{animation:bs1-a1 var(--t,5s) linear infinite both}
+.bs1-a2{animation:bs1-a2 var(--t,5s) linear infinite both}
+.bs1-t{animation:bs1-t var(--t,5s) linear infinite both}
+.bs1-wm{animation:bs1-wm var(--t,5s) linear infinite both}
+.bs1-l{animation:bs1-l var(--t,5s) linear infinite both}
+.bs1-l:nth-child(2){animation-delay:calc(var(--t,5s) * .022)}
+.bs1-l:nth-child(3){animation-delay:calc(var(--t,5s) * .044)}
+.bs1-l:nth-child(4){animation-delay:calc(var(--t,5s) * .066)}
+.bs1-l:nth-child(5){animation-delay:calc(var(--t,5s) * .088)}
+.bs1-l:nth-child(6){animation-delay:calc(var(--t,5s) * .110)}
+.bs1-l:nth-child(7){animation-delay:calc(var(--t,5s) * .132)}
+.bs1-l:nth-child(8){animation-delay:calc(var(--t,5s) * .154)}
+.bs1-l:nth-child(9){animation-delay:calc(var(--t,5s) * .176)}
+@keyframes bs1-shift{0%,28%{transform:translateX(171px);animation-timing-function:cubic-bezier(.65,0,.35,1)}42%{transform:translateX(0)}76%{transform:translateX(0);animation-timing-function:cubic-bezier(.65,0,.35,1)}90%,100%{transform:translateX(171px)}}
+@keyframes bs1-orbit{0%{stroke-dashoffset:100;transform:rotate(-120deg) scale(1.15);opacity:1;animation-timing-function:cubic-bezier(.45,0,.2,1)}11%{stroke-dashoffset:-100;transform:rotate(180deg) scale(.3);opacity:1}11.5%,100%{stroke-dashoffset:-100;transform:rotate(180deg) scale(.3);opacity:0}}
+@keyframes bs1-dot{0%,8%{transform:scale(0);animation-timing-function:cubic-bezier(.22,1,.36,1)}13%{transform:scale(1)}90%{transform:scale(1);animation-timing-function:cubic-bezier(.64,0,.78,0)}96%,100%{transform:scale(0)}}
+@keyframes bs1-pill{0%,12%{opacity:0;transform:translateX(18px);animation-timing-function:cubic-bezier(.22,1,.36,1)}20%{opacity:1;transform:none}84%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.64,0,.78,0)}89%,100%{opacity:0;transform:translateX(18px)}}
+@keyframes bs1-a1{0%,16%{opacity:0;transform:translateY(16px);animation-timing-function:cubic-bezier(.22,1,.36,1)}24%{opacity:1;transform:none}81%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.64,0,.78,0)}86%,100%{opacity:0;transform:translateY(16px)}}
+@keyframes bs1-a2{0%,16%{opacity:0;transform:translateY(-16px);animation-timing-function:cubic-bezier(.22,1,.36,1)}24%{opacity:1;transform:none}81%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.64,0,.78,0)}86%,100%{opacity:0;transform:translateY(-16px)}}
+@keyframes bs1-t{0%,20%{opacity:0;transform:translateX(-18px);animation-timing-function:cubic-bezier(.22,1,.36,1)}28%{opacity:1;transform:none}78%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.64,0,.78,0)}83%,100%{opacity:0;transform:translateX(-18px)}}
+@keyframes bs1-wm{0%,28%{opacity:0;transform:none}29%{opacity:1;transform:none}72%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.64,0,.78,0)}79%,100%{opacity:0;transform:translateX(-20px)}}
+@keyframes bs1-l{0%,30%{opacity:0;transform:translateY(12px);animation-timing-function:cubic-bezier(.22,1,.36,1)}40%,100%{opacity:1;transform:none}}
+.is-static *{animation:none !important}
+.is-static .bs1-orbit{opacity:0}
+@media (prefers-reduced-motion: reduce){.bs1-root *{animation:none !important}.bs1-orbit{opacity:0}}
+</style></head>
+<body class="bs1-root">
+<svg id="logo" viewBox="0 0 408.08 80" overflow="visible" role="img" aria-label="BearStack">
+<g class="bs1-shift">
+<g transform="translate(0 8) scale(.64)" fill="var(--sym)">
+<circle class="bs1-orbit" cx="79" cy="50" r="24" fill="none" stroke="var(--sym)" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100"></circle>
+<rect class="bs1-a1" x="17" y="14" width="18" height="32" rx="4"></rect>
+<rect class="bs1-a2" x="17" y="54" width="18" height="32" rx="4"></rect>
+<rect class="bs1-t" x="43" y="14" width="33" height="14" rx="7"></rect>
+<rect class="bs1-pill" x="43" y="38" width="25" height="24" rx="12"></rect>
+<rect class="bs1-t" x="43" y="72" width="33" height="14" rx="7"></rect>
+<circle class="bs1-dot" cx="79" cy="50" r="7"></circle>
+</g>
+<g class="bs1-wm">
+<g transform="translate(88 0)" fill="var(--wm)">
+<path class="bs1-l" d="M21.184 62.0H6.464V19.12H21.504Q29.44 19.12 33.92 22.128Q38.4 25.136 38.4 30.512Q38.4 38.256 31.04 40.56Q39.04 42.416 39.04 50.16Q39.04 62.0 21.184 62.0ZM12.992 24.56V37.936H21.696Q27.072 37.936 29.472 36.272Q31.872 34.608 31.872 30.96Q31.872 27.824 29.248 26.192Q26.624 24.56 21.824 24.56ZM12.992 43.376V56.56H21.504Q26.624 56.56 29.568 55.088Q32.512 53.616 32.512 49.712Q32.512 46.256 29.92 44.816Q27.328 43.376 21.696 43.376Z"></path>
+<path class="bs1-l" d="M61.568 62.704Q54.4 62.704 49.664 58.032Q44.928 53.36 44.928 46.128Q44.928 39.216 49.408 34.48Q53.888 29.744 60.8 29.744Q67.776 29.744 71.968 34.192Q76.16 38.64 76.16 45.36V47.92H51.072Q51.584 52.016 54.464 54.544Q57.344 57.072 61.504 57.072Q67.904 57.072 70.656 51.952L75.52 54.448Q73.472 58.48 69.856 60.592Q66.24 62.704 61.568 62.704ZM51.328 43.824H69.824Q69.632 40.048 67.136 37.744Q64.64 35.44 60.736 35.44Q56.896 35.44 54.368 37.808Q51.84 40.176 51.328 43.824Z"></path>
+<path class="bs1-l" d="M97.152 62.768Q90.432 62.768 85.92 57.968Q81.408 53.168 81.408 46.256Q81.408 39.472 86.208 34.672Q91.008 29.872 98.112 29.872Q105.216 29.872 110.016 34.576Q114.816 39.28 114.816 46.256V62.0H108.8V56.496Q107.008 59.44 103.968 61.104Q100.928 62.768 97.152 62.768ZM108.48 46.32Q108.48 41.968 105.472 38.896Q102.464 35.824 98.112 35.824Q93.76 35.824 90.752 38.896Q87.744 41.968 87.744 46.32Q87.744 50.608 90.752 53.68Q93.76 56.752 98.112 56.752Q102.464 56.752 105.472 53.68Q108.48 50.608 108.48 46.32Z"></path>
+<path class="bs1-l" d="M129.92 62.0H123.584V43.312Q123.584 37.424 126.88 33.712Q130.176 30.0 136.128 30.0Q139.392 30.0 141.76 31.152V37.424Q139.456 36.08 136.704 36.08Q133.568 36.08 131.744 38.096Q129.92 40.112 129.92 43.568Z"></path>
+<path class="bs1-l" d="M159.872 62.704Q154.368 62.704 150.144 60.304Q145.92 57.904 144.0 53.552L149.504 50.864Q152.064 56.56 159.872 56.56Q163.712 56.56 166.208 54.8Q168.704 53.04 168.704 49.968Q168.704 48.624 168.16 47.568Q167.616 46.512 166.912 45.904Q166.208 45.296 164.736 44.784Q163.264 44.272 162.272 44.048Q161.28 43.824 159.296 43.44Q156.928 42.992 155.264 42.544Q153.6 42.096 151.456 41.136Q149.312 40.176 148.0 38.928Q146.688 37.68 145.76 35.632Q144.832 33.584 144.832 30.96Q144.832 25.648 149.056 22.064Q153.28 18.48 159.424 18.48Q164.48 18.48 168.48 20.816Q172.48 23.152 174.336 27.44L168.896 30.256Q166.08 24.56 159.168 24.56Q155.84 24.56 153.568 26.32Q151.296 28.08 151.296 30.768Q151.296 32.112 151.872 33.136Q152.448 34.16 153.184 34.8Q153.92 35.44 155.392 35.984Q156.864 36.528 157.984 36.784Q159.104 37.04 161.024 37.424Q163.392 37.872 165.024 38.32Q166.656 38.768 168.736 39.728Q170.816 40.688 172.096 41.936Q173.376 43.184 174.304 45.232Q175.232 47.28 175.232 49.904Q175.232 55.536 170.816 59.12Q166.4 62.704 159.872 62.704Z"></path>
+<path class="bs1-l" d="M197.184 62.832Q191.424 62.832 188.32 59.536Q185.216 56.24 185.216 50.736V36.144H179.008V30.64H185.216V22.512H191.552V30.64H203.584V36.144H191.552V50.544Q191.552 53.616 193.216 55.344Q194.88 57.072 197.76 57.072Q200.96 57.072 203.584 55.216V61.04Q200.96 62.832 197.184 62.832Z"></path>
+<path class="bs1-l" d="M225.152 62.768Q218.432 62.768 213.92 57.968Q209.408 53.168 209.408 46.256Q209.408 39.472 214.208 34.672Q219.008 29.872 226.112 29.872Q233.216 29.872 238.016 34.576Q242.816 39.28 242.816 46.256V62.0H236.8V56.496Q235.008 59.44 231.968 61.104Q228.928 62.768 225.152 62.768ZM236.48 46.32Q236.48 41.968 233.472 38.896Q230.464 35.824 226.112 35.824Q221.76 35.824 218.752 38.896Q215.744 41.968 215.744 46.32Q215.744 50.608 218.752 53.68Q221.76 56.752 226.112 56.752Q230.464 56.752 233.472 53.68Q236.48 50.608 236.48 46.32Z"></path>
+<path class="bs1-l" d="M265.984 62.704Q259.264 62.768 254.432 57.936Q249.6 53.104 249.6 46.256Q249.6 39.472 254.4 34.64Q259.2 29.808 265.984 29.872Q270.464 29.872 274.144 31.952Q277.824 34.032 279.936 38.128L274.688 41.072Q271.872 35.888 265.984 35.888Q261.824 35.888 258.88 38.928Q255.936 41.968 255.936 46.256Q255.936 50.544 258.88 53.648Q261.824 56.752 265.984 56.752Q271.872 56.752 274.688 51.568L279.936 54.448Q277.824 58.544 274.144 60.624Q270.464 62.704 265.984 62.704Z"></path>
+<path class="bs1-l" d="M293.696 62.0H287.36V16.176H293.696V43.696H297.536Q297.984 42.608 299.008 41.584L309.056 30.64H316.8L303.296 45.36Q302.72 45.872 302.72 46.256Q302.72 46.64 303.296 47.152L316.736 62.0H308.928L298.944 51.056Q297.92 49.776 297.472 48.688H293.696Z"></path>
+</g>
+</g>
+</g>
+</svg>
+<script>
+// Query params: bg, sym, wm (hex without #, or "none" for transparent bg), lw = logo width in px, t = loop seconds
+const q = new URLSearchParams(location.search), r = document.documentElement.style;
+const c = (k, d) => (q.get(k) || d) === 'none' ? 'transparent' : '#' + (q.get(k) || d);
+r.setProperty('--bg', c('bg', '17130A')); r.setProperty('--sym', c('sym', 'F4F1E8')); r.setProperty('--wm', c('wm', 'F4F1E8'));
+r.setProperty('--lw', (q.get('lw') || '816') + 'px'); r.setProperty('--t', (q.get('t') || '5') + 's');
+</script>
+</body></html>
